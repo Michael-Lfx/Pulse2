@@ -14,6 +14,7 @@
 		BA3C00921AE7140B00911004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA3C00911AE7140B00911004 /* Images.xcassets */; };
 		BA3C00951AE7140B00911004 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA3C00931AE7140B00911004 /* LaunchScreen.xib */; };
 		BA3C00A11AE7140B00911004 /* Pulse2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C00A01AE7140B00911004 /* Pulse2Tests.m */; };
+		BAF58992314D5901ED41946D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB9D2BD43485FF5B2111854 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1FF3F4C22441D40B497FF69C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9BB9D2BD43485FF5B2111854 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3C00811AE7140B00911004 /* Pulse2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pulse2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3C00851AE7140B00911004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA3C00861AE7140B00911004 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -40,6 +43,7 @@
 		BA3C009A1AE7140B00911004 /* Pulse2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pulse2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3C009F1AE7140B00911004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA3C00A01AE7140B00911004 /* Pulse2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pulse2Tests.m; sourceTree = "<group>"; };
+		E7FB26D086C2121BEC49334E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF58992314D5901ED41946D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +65,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A229CFC868AF273455499E30 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E7FB26D086C2121BEC49334E /* Pods.debug.xcconfig */,
+				1FF3F4C22441D40B497FF69C /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BA3C00781AE7140B00911004 = {
 			isa = PBXGroup;
 			children = (
 				BA3C00831AE7140B00911004 /* Pulse2 */,
 				BA3C009D1AE7140B00911004 /* Pulse2Tests */,
 				BA3C00821AE7140B00911004 /* Products */,
+				A229CFC868AF273455499E30 /* Pods */,
+				F0B311003B034DAA1E839EB0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +135,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F0B311003B034DAA1E839EB0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9BB9D2BD43485FF5B2111854 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,9 +150,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA3C00A41AE7140B00911004 /* Build configuration list for PBXNativeTarget "Pulse2" */;
 			buildPhases = (
+				BBFC49954134DB783F18E857 /* Check Pods Manifest.lock */,
 				BA3C007D1AE7140B00911004 /* Sources */,
 				BA3C007E1AE7140B00911004 /* Frameworks */,
 				BA3C007F1AE7140B00911004 /* Resources */,
+				FA81DFEE46F36D57B29B57DA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -213,6 +239,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BBFC49954134DB783F18E857 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FA81DFEE46F36D57B29B57DA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BA3C007D1AE7140B00911004 /* Sources */ = {
@@ -347,6 +406,7 @@
 		};
 		BA3C00A51AE7140B00911004 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7FB26D086C2121BEC49334E /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Pulse2/Info.plist;
@@ -357,6 +417,7 @@
 		};
 		BA3C00A61AE7140B00911004 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1FF3F4C22441D40B497FF69C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Pulse2/Info.plist;
@@ -418,6 +479,7 @@
 				BA3C00A61AE7140B00911004 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BA3C00A71AE7140B00911004 /* Build configuration list for PBXNativeTarget "Pulse2Tests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +488,7 @@
 				BA3C00A91AE7140B00911004 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
