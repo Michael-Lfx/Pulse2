@@ -17,6 +17,6 @@
 
 @property AEAudioController *audioController;
 @property AEAudioFilePlayer *looper;
-@property AEBlockAudioReceiver *receiver;
+@property AEChannelGroupRef channelGroup;
 
 @end

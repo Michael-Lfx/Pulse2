@@ -58,6 +58,7 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
         
         [_loopManagers addObject:loopManager];
     }
+    
 }
 
 - (void)createSoundInteractors {
@@ -317,7 +318,7 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
     /* Called before each frame is rendered */
     
     for (SoundInteractor *interactor in _soundInteractors) {
-        if ([interactor isReady] && [interactor getState]) {
+        if ([interactor isReady]) {
             [interactor updateAppearance];
         }
     }

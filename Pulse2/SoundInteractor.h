@@ -12,7 +12,6 @@
 
 @interface SoundInteractor : SKShapeNode
 
-- (instancetype)initWithAudioController:(AEAudioController *)audioController fileURL:(NSURL *)url;
 - (void)resetValues;
 // set SoundFilePlayer object
 - (void)connectToLoopManager:(LoopManager *)loopManager;

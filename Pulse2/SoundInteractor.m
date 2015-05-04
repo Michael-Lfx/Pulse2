@@ -24,16 +24,16 @@
 @implementation SoundInteractor
 
 // shape and color values
-double beginningStrokeGray = 0.05;
-double endingStrokeGray = 0.6;
-double grayScaleValueOff = 0.2;
-double grayScaleValueOn = 1.0;
-double alphaValue = 0.4;
+double _beginningStrokeGray = 0.05;
+double _endingStrokeGray = 0.6;
+double _grayScaleValueOff = 0.2;
+double _grayScaleValueOn = 1.0;
+double _alphaValue = 0.4;
 
 // animation timings
-double volumeFadeTime = 1.0;
-double appearAnimationTime = 2.5;
-double ringFadeInTime = 0.2;
+double _volumeFadeTime = 1.0;
+double _appearAnimationTime = 2.5;
+double _ringFadeInTime = 0.2;
 
 - (instancetype)init {
     self = [super init];
@@ -56,28 +56,28 @@ double ringFadeInTime = 0.2;
     self.yScale = 0;
     
     self.alpha = 0;
-    self.fillColor = [SKColor colorWithWhite:grayScaleValueOff alpha:1.0];
-    self.strokeColor = [SKColor colorWithWhite:beginningStrokeGray alpha:1.0];
+    self.fillColor = [SKColor colorWithWhite:_grayScaleValueOff alpha:1.0];
+    self.strokeColor = [SKColor colorWithWhite:_beginningStrokeGray alpha:1.0];
 }
 
 - (void)connectToLoopManager:(LoopManager *)loopManager {
     self.loopManager = loopManager;
     
-    self.volumeUpAction = [SKAction customActionWithDuration:volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-        double targetValue = (elapsedTime / volumeFadeTime);
+    self.volumeUpAction = [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+        double targetValue = (elapsedTime / _volumeFadeTime);
         double beginValue = 1 - targetValue;
         
-        double grayValue = beginValue * grayScaleValueOff + targetValue * grayScaleValueOn;
+        double grayValue = beginValue * _grayScaleValueOff + targetValue * _grayScaleValueOn;
         self.fillColor = [SKColor colorWithWhite:grayValue alpha:1.0];
         
         loopManager.looper.volume = targetValue;
     }];
     
-    self.volumeDownAction = [SKAction customActionWithDuration:volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-        double targetValue = (elapsedTime / volumeFadeTime);
+    self.volumeDownAction = [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+        double targetValue = (elapsedTime / _volumeFadeTime);
         double beginValue = 1 - targetValue;
         
-        double grayValue = beginValue * grayScaleValueOn + targetValue * grayScaleValueOff;
+        double grayValue = beginValue * _grayScaleValueOn + targetValue * _grayScaleValueOff;
         self.fillColor = [SKColor colorWithWhite:grayValue alpha:1.0];
         
         loopManager.looper.volume = beginValue;
@@ -85,14 +85,14 @@ double ringFadeInTime = 0.2;
 }
 
 - (void)appearWithGrowAnimation {
-    [self runAction:[SKAction scaleTo:1.0 duration:appearAnimationTime] completion:^{
+    [self runAction:[SKAction scaleTo:1.0 duration:_appearAnimationTime] completion:^{
         _ready = YES;
     }];
     
     // fade alpha in, then fade outer ring in
-    [self runAction:[SKAction fadeAlphaTo:alphaValue duration:appearAnimationTime - ringFadeInTime] completion:^{
-        [self runAction:[SKAction customActionWithDuration:ringFadeInTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-            double grayValue = beginningStrokeGray * ((ringFadeInTime - elapsedTime) / ringFadeInTime) + endingStrokeGray * (elapsedTime / ringFadeInTime);
+    [self runAction:[SKAction fadeAlphaTo:_alphaValue duration:_appearAnimationTime - _ringFadeInTime] completion:^{
+        [self runAction:[SKAction customActionWithDuration:_ringFadeInTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+            double grayValue = _beginningStrokeGray * ((_ringFadeInTime - elapsedTime) / _ringFadeInTime) + _endingStrokeGray * (elapsedTime / _ringFadeInTime);
             self.strokeColor = [SKColor colorWithWhite:grayValue alpha:1.0];
         }]];
     }];
@@ -121,8 +121,8 @@ double ringFadeInTime = 0.2;
 }
 
 - (void)updateAppearance {
-    self.xScale = 1 + [_loopManager getCurrentAmplitude] / 50.0;
-    self.yScale = 1 + [_loopManager getCurrentAmplitude] / 50.0;
-}
+    double currentPowerLevel = [_loopManager getCurrentAmplitude];
+    [self runAction:[SKAction scaleTo:1 + (currentPowerLevel * _loopManager.looper.volume) duration:0.1]];
+ }
 
 @end
