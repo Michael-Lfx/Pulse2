@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "GameScene.h"
 
 @interface ViewController ()
 
@@ -16,7 +17,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    // configure the view
+    SKView *skView = (SKView *)self.view;
+    skView.showsFPS = NO;
+    skView.showsNodeCount = NO;
+    skView.ignoresSiblingOrder = YES;
+    skView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.95 alpha:1.0];
+    
+    CGSize screenSize = self.view.frame.size;
+    GameScene *gameScene = [[GameScene alloc] initWithSize:screenSize];
+    [skView presentScene:gameScene];
 }
 
 - (void)didReceiveMemoryWarning {
