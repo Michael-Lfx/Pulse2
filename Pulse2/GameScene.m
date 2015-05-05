@@ -12,6 +12,7 @@
 @interface GameScene ()
 
 @property AEAudioController *audioController;
+@property AEAudioUnitChannel *collisionSound;
 
 @end
 
@@ -24,7 +25,6 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
     
     self.backgroundColor = [SKColor colorWithRed:10.0/255 green:55.0/255 blue:70.0/255 alpha:1.0];
     self.scaleMode = SKSceneScaleModeAspectFit;
-    self.view.frameInterval = 2;
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     self.physicsBody.categoryBitMask = edgeCategory;
     self.physicsWorld.contactDelegate = self;
@@ -103,6 +103,31 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
     }
     
     self.draggedInteractor = nil;
+    
+//    AudioComponentDescription component = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
+//                                                                          kAudioUnitType_MusicDevice,
+//                                                                          kAudioUnitSubType_Sampler);
+//    NSError *error = NULL;
+//    self.collisionSound = [[AEAudioUnitChannel alloc] initWithComponentDescription:component audioController:_audioController error:&error];
+//    if (!_collisionSound) {
+//        // report error
+//    } else {
+//        
+//        NSURL *presetURL = [[NSBundle mainBundle] URLForResource:@"piano" withExtension:@"aupreset"];
+//        
+//        OSStatus result = noErr;
+//        AUSamplerInstrumentData auPreset = {0};
+//        auPreset.fileURL = (__bridge CFURLRef)presetURL;
+//        auPreset.instrumentType = kInstrumentType_AUPreset;
+//        result = AudioUnitSetProperty(_collisionSound.audioUnit,
+//                             kAUSamplerProperty_LoadInstrument,
+//                             kAudioUnitScope_Global,
+//                             0,
+//                             &auPreset,
+//                             sizeof(auPreset));
+//    }
+//    
+//    [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
 }
 
 - (void)addGestureRecognizers {
@@ -122,9 +147,7 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
     [[self view] addGestureRecognizer:longPressRecognizer];
 }
 
-- (void)setupScene {
-//    [_audioController addChannels:_audioFilePlayers];
-    
+- (void)setupScene {    
     for (LoopManager *loopManager in _loopManagers) {
         loopManager.looper.channelIsPlaying = YES;
     }
@@ -222,6 +245,7 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
         if ([interactor getState] == NO) {
             [interactor turnOn];
+//            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, 0x40, 127, 0);
         } else {
             [interactor turnOff];
         }

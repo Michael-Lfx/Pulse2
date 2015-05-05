@@ -122,7 +122,7 @@ double _ringFadeInTime = 0.2;
 
 - (void)updateAppearance {
     double currentPowerLevel = [_loopManager getCurrentAmplitude];
-    [self runAction:[SKAction scaleTo:1 + (currentPowerLevel * _loopManager.looper.volume) duration:0.1]];
+    [self runAction:[SKAction scaleTo:1 + (currentPowerLevel * _loopManager.looper.volume) duration:0.07]];
  }
 
 @end

@@ -26,7 +26,7 @@
     }
     
     _audioController.allowMixingWithOtherApps = NO;
-    _audioController.useMeasurementMode = NO;
+    _audioController.useMeasurementMode = YES;
     
     return YES;
 }
