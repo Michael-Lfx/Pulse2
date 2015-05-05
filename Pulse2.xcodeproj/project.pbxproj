@@ -29,7 +29,6 @@
 		BA3C00A11AE7140B00911004 /* Pulse2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C00A01AE7140B00911004 /* Pulse2Tests.m */; };
 		BA8FE9F31AF957BC000070DC /* piano.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = BA8FE9F21AF957BC000070DC /* piano.aupreset */; };
 		BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB96FAB1AF81613001906D0 /* MainMenuScene.m */; };
-		BAB96FAF1AF81B17001906D0 /* testpreset.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = BAB96FAE1AF81B17001906D0 /* testpreset.aupreset */; };
 		BAF06F281AEED4A000FBB4C3 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF06F271AEED4A000FBB4C3 /* SpriteKit.framework */; };
 		BAF06F311AEED62500FBB4C3 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF06F301AEED62500FBB4C3 /* GameScene.m */; };
 		BAF06F371AEED6F400FBB4C3 /* SoundInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */; };
@@ -80,7 +79,6 @@
 		BA8FE9F21AF957BC000070DC /* piano.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = piano.aupreset; sourceTree = "<group>"; };
 		BAB96FAA1AF81613001906D0 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		BAB96FAB1AF81613001906D0 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
-		BAB96FAE1AF81B17001906D0 /* testpreset.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testpreset.aupreset; sourceTree = "<group>"; };
 		BAF06F271AEED4A000FBB4C3 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		BAF06F2F1AEED62500FBB4C3 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		BAF06F301AEED62500FBB4C3 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
@@ -214,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				BA8FE9F21AF957BC000070DC /* piano.aupreset */,
-				BAB96FAE1AF81B17001906D0 /* testpreset.aupreset */,
 			);
 			name = Presets;
 			sourceTree = "<group>";
@@ -327,7 +324,6 @@
 				BA3C00921AE7140B00911004 /* Images.xcassets in Resources */,
 				BA014C311AF05FE9001CAAE3 /* relaxation - Empee EP - 90.mp3 in Resources */,
 				BA8FE9F31AF957BC000070DC /* piano.aupreset in Resources */,
-				BAB96FAF1AF81B17001906D0 /* testpreset.aupreset in Resources */,
 				BA014C261AF05FE9001CAAE3 /* relaxation - 01 A1 Andre Winter Minimize Kit - 90.mp3 in Resources */,
 				BA014C301AF05FE9001CAAE3 /* relaxation - Eighties EP - 90.mp3 in Resources */,
 				BA014C2C1AF05FE9001CAAE3 /* relaxation - Dance Organ - 90.mp3 in Resources */,
