@@ -10,7 +10,7 @@
 
 @interface SoundInteractor ()
 
-@property(nonatomic) LoopManager *loopManager;
+@property(nonatomic) Conductor *conductor;
 @property BOOL state;
 @property BOOL ready;
 @property double averagedAmplitude;
@@ -60,8 +60,8 @@ double _ringFadeInTime = 0.2;
     self.strokeColor = [SKColor colorWithWhite:_beginningStrokeGray alpha:1.0];
 }
 
-- (void)connectToLoopManager:(LoopManager *)loopManager {
-    self.loopManager = loopManager;
+- (void)connectToConductor:(Conductor *)conductor {
+    self.conductor = conductor;
     
     self.volumeUpAction = [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
         double targetValue = (elapsedTime / _volumeFadeTime);
@@ -70,7 +70,7 @@ double _ringFadeInTime = 0.2;
         double grayValue = beginValue * _grayScaleValueOff + targetValue * _grayScaleValueOn;
         self.fillColor = [SKColor colorWithWhite:grayValue alpha:1.0];
         
-        loopManager.looper.volume = targetValue;
+        [_conductor setVolumeForLoop:self.name withVolume:targetValue];
     }];
     
     self.volumeDownAction = [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
@@ -80,7 +80,7 @@ double _ringFadeInTime = 0.2;
         double grayValue = beginValue * _grayScaleValueOn + targetValue * _grayScaleValueOff;
         self.fillColor = [SKColor colorWithWhite:grayValue alpha:1.0];
         
-        loopManager.looper.volume = beginValue;
+        [_conductor setVolumeForLoop:self.name withVolume:beginValue];
     }];
 }
 
@@ -121,8 +121,8 @@ double _ringFadeInTime = 0.2;
 }
 
 - (void)updateAppearance {
-    double currentPowerLevel = [_loopManager getCurrentAmplitude];
-    [self runAction:[SKAction scaleTo:1 + (currentPowerLevel * _loopManager.looper.volume) duration:0.07]];
+    double powerLevel = [_conductor getPowerLevelForLoop:self.name];
+    [self runAction:[SKAction scaleTo:1 + powerLevel duration:0.07]];
  }
 
 @end

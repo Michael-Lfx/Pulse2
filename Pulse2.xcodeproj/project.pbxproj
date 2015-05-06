@@ -7,19 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA014C181AF057AD001CAAE3 /* LoopManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = BA014C171AF057AD001CAAE3 /* LoopManager.mm */; };
-		BA014C261AF05FE9001CAAE3 /* relaxation - 01 A1 Andre Winter Minimize Kit - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1A1AF05FE9001CAAE3 /* relaxation - 01 A1 Andre Winter Minimize Kit - 90.mp3 */; };
-		BA014C271AF05FE9001CAAE3 /* relaxation - Absynth Beach - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1B1AF05FE9001CAAE3 /* relaxation - Absynth Beach - 90.mp3 */; };
-		BA014C281AF05FE9001CAAE3 /* relaxation - Blue Sun - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1C1AF05FE9001CAAE3 /* relaxation - Blue Sun - 90.mp3 */; };
-		BA014C291AF05FE9001CAAE3 /* relaxation - Bouncing Mark I - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1D1AF05FE9001CAAE3 /* relaxation - Bouncing Mark I - 90.mp3 */; };
-		BA014C2A1AF05FE9001CAAE3 /* relaxation - Carrier - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1E1AF05FE9001CAAE3 /* relaxation - Carrier - 90.mp3 */; };
-		BA014C2B1AF05FE9001CAAE3 /* relaxation - Cypress - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1F1AF05FE9001CAAE3 /* relaxation - Cypress - 90.mp3 */; };
-		BA014C2C1AF05FE9001CAAE3 /* relaxation - Dance Organ - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C201AF05FE9001CAAE3 /* relaxation - Dance Organ - 90.mp3 */; };
-		BA014C2D1AF05FE9001CAAE3 /* relaxation - Distant Pianet - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C211AF05FE9001CAAE3 /* relaxation - Distant Pianet - 90.mp3 */; };
-		BA014C2E1AF05FE9001CAAE3 /* relaxation - Dominant - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C221AF05FE9001CAAE3 /* relaxation - Dominant - 90.mp3 */; };
-		BA014C2F1AF05FE9001CAAE3 /* relaxation - Dub Pulse - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C231AF05FE9001CAAE3 /* relaxation - Dub Pulse - 90.mp3 */; };
-		BA014C301AF05FE9001CAAE3 /* relaxation - Eighties EP - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C241AF05FE9001CAAE3 /* relaxation - Eighties EP - 90.mp3 */; };
-		BA014C311AF05FE9001CAAE3 /* relaxation - Empee EP - 90.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C251AF05FE9001CAAE3 /* relaxation - Empee EP - 90.mp3 */; };
+		BA014C261AF05FE9001CAAE3 /* relaxation-drums.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1A1AF05FE9001CAAE3 /* relaxation-drums.mp3 */; };
+		BA014C271AF05FE9001CAAE3 /* relaxation-beach.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1B1AF05FE9001CAAE3 /* relaxation-beach.mp3 */; };
+		BA014C281AF05FE9001CAAE3 /* relaxation-blue-sun.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1C1AF05FE9001CAAE3 /* relaxation-blue-sun.mp3 */; };
+		BA014C291AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1D1AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 */; };
+		BA014C2A1AF05FE9001CAAE3 /* relaxation-carrier.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1E1AF05FE9001CAAE3 /* relaxation-carrier.mp3 */; };
+		BA014C2B1AF05FE9001CAAE3 /* relaxation-cypress.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C1F1AF05FE9001CAAE3 /* relaxation-cypress.mp3 */; };
+		BA014C2C1AF05FE9001CAAE3 /* relaxation-dance-organ.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C201AF05FE9001CAAE3 /* relaxation-dance-organ.mp3 */; };
+		BA014C2D1AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C211AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 */; };
+		BA014C2E1AF05FE9001CAAE3 /* relaxation-dominant.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C221AF05FE9001CAAE3 /* relaxation-dominant.mp3 */; };
+		BA014C2F1AF05FE9001CAAE3 /* relaxation-dub-pulse.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C231AF05FE9001CAAE3 /* relaxation-dub-pulse.mp3 */; };
+		BA014C301AF05FE9001CAAE3 /* relaxation-eighties-ep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C241AF05FE9001CAAE3 /* relaxation-eighties-ep.mp3 */; };
+		BA014C311AF05FE9001CAAE3 /* relaxation-empee-ep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BA014C251AF05FE9001CAAE3 /* relaxation-empee-ep.mp3 */; };
+		BA2BD3041AF965EC008A4169 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = BA2BD3031AF965EC008A4169 /* Sounds */; };
+		BA2BD3061AF9664A008A4169 /* piano.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = BA2BD3051AF9664A008A4169 /* piano.aupreset */; };
+		BA2BD3091AF98CA0008A4169 /* Conductor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2BD3081AF98CA0008A4169 /* Conductor.m */; };
 		BA3C00871AE7140B00911004 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C00861AE7140B00911004 /* main.m */; };
 		BA3C008A1AE7140B00911004 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C00891AE7140B00911004 /* AppDelegate.m */; };
 		BA3C008D1AE7140B00911004 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C008C1AE7140B00911004 /* ViewController.m */; };
@@ -27,7 +29,6 @@
 		BA3C00921AE7140B00911004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA3C00911AE7140B00911004 /* Images.xcassets */; };
 		BA3C00951AE7140B00911004 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA3C00931AE7140B00911004 /* LaunchScreen.xib */; };
 		BA3C00A11AE7140B00911004 /* Pulse2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C00A01AE7140B00911004 /* Pulse2Tests.m */; };
-		BA8FE9F31AF957BC000070DC /* piano.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = BA8FE9F21AF957BC000070DC /* piano.aupreset */; };
 		BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB96FAB1AF81613001906D0 /* MainMenuScene.m */; };
 		BAF06F281AEED4A000FBB4C3 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF06F271AEED4A000FBB4C3 /* SpriteKit.framework */; };
 		BAF06F311AEED62500FBB4C3 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF06F301AEED62500FBB4C3 /* GameScene.m */; };
@@ -49,20 +50,22 @@
 /* Begin PBXFileReference section */
 		1FF3F4C22441D40B497FF69C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9BB9D2BD43485FF5B2111854 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA014C161AF057AD001CAAE3 /* LoopManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopManager.h; sourceTree = "<group>"; };
-		BA014C171AF057AD001CAAE3 /* LoopManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoopManager.mm; sourceTree = "<group>"; };
-		BA014C1A1AF05FE9001CAAE3 /* relaxation - 01 A1 Andre Winter Minimize Kit - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - 01 A1 Andre Winter Minimize Kit - 90.mp3"; sourceTree = "<group>"; };
-		BA014C1B1AF05FE9001CAAE3 /* relaxation - Absynth Beach - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - Absynth Beach - 90.mp3"; sourceTree = "<group>"; };
-		BA014C1C1AF05FE9001CAAE3 /* relaxation - Blue Sun - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - Blue Sun - 90.mp3"; sourceTree = "<group>"; };
-		BA014C1D1AF05FE9001CAAE3 /* relaxation - Bouncing Mark I - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - Bouncing Mark I - 90.mp3"; sourceTree = "<group>"; };
-		BA014C1E1AF05FE9001CAAE3 /* relaxation - Carrier - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - Carrier - 90.mp3"; sourceTree = "<group>"; };
-		BA014C1F1AF05FE9001CAAE3 /* relaxation - Cypress - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - Cypress - 90.mp3"; sourceTree = "<group>"; };
-		BA014C201AF05FE9001CAAE3 /* relaxation - Dance Organ - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - Dance Organ - 90.mp3"; sourceTree = "<group>"; };
-		BA014C211AF05FE9001CAAE3 /* relaxation - Distant Pianet - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - Distant Pianet - 90.mp3"; sourceTree = "<group>"; };
-		BA014C221AF05FE9001CAAE3 /* relaxation - Dominant - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - Dominant - 90.mp3"; sourceTree = "<group>"; };
-		BA014C231AF05FE9001CAAE3 /* relaxation - Dub Pulse - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - Dub Pulse - 90.mp3"; sourceTree = "<group>"; };
-		BA014C241AF05FE9001CAAE3 /* relaxation - Eighties EP - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - Eighties EP - 90.mp3"; sourceTree = "<group>"; };
-		BA014C251AF05FE9001CAAE3 /* relaxation - Empee EP - 90.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation - Empee EP - 90.mp3"; sourceTree = "<group>"; };
+		BA014C1A1AF05FE9001CAAE3 /* relaxation-drums.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-drums.mp3"; sourceTree = "<group>"; };
+		BA014C1B1AF05FE9001CAAE3 /* relaxation-beach.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-beach.mp3"; sourceTree = "<group>"; };
+		BA014C1C1AF05FE9001CAAE3 /* relaxation-blue-sun.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-blue-sun.mp3"; sourceTree = "<group>"; };
+		BA014C1D1AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-bouncing-mark.mp3"; sourceTree = "<group>"; };
+		BA014C1E1AF05FE9001CAAE3 /* relaxation-carrier.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-carrier.mp3"; sourceTree = "<group>"; };
+		BA014C1F1AF05FE9001CAAE3 /* relaxation-cypress.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-cypress.mp3"; sourceTree = "<group>"; };
+		BA014C201AF05FE9001CAAE3 /* relaxation-dance-organ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-dance-organ.mp3"; sourceTree = "<group>"; };
+		BA014C211AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-distant-planet.mp3"; sourceTree = "<group>"; };
+		BA014C221AF05FE9001CAAE3 /* relaxation-dominant.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-dominant.mp3"; sourceTree = "<group>"; };
+		BA014C231AF05FE9001CAAE3 /* relaxation-dub-pulse.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-dub-pulse.mp3"; sourceTree = "<group>"; };
+		BA014C241AF05FE9001CAAE3 /* relaxation-eighties-ep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-eighties-ep.mp3"; sourceTree = "<group>"; };
+		BA014C251AF05FE9001CAAE3 /* relaxation-empee-ep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "relaxation-empee-ep.mp3"; sourceTree = "<group>"; };
+		BA2BD3031AF965EC008A4169 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
+		BA2BD3051AF9664A008A4169 /* piano.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = piano.aupreset; sourceTree = "<group>"; };
+		BA2BD3071AF98CA0008A4169 /* Conductor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conductor.h; sourceTree = "<group>"; };
+		BA2BD3081AF98CA0008A4169 /* Conductor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conductor.m; sourceTree = "<group>"; };
 		BA3C00811AE7140B00911004 /* Pulse2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pulse2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3C00851AE7140B00911004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA3C00861AE7140B00911004 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -76,7 +79,6 @@
 		BA3C009A1AE7140B00911004 /* Pulse2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pulse2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3C009F1AE7140B00911004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA3C00A01AE7140B00911004 /* Pulse2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pulse2Tests.m; sourceTree = "<group>"; };
-		BA8FE9F21AF957BC000070DC /* piano.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = piano.aupreset; sourceTree = "<group>"; };
 		BAB96FAA1AF81613001906D0 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		BAB96FAB1AF81613001906D0 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
 		BAF06F271AEED4A000FBB4C3 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -120,18 +122,18 @@
 		BA014C321AF05FF1001CAAE3 /* relaxation */ = {
 			isa = PBXGroup;
 			children = (
-				BA014C1A1AF05FE9001CAAE3 /* relaxation - 01 A1 Andre Winter Minimize Kit - 90.mp3 */,
-				BA014C1B1AF05FE9001CAAE3 /* relaxation - Absynth Beach - 90.mp3 */,
-				BA014C1C1AF05FE9001CAAE3 /* relaxation - Blue Sun - 90.mp3 */,
-				BA014C1D1AF05FE9001CAAE3 /* relaxation - Bouncing Mark I - 90.mp3 */,
-				BA014C1E1AF05FE9001CAAE3 /* relaxation - Carrier - 90.mp3 */,
-				BA014C1F1AF05FE9001CAAE3 /* relaxation - Cypress - 90.mp3 */,
-				BA014C201AF05FE9001CAAE3 /* relaxation - Dance Organ - 90.mp3 */,
-				BA014C211AF05FE9001CAAE3 /* relaxation - Distant Pianet - 90.mp3 */,
-				BA014C221AF05FE9001CAAE3 /* relaxation - Dominant - 90.mp3 */,
-				BA014C231AF05FE9001CAAE3 /* relaxation - Dub Pulse - 90.mp3 */,
-				BA014C241AF05FE9001CAAE3 /* relaxation - Eighties EP - 90.mp3 */,
-				BA014C251AF05FE9001CAAE3 /* relaxation - Empee EP - 90.mp3 */,
+				BA014C1A1AF05FE9001CAAE3 /* relaxation-drums.mp3 */,
+				BA014C1B1AF05FE9001CAAE3 /* relaxation-beach.mp3 */,
+				BA014C1C1AF05FE9001CAAE3 /* relaxation-blue-sun.mp3 */,
+				BA014C1D1AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 */,
+				BA014C1E1AF05FE9001CAAE3 /* relaxation-carrier.mp3 */,
+				BA014C1F1AF05FE9001CAAE3 /* relaxation-cypress.mp3 */,
+				BA014C201AF05FE9001CAAE3 /* relaxation-dance-organ.mp3 */,
+				BA014C211AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 */,
+				BA014C221AF05FE9001CAAE3 /* relaxation-dominant.mp3 */,
+				BA014C231AF05FE9001CAAE3 /* relaxation-dub-pulse.mp3 */,
+				BA014C241AF05FE9001CAAE3 /* relaxation-eighties-ep.mp3 */,
+				BA014C251AF05FE9001CAAE3 /* relaxation-empee-ep.mp3 */,
 				BAF06F461AEEE16200FBB4C3 /* relaxation.plist */,
 			);
 			name = relaxation;
@@ -166,16 +168,17 @@
 				BA3C008C1AE7140B00911004 /* ViewController.m */,
 				BAB96FAA1AF81613001906D0 /* MainMenuScene.h */,
 				BAB96FAB1AF81613001906D0 /* MainMenuScene.m */,
+				BA2BD3071AF98CA0008A4169 /* Conductor.h */,
+				BA2BD3081AF98CA0008A4169 /* Conductor.m */,
 				BAF06F2F1AEED62500FBB4C3 /* GameScene.h */,
 				BAF06F301AEED62500FBB4C3 /* GameScene.m */,
-				BA014C161AF057AD001CAAE3 /* LoopManager.h */,
-				BA014C171AF057AD001CAAE3 /* LoopManager.mm */,
 				BAF06F351AEED6F400FBB4C3 /* SoundInteractor.h */,
 				BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */,
 				BAB96FAD1AF81B0A001906D0 /* Presets */,
-				BAF06F381AEEE13000FBB4C3 /* Sounds */,
-				BA3C00841AE7140B00911004 /* Supporting Files */,
+				BAF06F381AEEE13000FBB4C3 /* Loop Data */,
+				BA2BD3031AF965EC008A4169 /* Sounds */,
 				BA3C00911AE7140B00911004 /* Images.xcassets */,
+				BA3C00841AE7140B00911004 /* Supporting Files */,
 				BA3C008E1AE7140B00911004 /* Main.storyboard */,
 				BA3C00931AE7140B00911004 /* LaunchScreen.xib */,
 			);
@@ -211,17 +214,17 @@
 		BAB96FAD1AF81B0A001906D0 /* Presets */ = {
 			isa = PBXGroup;
 			children = (
-				BA8FE9F21AF957BC000070DC /* piano.aupreset */,
+				BA2BD3051AF9664A008A4169 /* piano.aupreset */,
 			);
 			name = Presets;
 			sourceTree = "<group>";
 		};
-		BAF06F381AEEE13000FBB4C3 /* Sounds */ = {
+		BAF06F381AEEE13000FBB4C3 /* Loop Data */ = {
 			isa = PBXGroup;
 			children = (
 				BA014C321AF05FF1001CAAE3 /* relaxation */,
 			);
-			name = Sounds;
+			name = "Loop Data";
 			sourceTree = "<group>";
 		};
 		F0B311003B034DAA1E839EB0 /* Frameworks */ = {
@@ -316,22 +319,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA3C00901AE7140B00911004 /* Main.storyboard in Resources */,
-				BA014C281AF05FE9001CAAE3 /* relaxation - Blue Sun - 90.mp3 in Resources */,
-				BA014C2A1AF05FE9001CAAE3 /* relaxation - Carrier - 90.mp3 in Resources */,
-				BA014C2F1AF05FE9001CAAE3 /* relaxation - Dub Pulse - 90.mp3 in Resources */,
+				BA014C281AF05FE9001CAAE3 /* relaxation-blue-sun.mp3 in Resources */,
+				BA014C2A1AF05FE9001CAAE3 /* relaxation-carrier.mp3 in Resources */,
+				BA014C2F1AF05FE9001CAAE3 /* relaxation-dub-pulse.mp3 in Resources */,
 				BA3C00951AE7140B00911004 /* LaunchScreen.xib in Resources */,
-				BA014C2B1AF05FE9001CAAE3 /* relaxation - Cypress - 90.mp3 in Resources */,
+				BA014C2B1AF05FE9001CAAE3 /* relaxation-cypress.mp3 in Resources */,
 				BA3C00921AE7140B00911004 /* Images.xcassets in Resources */,
-				BA014C311AF05FE9001CAAE3 /* relaxation - Empee EP - 90.mp3 in Resources */,
-				BA8FE9F31AF957BC000070DC /* piano.aupreset in Resources */,
-				BA014C261AF05FE9001CAAE3 /* relaxation - 01 A1 Andre Winter Minimize Kit - 90.mp3 in Resources */,
-				BA014C301AF05FE9001CAAE3 /* relaxation - Eighties EP - 90.mp3 in Resources */,
-				BA014C2C1AF05FE9001CAAE3 /* relaxation - Dance Organ - 90.mp3 in Resources */,
-				BA014C2D1AF05FE9001CAAE3 /* relaxation - Distant Pianet - 90.mp3 in Resources */,
+				BA014C311AF05FE9001CAAE3 /* relaxation-empee-ep.mp3 in Resources */,
+				BA2BD3061AF9664A008A4169 /* piano.aupreset in Resources */,
+				BA2BD3041AF965EC008A4169 /* Sounds in Resources */,
+				BA014C261AF05FE9001CAAE3 /* relaxation-drums.mp3 in Resources */,
+				BA014C301AF05FE9001CAAE3 /* relaxation-eighties-ep.mp3 in Resources */,
+				BA014C2C1AF05FE9001CAAE3 /* relaxation-dance-organ.mp3 in Resources */,
+				BA014C2D1AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 in Resources */,
 				BAF06F541AEEE16200FBB4C3 /* relaxation.plist in Resources */,
-				BA014C291AF05FE9001CAAE3 /* relaxation - Bouncing Mark I - 90.mp3 in Resources */,
-				BA014C271AF05FE9001CAAE3 /* relaxation - Absynth Beach - 90.mp3 in Resources */,
-				BA014C2E1AF05FE9001CAAE3 /* relaxation - Dominant - 90.mp3 in Resources */,
+				BA014C291AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 in Resources */,
+				BA014C271AF05FE9001CAAE3 /* relaxation-beach.mp3 in Resources */,
+				BA014C2E1AF05FE9001CAAE3 /* relaxation-dominant.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,8 +391,8 @@
 				BA3C008A1AE7140B00911004 /* AppDelegate.m in Sources */,
 				BAF06F311AEED62500FBB4C3 /* GameScene.m in Sources */,
 				BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */,
-				BA014C181AF057AD001CAAE3 /* LoopManager.mm in Sources */,
 				BA3C00871AE7140B00911004 /* main.m in Sources */,
+				BA2BD3091AF98CA0008A4169 /* Conductor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

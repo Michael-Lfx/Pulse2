@@ -8,13 +8,13 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import <TheAmazingAudioEngine/TheAmazingAudioEngine.h>
-#import "LoopManager.h"
+#import "Conductor.h"
 
 @interface SoundInteractor : SKShapeNode
 
 - (void)resetValues;
 // set SoundFilePlayer object
-- (void)connectToLoopManager:(LoopManager *)loopManager;
+- (void)connectToConductor:(Conductor *)conductor;
 // fade in and grow interactor
 - (void)appearWithGrowAnimation;
 // returns true if appear animation has completed

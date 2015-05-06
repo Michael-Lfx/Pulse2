@@ -1,66 +1,243 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<array>
-	<array>
-		<string>relaxation - 01 A1 Andre Winter Minimize Kit - 90</string>
-		<real>0.25</real>
-		<integer>6</integer>
-	</array>
-	<array>
-		<string>relaxation - Dub Pulse - 90</string>
-		<real>0.23</real>
-		<integer>5</integer>
-	</array>
-	<array>
-		<string>relaxation - Absynth Beach - 90</string>
-		<real>0.12</real>
-		<integer>15</integer>
-	</array>
-	<array>
-		<string>relaxation - Blue Sun - 90</string>
-		<real>0.2</real>
-		<integer>5</integer>
-	</array>
-	<array>
-		<string>relaxation - Bouncing Mark I - 90</string>
-		<real>0.2</real>
-		<integer>5</integer>
-	</array>
-	<array>
-		<string>relaxation - Carrier - 90</string>
-		<real>0.2</real>
-		<integer>10</integer>
-	</array>
-	<array>
-		<string>relaxation - Cypress - 90</string>
-		<real>0.2</real>
-		<integer>4</integer>
-	</array>
-	<array>
-		<string>relaxation - Dance Organ - 90</string>
-		<real>0.25</real>
-		<integer>5</integer>
-	</array>
-	<array>
-		<string>relaxation - Distant Pianet - 90</string>
-		<real>0.18</real>
-		<integer>6</integer>
-	</array>
-	<array>
-		<string>relaxation - Dominant - 90</string>
-		<real>0.12</real>
-		<integer>5</integer>
-	</array>
-	<array>
-		<string>relaxation - Eighties EP - 90</string>
-		<real>0.2</real>
-		<integer>10</integer>
-	</array>
-	<array>
-		<string>relaxation - Empee EP - 90</string>
-		<real>0.2</real>
-		<integer>5</integer>
-	</array>
-</array>
+<dict>
+	<key>extension</key>
+	<string>mp3</string>
+	<key>bpm</key>
+	<integer>90</integer>
+	<key>beats</key>
+	<integer>16</integer>
+	<key>audio files</key>
+	<dict>
+		<key>relaxation-drums</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<integer>0</integer>
+					<integer>2</integer>
+					<integer>4</integer>
+					<integer>6</integer>
+					<integer>8</integer>
+					<integer>10</integer>
+					<integer>12</integer>
+					<integer>14</integer>
+				</array>
+				<array>
+					<integer>1</integer>
+					<integer>3</integer>
+					<integer>5</integer>
+					<integer>7</integer>
+					<integer>9</integer>
+					<integer>11</integer>
+					<integer>13</integer>
+					<integer>15</integer>
+				</array>
+			</array>
+		</dict>
+		<key>relaxation-beach</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<integer>0</integer>
+					<integer>8</integer>
+				</array>
+			</array>
+		</dict>
+		<key>relaxation-blue-sun</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<integer>0</integer>
+				</array>
+			</array>
+		</dict>
+		<key>relaxation-bouncing-mark</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<integer>0</integer>
+				</array>
+				<array>
+					<real>1.5</real>
+					<integer>8</integer>
+				</array>
+				<array>
+					<real>9.5</real>
+				</array>
+			</array>
+		</dict>
+		<key>relaxation-carrier</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<integer>0</integer>
+				</array>
+				<array>
+					<real>1.5</real>
+					<real>13.5</real>
+				</array>
+				<array>
+					<real>3.5</real>
+					<real>11.5</real>
+				</array>
+				<array>
+					<real>5.5</real>
+					<real>9.5</real>
+				</array>
+				<array>
+					<integer>8</integer>
+				</array>
+			</array>
+		</dict>
+		<key>relaxation-cypress</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<integer>0</integer>
+					<integer>1</integer>
+					<integer>2</integer>
+					<integer>3</integer>
+					<integer>4</integer>
+					<integer>5</integer>
+					<integer>6</integer>
+					<integer>7</integer>
+					<integer>8</integer>
+					<integer>9</integer>
+					<integer>10</integer>
+					<integer>11</integer>
+					<integer>12</integer>
+					<integer>13</integer>
+					<integer>14</integer>
+					<integer>15</integer>
+				</array>
+			</array>
+		</dict>
+		<key>relaxation-dance-organ</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<integer>0</integer>
+					<real>11.5</real>
+				</array>
+				<array>
+					<integer>8</integer>
+					<integer>12</integer>
+				</array>
+				<array>
+					<real>3.5</real>
+					<real>11.75</real>
+				</array>
+				<array>
+					<real>1.5</real>
+					<real>13.5</real>
+				</array>
+			</array>
+		</dict>
+		<key>relaxation-distant-planet</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<integer>12</integer>
+				</array>
+				<array>
+					<real>11.5</real>
+					<integer>13</integer>
+				</array>
+				<array>
+					<real>12.5</real>
+					<integer>14</integer>
+				</array>
+				<array>
+					<real>13.5</real>
+					<integer>15</integer>
+				</array>
+				<array>
+					<real>14.5</real>
+				</array>
+				<array>
+					<real>15.5</real>
+				</array>
+			</array>
+		</dict>
+		<key>relaxation-dominant</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<integer>0</integer>
+					<integer>4</integer>
+					<integer>8</integer>
+					<integer>12</integer>
+				</array>
+			</array>
+		</dict>
+		<key>relaxation-dub-pulse</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<integer>0</integer>
+					<integer>4</integer>
+					<integer>8</integer>
+					<integer>12</integer>
+				</array>
+			</array>
+		</dict>
+		<key>relaxation-eighties-ep</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<real>11.5</real>
+				</array>
+				<array>
+					<real>3.5</real>
+				</array>
+				<array>
+					<real>1.5</real>
+					<real>9.5</real>
+				</array>
+				<array>
+					<integer>2</integer>
+					<integer>10</integer>
+				</array>
+				<array>
+					<integer>1</integer>
+					<integer>9</integer>
+				</array>
+				<array>
+					<real>0.5</real>
+					<real>8.5</real>
+				</array>
+			</array>
+		</dict>
+		<key>relaxation-empee-ep</key>
+		<dict>
+			<key>beat values</key>
+			<array>
+				<array>
+					<integer>0</integer>
+					<integer>4</integer>
+					<integer>8</integer>
+					<integer>12</integer>
+				</array>
+				<array>
+					<integer>2</integer>
+					<integer>6</integer>
+					<integer>10</integer>
+					<integer>14</integer>
+				</array>
+			</array>
+		</dict>
+	</dict>
+</dict>
 </plist>

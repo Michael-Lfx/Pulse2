@@ -12,6 +12,7 @@
 @interface GameScene ()
 
 @property AEAudioController *audioController;
+@property Conductor *conductor;
 @property AEAudioUnitChannel *collisionSound;
 
 @end
@@ -19,7 +20,7 @@
 @implementation GameScene
 
 double interactorTimerDuration = 1.0;
-float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
+float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 
 - (void)didMoveToView:(SKView *)view {
     
@@ -32,33 +33,11 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.audioController = delegate.audioController;
     
-    // create all the loopers
-    [self createLoopManagers];
+    self.conductor = [[Conductor alloc] initWithAudioController:_audioController plist:@"relaxation"];
+    
     [self createSoundInteractors];
     [self addGestureRecognizers];
-    [self setupScene];
-}
-
-
-- (void)createLoopManagers {
-    
-    // load file names from plist into array
-    NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:@"relaxation" ofType:@"plist"];
-    NSMutableArray *soundFiles = [[NSMutableArray alloc] initWithContentsOfFile:pathToPlist];
-
-    self.loopManagers = [[NSMutableArray alloc] init];
-    
-    // create an audio file player for each sound file
-    for (NSArray *soundFile in soundFiles) {
-
-        NSString *filename = soundFile[0];
-        NSURL *url = [[NSBundle mainBundle] URLForResource:filename withExtension:@"mp3"];
-        
-        LoopManager *loopManager = [[LoopManager alloc] initWithAudioController:_audioController fileURL:url];
-        
-        [_loopManagers addObject:loopManager];
-    }
-    
+    [self startScene];
 }
 
 - (void)createSoundInteractors {
@@ -70,7 +49,9 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
     
     self.soundInteractors = [[NSMutableArray alloc] init];
     
-    for (LoopManager *loopManager in _loopManagers) {
+    NSArray *filenames = [_conductor getFilenames];
+    
+    for (NSString *filename in filenames) {
         
         // random position within bounds of screen
         CGFloat x = (random()/(CGFloat)RAND_MAX) * windowWidth;
@@ -83,7 +64,9 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
         // create interactor, attach to audio file player
         SoundInteractor *interactor = [SoundInteractor shapeNodeWithCircleOfRadius:_baseInteractorSize/2];
         interactor.position = CGPointMake(x, y);
-        [interactor connectToLoopManager:loopManager];
+        interactor.name = filename;
+        [interactor connectToConductor:_conductor];
+//        [interactor connectToLoopManager:loopManager];
         
         // set physics properties
         [interactor setPhysicsBody:[SKPhysicsBody bodyWithCircleOfRadius:interactor.frame.size.width/2]];
@@ -104,30 +87,30 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
     
     self.draggedInteractor = nil;
     
-//    AudioComponentDescription component = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
-//                                                                          kAudioUnitType_MusicDevice,
-//                                                                          kAudioUnitSubType_Sampler);
-//    NSError *error = NULL;
-//    self.collisionSound = [[AEAudioUnitChannel alloc] initWithComponentDescription:component audioController:_audioController error:&error];
-//    if (!_collisionSound) {
-//        // report error
-//    } else {
-//        
-//        NSURL *presetURL = [[NSBundle mainBundle] URLForResource:@"piano" withExtension:@"aupreset"];
-//        
-//        OSStatus result = noErr;
-//        AUSamplerInstrumentData auPreset = {0};
-//        auPreset.fileURL = (__bridge CFURLRef)presetURL;
-//        auPreset.instrumentType = kInstrumentType_AUPreset;
-//        result = AudioUnitSetProperty(_collisionSound.audioUnit,
-//                             kAUSamplerProperty_LoadInstrument,
-//                             kAudioUnitScope_Global,
-//                             0,
-//                             &auPreset,
-//                             sizeof(auPreset));
-//    }
-//    
-//    [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
+    AudioComponentDescription component = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
+                                                                          kAudioUnitType_MusicDevice,
+                                                                          kAudioUnitSubType_Sampler);
+    NSError *error = NULL;
+    self.collisionSound = [[AEAudioUnitChannel alloc] initWithComponentDescription:component audioController:_audioController error:&error];
+    if (!_collisionSound) {
+        // report error
+    } else {
+        
+        NSURL *presetURL = [[NSBundle mainBundle] URLForResource:@"piano" withExtension:@"aupreset"];
+        
+        OSStatus result = noErr;
+        AUSamplerInstrumentData auPreset = {0};
+        auPreset.fileURL = (__bridge CFURLRef)presetURL;
+        auPreset.instrumentType = kInstrumentType_AUPreset;
+        result = AudioUnitSetProperty(_collisionSound.audioUnit,
+                             kAUSamplerProperty_LoadInstrument,
+                             kAudioUnitScope_Global,
+                             0,
+                             &auPreset,
+                             sizeof(auPreset));
+    }
+    
+    [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
 }
 
 - (void)addGestureRecognizers {
@@ -147,10 +130,8 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
     [[self view] addGestureRecognizer:longPressRecognizer];
 }
 
-- (void)setupScene {    
-    for (LoopManager *loopManager in _loopManagers) {
-        loopManager.looper.channelIsPlaying = YES;
-    }
+- (void)startScene {
+    [_conductor start];
     
     // randomize order of interactors
     NSUInteger count = [_soundInteractors count];
@@ -233,6 +214,13 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
             bodyB.velocity = CGVectorMake(bodyB.velocity.dx * 1.02, bodyB.velocity.dy * 1.02);
             bodyA.velocity = CGVectorMake(bodyA.velocity.dx * 1.02, bodyA.velocity.dy * 1.02);
         }
+        
+        if (contactImpulse > 1) {
+            int r = arc4random_uniform(6);
+            float vel = pow(10, 1/(-contactImpulse));
+            int intVel = roundf(vel * 50);
+            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, collisionFrequencies[r], intVel, 0);
+        }
     }
 }
 
@@ -245,7 +233,7 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
         if ([interactor getState] == NO) {
             [interactor turnOn];
-//            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, 0x40, 127, 0);
+//            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, 60, 127, 0);
         } else {
             [interactor turnOff];
         }
@@ -340,10 +328,14 @@ float collisionFrequencies[5] = {261.63, 329.63, 392.00, 440.00, 523.25};
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
-    
+    int value = 0;
     for (SoundInteractor *interactor in _soundInteractors) {
         if ([interactor isReady]) {
             [interactor updateAppearance];
+        }
+        if (value == 0) {
+            value = 1;
+            NSLog(@"%f", [_conductor getCurrentBeatForLoop:interactor.name]);
         }
     }
 }
