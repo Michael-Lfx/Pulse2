@@ -17,6 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.shouldHideStatusBar = YES;
+    [self setNeedsStatusBarAppearanceUpdate];
     
     // configure the view
     SKView *skView = (SKView *)self.view;
@@ -28,6 +30,10 @@
     CGSize screenSize = self.view.frame.size;
     GameScene *gameScene = [[GameScene alloc] initWithSize:screenSize];
     [skView presentScene:gameScene];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return _shouldHideStatusBar;
 }
 
 - (void)didReceiveMemoryWarning {

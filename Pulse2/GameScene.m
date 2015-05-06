@@ -215,12 +215,14 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
             bodyA.velocity = CGVectorMake(bodyA.velocity.dx * 1.02, bodyA.velocity.dy * 1.02);
         }
         
-        if (contactImpulse > 1) {
-            int r = arc4random_uniform(6);
-            float vel = pow(10, 1/(-contactImpulse));
-            int intVel = roundf(vel * 50);
-            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, collisionFrequencies[r], intVel, 0);
-        }
+        
+    }
+    
+    if (contactImpulse > 1) {
+        int r = arc4random_uniform(6);
+        float vel = pow(10, 1/(-contactImpulse));
+        int intVel = roundf(vel * 50);
+        MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, collisionFrequencies[r], intVel, 0);
     }
 }
 
@@ -335,7 +337,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         }
         if (value == 0) {
             value = 1;
-            NSLog(@"%f", [_conductor getCurrentBeatForLoop:interactor.name]);
+            double beat = [_conductor getCurrentBeatForLoop:interactor.name];
         }
     }
 }
