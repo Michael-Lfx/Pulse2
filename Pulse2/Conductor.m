@@ -76,14 +76,24 @@ double _beats;
     }
 }
 
-- (void)setVolumeForLoop:(NSString *)filename withVolume:(double)volume {
-    AEAudioFilePlayer *player = [_audioFilePlayers objectForKey:filename];
+- (void)setVolumeForLoop:(NSString *)loopName withVolume:(double)volume {
+    AEAudioFilePlayer *player = [_audioFilePlayers objectForKey:loopName];
     player.volume = volume;
 }
 
-- (double)getPowerLevelForLoop:(NSString *)filename {
-    AEAudioFilePlayer *player = [_audioFilePlayers objectForKey:filename];
-    AEChannelGroupRef group = [[_channelGroups objectForKey:filename] pointerValue];
+- (void)fadeVolumeForLoop:(NSString *)loopName withDuration:(double)duration fadeIn:(BOOL)fadeIn{ //doesn't fade yet
+    AEAudioFilePlayer *player = [_audioFilePlayers objectForKey:loopName];
+    [UIView animateWithDuration:duration animations:^(void){
+       if(fadeIn)
+           player.volume = 1;
+       else
+           player.volume = 0;
+    }];
+}
+
+- (double)getPowerLevelForLoop:(NSString *)loopName {
+    AEAudioFilePlayer *player = [_audioFilePlayers objectForKey:loopName];
+    AEChannelGroupRef group = [[_channelGroups objectForKey:loopName] pointerValue];
     
     Float32 powerLevel, peakLevel;
     [_audioController averagePowerLevel:&powerLevel peakHoldLevel:&peakLevel forGroup:group];
@@ -91,8 +101,8 @@ double _beats;
     return pow(10, powerLevel / 40) * player.volume;
 }
 
-- (double)getCurrentBeatForLoop:(NSString *)filename {
-    AEAudioFilePlayer *player = [_audioFilePlayers objectForKey:filename];
+- (double)getCurrentBeatForLoop:(NSString *)loopName {
+    AEAudioFilePlayer *player = [_audioFilePlayers objectForKey:loopName];
     return _beats * (player.currentTime / player.duration);
 }
 

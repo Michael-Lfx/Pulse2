@@ -8,6 +8,7 @@
 
 #import "GameScene.h"
 #import "AppDelegate.h"
+#import "LoopData.h"
 
 @interface GameScene ()
 
@@ -40,6 +41,10 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     [self startScene];
 }
 
+- (void)willMoveFromView:(SKView *)view {
+    [self.view removeGestureRecognizer:_swipeRecognizer];
+}
+
 - (void)createSoundInteractors {
     CGFloat windowWidth = self.size.width;
     CGFloat windowHeight = self.size.height;
@@ -66,7 +71,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         interactor.position = CGPointMake(x, y);
         interactor.name = filename;
         [interactor connectToConductor:_conductor];
-//        [interactor connectToLoopManager:loopManager];
         
         // set physics properties
         [interactor setPhysicsBody:[SKPhysicsBody bodyWithCircleOfRadius:interactor.frame.size.width/2]];
@@ -82,6 +86,9 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         interactor.physicsBody.contactTestBitMask = edgeCategory | ballCategory;
         
         [interactor resetValues];
+        if ([filename isEqualToString:@"relaxation-carrier"]) {
+            interactor.strokeColor = [SKColor redColor];
+        }
         [_soundInteractors addObject:interactor];
     }
     
@@ -233,9 +240,13 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     
     if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
-        if ([interactor getState] == NO) {
+        
+        
+        if ([interactor.name isEqualToString:@"relaxation-carrier"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"SongSlider", @"relaxation-carrier", _conductor] forKeys:@[@"minigameName", @"loopName", @"conductor"]]];
+        } else if ([interactor getState] == NO) {
             [interactor turnOn];
-//            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, 60, 127, 0);
+            //            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, 60, 127, 0);
         } else {
             [interactor turnOff];
         }
@@ -330,20 +341,11 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
-    int value = 0;
     for (SoundInteractor *interactor in _soundInteractors) {
         if ([interactor isReady]) {
             [interactor updateAppearance];
         }
-        if (value == 0) {
-            value = 1;
-            double beat = [_conductor getCurrentBeatForLoop:interactor.name];
-        }
     }
-}
-
--(void)willMoveFromView:(SKView *)view{
-    [self.view removeGestureRecognizer:_swipeRecognizer];
 }
 
 @end

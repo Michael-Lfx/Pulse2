@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <TheAmazingAudioEngine/TheAmazingAudioEngine.h>
+#import <UIKit/UIKit.h>
 
 @interface Conductor : NSObject
 
@@ -16,10 +17,11 @@
 - (void)start;
 - (void)stop;
 
-- (void)setVolumeForLoop:(NSString *)filename withVolume:(double)volume;
+- (void)setVolumeForLoop:(NSString *)loopName withVolume:(double)volume;
+- (void)fadeVolumeForLoop:(NSString *)loopName withDuration:(double)duration fadeIn:(BOOL)fadeIn;
 
-- (double)getPowerLevelForLoop:(NSString *)filename;
-- (double)getCurrentBeatForLoop:(NSString *)filename;
+- (double)getPowerLevelForLoop:(NSString *)loopName;
+- (double)getCurrentBeatForLoop:(NSString *)loopName;
 - (NSArray *)getFilenames;
 
 @end

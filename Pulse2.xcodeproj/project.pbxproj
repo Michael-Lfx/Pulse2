@@ -22,6 +22,7 @@
 		BA2BD3041AF965EC008A4169 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = BA2BD3031AF965EC008A4169 /* Sounds */; };
 		BA2BD3061AF9664A008A4169 /* piano.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = BA2BD3051AF9664A008A4169 /* piano.aupreset */; };
 		BA2BD3091AF98CA0008A4169 /* Conductor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2BD3081AF98CA0008A4169 /* Conductor.m */; };
+		BA2BD30C1AF99D2D008A4169 /* LoopData.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2BD30B1AF99D2D008A4169 /* LoopData.m */; };
 		BA3C00871AE7140B00911004 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C00861AE7140B00911004 /* main.m */; };
 		BA3C008A1AE7140B00911004 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C00891AE7140B00911004 /* AppDelegate.m */; };
 		BA3C008D1AE7140B00911004 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C008C1AE7140B00911004 /* ViewController.m */; };
@@ -29,6 +30,11 @@
 		BA3C00921AE7140B00911004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA3C00911AE7140B00911004 /* Images.xcassets */; };
 		BA3C00951AE7140B00911004 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA3C00931AE7140B00911004 /* LaunchScreen.xib */; };
 		BA3C00A11AE7140B00911004 /* Pulse2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3C00A01AE7140B00911004 /* Pulse2Tests.m */; };
+		BA4AA3A01B02B9A1007E3D7B /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4AA39E1B02B9A1007E3D7B /* arrow.png */; };
+		BA4AA3A11B02B9A1007E3D7B /* Triangle_9.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4AA39F1B02B9A1007E3D7B /* Triangle_9.png */; };
+		BA4AA3AC1B02BA1F007E3D7B /* SongTrainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3A81B02BA1F007E3D7B /* SongTrainScene.m */; };
+		BA4AA3AD1B02BA1F007E3D7B /* SongSwipeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */; };
+		BA4AA3B01B02BB81007E3D7B /* SongSliderScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3AF1B02BB81007E3D7B /* SongSliderScene.m */; };
 		BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB96FAB1AF81613001906D0 /* MainMenuScene.m */; };
 		BAF06F281AEED4A000FBB4C3 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF06F271AEED4A000FBB4C3 /* SpriteKit.framework */; };
 		BAF06F311AEED62500FBB4C3 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF06F301AEED62500FBB4C3 /* GameScene.m */; };
@@ -66,6 +72,8 @@
 		BA2BD3051AF9664A008A4169 /* piano.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = piano.aupreset; sourceTree = "<group>"; };
 		BA2BD3071AF98CA0008A4169 /* Conductor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conductor.h; sourceTree = "<group>"; };
 		BA2BD3081AF98CA0008A4169 /* Conductor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conductor.m; sourceTree = "<group>"; };
+		BA2BD30A1AF99D2D008A4169 /* LoopData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopData.h; sourceTree = "<group>"; };
+		BA2BD30B1AF99D2D008A4169 /* LoopData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopData.m; sourceTree = "<group>"; };
 		BA3C00811AE7140B00911004 /* Pulse2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pulse2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3C00851AE7140B00911004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA3C00861AE7140B00911004 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -79,6 +87,14 @@
 		BA3C009A1AE7140B00911004 /* Pulse2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pulse2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3C009F1AE7140B00911004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA3C00A01AE7140B00911004 /* Pulse2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pulse2Tests.m; sourceTree = "<group>"; };
+		BA4AA39E1B02B9A1007E3D7B /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		BA4AA39F1B02B9A1007E3D7B /* Triangle_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Triangle_9.png; sourceTree = "<group>"; };
+		BA4AA3A71B02BA1F007E3D7B /* SongTrainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTrainScene.h; sourceTree = "<group>"; };
+		BA4AA3A81B02BA1F007E3D7B /* SongTrainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTrainScene.m; sourceTree = "<group>"; };
+		BA4AA3A91B02BA1F007E3D7B /* SongSwipeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSwipeScene.h; sourceTree = "<group>"; };
+		BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSwipeScene.m; sourceTree = "<group>"; };
+		BA4AA3AE1B02BB81007E3D7B /* SongSliderScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSliderScene.h; sourceTree = "<group>"; };
+		BA4AA3AF1B02BB81007E3D7B /* SongSliderScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSliderScene.m; sourceTree = "<group>"; };
 		BAB96FAA1AF81613001906D0 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		BAB96FAB1AF81613001906D0 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
 		BAF06F271AEED4A000FBB4C3 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -162,25 +178,14 @@
 		BA3C00831AE7140B00911004 /* Pulse2 */ = {
 			isa = PBXGroup;
 			children = (
-				BA3C00881AE7140B00911004 /* AppDelegate.h */,
-				BA3C00891AE7140B00911004 /* AppDelegate.m */,
-				BA3C008B1AE7140B00911004 /* ViewController.h */,
-				BA3C008C1AE7140B00911004 /* ViewController.m */,
-				BAB96FAA1AF81613001906D0 /* MainMenuScene.h */,
-				BAB96FAB1AF81613001906D0 /* MainMenuScene.m */,
-				BA2BD3071AF98CA0008A4169 /* Conductor.h */,
-				BA2BD3081AF98CA0008A4169 /* Conductor.m */,
-				BAF06F2F1AEED62500FBB4C3 /* GameScene.h */,
-				BAF06F301AEED62500FBB4C3 /* GameScene.m */,
-				BAF06F351AEED6F400FBB4C3 /* SoundInteractor.h */,
-				BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */,
+				BA4AA3A41B02B9C3007E3D7B /* Application */,
+				BA4AA3A31B02B9BC007E3D7B /* Main */,
+				BA4AA3A21B02B9AD007E3D7B /* Mini Games */,
 				BAB96FAD1AF81B0A001906D0 /* Presets */,
 				BAF06F381AEEE13000FBB4C3 /* Loop Data */,
 				BA2BD3031AF965EC008A4169 /* Sounds */,
 				BA3C00911AE7140B00911004 /* Images.xcassets */,
 				BA3C00841AE7140B00911004 /* Supporting Files */,
-				BA3C008E1AE7140B00911004 /* Main.storyboard */,
-				BA3C00931AE7140B00911004 /* LaunchScreen.xib */,
 			);
 			path = Pulse2;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 		BA3C00841AE7140B00911004 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BA4AA39D1B02B994007E3D7B /* assets */,
 				BA3C00851AE7140B00911004 /* Info.plist */,
 				BA3C00861AE7140B00911004 /* main.m */,
 			);
@@ -209,6 +215,58 @@
 				BA3C009F1AE7140B00911004 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BA4AA39D1B02B994007E3D7B /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				BA4AA39E1B02B9A1007E3D7B /* arrow.png */,
+				BA4AA39F1B02B9A1007E3D7B /* Triangle_9.png */,
+			);
+			name = assets;
+			sourceTree = "<group>";
+		};
+		BA4AA3A21B02B9AD007E3D7B /* Mini Games */ = {
+			isa = PBXGroup;
+			children = (
+				BA4AA3AE1B02BB81007E3D7B /* SongSliderScene.h */,
+				BA4AA3AF1B02BB81007E3D7B /* SongSliderScene.m */,
+				BA4AA3A71B02BA1F007E3D7B /* SongTrainScene.h */,
+				BA4AA3A81B02BA1F007E3D7B /* SongTrainScene.m */,
+				BA4AA3A91B02BA1F007E3D7B /* SongSwipeScene.h */,
+				BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */,
+			);
+			name = "Mini Games";
+			sourceTree = "<group>";
+		};
+		BA4AA3A31B02B9BC007E3D7B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				BAB96FAA1AF81613001906D0 /* MainMenuScene.h */,
+				BAB96FAB1AF81613001906D0 /* MainMenuScene.m */,
+				BAF06F2F1AEED62500FBB4C3 /* GameScene.h */,
+				BAF06F301AEED62500FBB4C3 /* GameScene.m */,
+				BA2BD3071AF98CA0008A4169 /* Conductor.h */,
+				BA2BD3081AF98CA0008A4169 /* Conductor.m */,
+				BA2BD30A1AF99D2D008A4169 /* LoopData.h */,
+				BA2BD30B1AF99D2D008A4169 /* LoopData.m */,
+				BAF06F351AEED6F400FBB4C3 /* SoundInteractor.h */,
+				BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		BA4AA3A41B02B9C3007E3D7B /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				BA3C00881AE7140B00911004 /* AppDelegate.h */,
+				BA3C00891AE7140B00911004 /* AppDelegate.m */,
+				BA3C008B1AE7140B00911004 /* ViewController.h */,
+				BA3C008C1AE7140B00911004 /* ViewController.m */,
+				BA3C008E1AE7140B00911004 /* Main.storyboard */,
+				BA3C00931AE7140B00911004 /* LaunchScreen.xib */,
+			);
+			name = Application;
 			sourceTree = "<group>";
 		};
 		BAB96FAD1AF81B0A001906D0 /* Presets */ = {
@@ -325,6 +383,7 @@
 				BA3C00951AE7140B00911004 /* LaunchScreen.xib in Resources */,
 				BA014C2B1AF05FE9001CAAE3 /* relaxation-cypress.mp3 in Resources */,
 				BA3C00921AE7140B00911004 /* Images.xcassets in Resources */,
+				BA4AA3A11B02B9A1007E3D7B /* Triangle_9.png in Resources */,
 				BA014C311AF05FE9001CAAE3 /* relaxation-empee-ep.mp3 in Resources */,
 				BA2BD3061AF9664A008A4169 /* piano.aupreset in Resources */,
 				BA2BD3041AF965EC008A4169 /* Sounds in Resources */,
@@ -334,6 +393,7 @@
 				BA014C2D1AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 in Resources */,
 				BAF06F541AEEE16200FBB4C3 /* relaxation.plist in Resources */,
 				BA014C291AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 in Resources */,
+				BA4AA3A01B02B9A1007E3D7B /* arrow.png in Resources */,
 				BA014C271AF05FE9001CAAE3 /* relaxation-beach.mp3 in Resources */,
 				BA014C2E1AF05FE9001CAAE3 /* relaxation-dominant.mp3 in Resources */,
 			);
@@ -387,12 +447,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAF06F371AEED6F400FBB4C3 /* SoundInteractor.m in Sources */,
+				BA2BD30C1AF99D2D008A4169 /* LoopData.m in Sources */,
+				BA4AA3B01B02BB81007E3D7B /* SongSliderScene.m in Sources */,
 				BA3C008D1AE7140B00911004 /* ViewController.m in Sources */,
 				BA3C008A1AE7140B00911004 /* AppDelegate.m in Sources */,
 				BAF06F311AEED62500FBB4C3 /* GameScene.m in Sources */,
+				BA4AA3AC1B02BA1F007E3D7B /* SongTrainScene.m in Sources */,
 				BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */,
 				BA3C00871AE7140B00911004 /* main.m in Sources */,
 				BA2BD3091AF98CA0008A4169 /* Conductor.m in Sources */,
+				BA4AA3AD1B02BA1F007E3D7B /* SongSwipeScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
