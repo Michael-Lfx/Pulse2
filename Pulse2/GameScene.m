@@ -243,7 +243,11 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         
         
         if ([interactor.name isEqualToString:@"relaxation-carrier"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"SongSlider", @"relaxation-carrier", _conductor] forKeys:@[@"minigameName", @"loopName", @"conductor"]]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"SongSliderScene", @"relaxation-carrier", _conductor] forKeys:@[@"minigameName", @"loopName", @"conductor"]]];
+        } else if ([interactor.name isEqualToString:@"relaxation-drums"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"SongTrainScene", @"relaxation-drums", _conductor] forKeys:@[@"minigameName", @"loopName", @"conductor"]]];
+        } else if ([interactor.name isEqualToString:@"relaxation-cypress"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"SongSwipeScene", @"relaxation-cypress", _conductor] forKeys:@[@"minigameName", @"loopName", @"conductor"]]];
         } else if ([interactor getState] == NO) {
             [interactor turnOn];
             //            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, 60, 127, 0);

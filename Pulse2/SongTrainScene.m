@@ -12,14 +12,11 @@
 
 #pragma mark - INITIALIZATION
 
-- (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor {
-    self = [super init];
-    
+- (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor size:(CGSize)size {
+    self = [super initWithSize:size];
     if (self) {
-        
         self.loopData = data;
         self.conductor = conductor;
-        
     }
     
     return self;
@@ -156,27 +153,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"currentBeat"]){
-        double currTime = [_conductor getCurrentBeatForLoop:[_loopData getLoopName]];
-        double preBeat = 2;
-        double firingTime = currTime + preBeat;
-        double animationDuration = preBeat * 60/[_loopData getBPM];
-        if(firingTime > [_loopData getNumBeats]){ // now it oscilates from 0 to 16
-            firingTime -= [_loopData getNumBeats];
-        }
-        if(firingTime > _nextBeat && (!_resetLoopBeat || (_resetLoopBeat && firingTime < .5 + [self getFirstBeat] &&
-            (_resetLoopTime && (CACurrentMediaTime() - _resetLoopTime > [_loopData getNumBeats]-_lastBeat-preBeat))))){
-            _resetLoopBeat = NO;
-            NSDictionary *beatMap = [_loopData getBeatMap];
-            NSArray *beatsToFire = [beatMap objectForKey:[NSNumber numberWithDouble:_nextBeat]];
-            double beatAfter = [self getNextBeat:beatMap];
-            for(NSString *instrumentName in beatsToFire){
-                float beatLength = beatAfter - _nextBeat;
-                if(_resetLoopBeat)
-                    beatLength += [_loopData getNumBeats];
-                [self drawTrack:instrumentName beatLength:beatLength duration:animationDuration];
-            }
-            _nextBeat = beatAfter;// update next beat by iterating through keys
-        }
+        
     }
 }
 
@@ -214,10 +191,10 @@
     return sortedKeys;
 }
 
-- (void)drawTrack:(NSString *)instrumentName beatLength:(double)beatLength duration:(double)animationDuration
+- (void)drawTrack:(NSNumber *)voiceNumber beatLength:(double)beatLength duration:(double)animationDuration
 {
     // initialize variables
-    int noteNumber = [[instrumentName substringFromIndex:(instrumentName.length - 1)] intValue];
+    int noteNumber = voiceNumber.intValue + 1;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat initialDistance = screenHeight - _train.position.y - _train.size.height/2;
     // calculate track length
@@ -278,6 +255,30 @@
             [self removeChildrenInArray:@[track]];
         }];
     }];
+}
+
+- (void)update:(NSTimeInterval)currentTime {
+    double currTime = [_conductor getCurrentBeatForLoop:[_loopData getLoopName]];
+    double preBeat = 2;
+    double firingTime = currTime + preBeat;
+    double animationDuration = preBeat * 60/[_loopData getBPM];
+    if(firingTime > [_loopData getNumBeats]){ // now it oscilates from 0 to 16
+        firingTime -= [_loopData getNumBeats];
+    }
+    if(firingTime > _nextBeat && (!_resetLoopBeat || (_resetLoopBeat && firingTime < .5 + [self getFirstBeat] &&
+                                                      (_resetLoopTime && (CACurrentMediaTime() - _resetLoopTime > [_loopData getNumBeats]-_lastBeat-preBeat))))){
+        _resetLoopBeat = NO;
+        NSDictionary *beatMap = [_loopData getBeatMap];
+        NSArray *beatsToFire = [beatMap objectForKey:[NSNumber numberWithDouble:_nextBeat]];
+        double beatAfter = [self getNextBeat:beatMap];
+        for(NSNumber *voiceNumber in beatsToFire){
+            float beatLength = beatAfter - _nextBeat;
+            if(_resetLoopBeat)
+                beatLength += [_loopData getNumBeats];
+            [self drawTrack:voiceNumber beatLength:beatLength duration:animationDuration];
+        }
+        _nextBeat = beatAfter;// update next beat by iterating through keys
+    }
 }
 
 @end
