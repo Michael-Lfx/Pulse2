@@ -32,6 +32,7 @@
     _resetLoopTime = 0;
     _resetLoopBeat = NO;
     _streakCounter = 0;
+    _hitNodesAtTouch = @[];
     _lastBeat = -1; // this signals we don't know what last beat is.
     
     
@@ -132,57 +133,50 @@
             SKSpriteNode *hitZone = (SKSpriteNode *)[self childNodeWithName:@"hitZone"];
             NSArray *arrowNodes = [self nodesAtPoint:hitZone.position];
             if(sender.direction == UISwipeGestureRecognizerDirectionDown){
-                for(SKNode *node in arrowNodes){
-                    if([node.name isEqualToString:@"down"]){
-                        [node removeAllActions];
-                        [self removeChildrenInArray:@[node]];
-                        _streakCounter++;
-                        [self updateStreakCounterDisplay];
-                    }
-                }
-                NSLog(@"Swiped Down");
+                [self clearNodes:arrowNodes forSwipeDirection:@"down"];
             } else if(sender.direction == UISwipeGestureRecognizerDirectionLeft){
-                for(SKNode *node in arrowNodes){
-                    if([node.name isEqualToString:@"left"]){
-                        [node removeAllActions];
-                        [self removeChildrenInArray:@[node]];
-                        _streakCounter++;
-                        [self updateStreakCounterDisplay];
-                    }
-                }
-                NSLog(@"Swiped Left");
+                [self clearNodes:arrowNodes forSwipeDirection:@"left"];
             } else if(sender.direction == UISwipeGestureRecognizerDirectionUp){
-                for(SKNode *node in arrowNodes){
-                    if([node.name isEqualToString:@"up"]){
-                        [node removeAllActions];
-                        [self removeChildrenInArray:@[node]];
-                        _streakCounter++;
-                        [self updateStreakCounterDisplay];
-                    }
-                }
-                NSLog(@"Swiped Up");
+                [self clearNodes:arrowNodes forSwipeDirection:@"up"];
             } else if(sender.direction == UISwipeGestureRecognizerDirectionRight){
-                for(SKNode *node in arrowNodes){
-                    if([node.name isEqualToString:@"right"]){
-                        [node removeAllActions];
-                        [self removeChildrenInArray:@[node]];
-                        _streakCounter++;
-                        [self updateStreakCounterDisplay];
-                    }
-                }
-                NSLog(@"Swiped Right");
+                [self clearNodes:arrowNodes forSwipeDirection:@"right"];
             }
         }
     }
 }
 
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-//{
-//    UITouch *touch = [touches anyObject];
-//    CGPoint location = [touch locationInNode:self];
-//    SKNode *node = [self nodeAtPoint:location];
-//    
-//}
+- (void)clearNodes:(NSArray *)arrowNodes forSwipeDirection:(NSString *)direction
+{
+    for(SKNode *node in arrowNodes){
+        if([node.name isEqualToString:direction]){
+            [node removeAllActions];
+            [self removeChildrenInArray:@[node]];
+            _streakCounter++;
+            [self updateStreakCounterDisplay];
+        }
+    }
+    for(SKNode *node in _hitNodesAtTouch){
+        if([node.name isEqualToString:direction] && ![arrowNodes containsObject:node]){
+            [node removeAllActions];
+            [self removeChildrenInArray:@[node]];
+            _streakCounter++;
+            [self updateStreakCounterDisplay];
+        }
+    }
+    _hitNodesAtTouch = @[];
+    NSLog(@"Swiped %@", direction);
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKSpriteNode *touchedNode = (SKSpriteNode *)[self nodeAtPoint:location];
+    if([touchedNode.name isEqualToString:@"swipeZone"]){
+        SKSpriteNode *hitZone = (SKSpriteNode *)[self childNodeWithName:@"hitZone"];
+        _hitNodesAtTouch = [self nodesAtPoint:hitZone.position];
+    }
+}
 
 
 #pragma mark - GAME PLAY

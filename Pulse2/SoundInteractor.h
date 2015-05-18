@@ -21,6 +21,10 @@
 - (BOOL)isReady;
 // get on/off state
 - (BOOL)getState;
+// get unlockedState
+- (BOOL)isUnlocked;
+// indicate node is unlocked and ready to be tapped
+- (void)unlockNode;
 // turn on with volume and color fade in
 - (void)turnOn;
 // turn off with volume and color fade out

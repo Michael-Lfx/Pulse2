@@ -21,6 +21,7 @@
 @property BOOL resetLoopBeat;
 @property double resetLoopTime;
 @property double lastBeat;
+@property NSArray* hitNodesAtTouch;
 @property int streakCounter;
 @property SKLabelNode *streakDisplay;
 

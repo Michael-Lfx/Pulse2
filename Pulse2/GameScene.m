@@ -87,7 +87,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         interactor.physicsBody.contactTestBitMask = edgeCategory | ballCategory;
         
         [interactor resetValues];
-        if ([filename isEqualToString:@"relaxation-carrier"]) {
+        if ([filename isEqualToString:@"relaxation-cypress"]) {
             interactor.strokeColor = [SKColor redColor];
         }
         [_soundInteractors addObject:interactor];
@@ -252,12 +252,9 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     
     if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
-        if([interactor isKindOfClass:[SoundInteractor class]]){
-            // FOR HENRY, change the above if statement to ((isDoubleTap && touchedNode.isUnlocked) || !(touchedNode.isUnlocked))
+        if(recognizer.numberOfTapsRequired == 2 || ![interactor isUnlocked]){ // double tap or a single tap on locked node
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[interactor.name, _conductor] forKeys:@[@"loopName", @"conductor"]]];
-        }
-        // add the else statement here (i.e. is single tap stuff)
-        else if ([interactor getState] == NO) {
+        } else if ([interactor getState] == NO) { // single tap on unlocked node
             [interactor turnOn];
             //            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, 60, 127, 0);
         } else {
