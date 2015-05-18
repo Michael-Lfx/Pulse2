@@ -52,11 +52,13 @@
     SKScene *sceneToPresent;
     if ([minigameName isEqualToString:@"SongSliderScene"]) {
         SongSliderScene *sliderScene = [[SongSliderScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size];
-        SKTransition *transition = [SKTransition fadeWithDuration:1.0];
-        [conductor fadeVolumeForLoop:loopName withDuration:1 fadeIn:YES];
-        SKView *skView = (SKView *)self.view;
-        [skView presentScene:sliderScene transition:transition];
-        [_gameScene removeFromParent];
+        sceneToPresent = sliderScene;
+    } else if ([minigameName isEqualToString:@"SongTrainScene"]) {
+        SongTrainScene *trainScene = [[SongTrainScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size];
+        sceneToPresent = trainScene;
+    } else {
+        SongSwipeScene *swipeScene = [[SongSwipeScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size];
+        sceneToPresent = swipeScene;
     }
     SKTransition *transition = [SKTransition doorsOpenHorizontalWithDuration:1.0];
     transition.pausesOutgoingScene = TRUE;
