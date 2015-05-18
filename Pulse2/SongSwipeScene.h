@@ -11,9 +11,9 @@
 #import "LoopData.h"
 #import "Conductor.h"
 
-@interface SongSwipeScene : SKScene
+@interface SongSwipeScene : SKScene <UIGestureRecognizerDelegate>
 
-- (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor;
+- (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor size:(CGSize)size;
 
 @property Conductor *conductor;
 @property LoopData *loopData;

@@ -12,12 +12,9 @@
 
 - (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor size:(CGSize)size {
     self = [super initWithSize:size];
-    
     if (self) {
-        
         self.loopData = data;
         self.conductor = conductor;
-        
     }
     
     return self;
@@ -67,7 +64,7 @@
 {
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGRect rect = CGRectMake(0, 0, screenWidth, (screenHeight -_slider.frame.origin.y) + [_slider thumbImageForState:UIControlStateNormal].size.height/2);
+    CGRect rect = CGRectMake(0, 0, screenWidth, (screenHeight -_slider.frame.origin.y));
     SKShapeNode *ballCover = [SKShapeNode shapeNodeWithRect:rect];
     ballCover.strokeColor = ballCover.fillColor = self.backgroundColor;
     [self addChild:ballCover];

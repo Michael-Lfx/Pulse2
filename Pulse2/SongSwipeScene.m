@@ -12,16 +12,12 @@
 
 #pragma mark - INITIALIZATION
 
-- (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor {
-    self = [super init];
-    
+- (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor size:(CGSize)size {
+    self = [super initWithSize:size];
     if (self) {
-        
         self.loopData = data;
         self.conductor = conductor;
-        
     }
-    
     return self;
 }
 
@@ -91,7 +87,11 @@
     UISwipeGestureRecognizer *upSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     UISwipeGestureRecognizer *rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     UISwipeGestureRecognizer *downSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
-
+    leftSwipeRecognizer.delegate = self;
+    upSwipeRecognizer.delegate = self;
+    rightSwipeRecognizer.delegate = self;
+    downSwipeRecognizer.delegate = self;
+    
     leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     upSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
     rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
@@ -103,9 +103,27 @@
     [self.view addGestureRecognizer:downSwipeRecognizer];
 }
 
+#pragma mark - GUESTURES
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+       shouldReceiveTouch:(UITouch *)touch
+{
+    return YES;
+}
+
 - (void)handleSwipe:(UISwipeGestureRecognizer *)sender
 {
-    if (sender.state == UIGestureRecognizerStateEnded)
+    if (sender.state == UIGestureRecognizerStateBegan || sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateCancelled)
     {
         CGPoint touchLocation = [sender locationInView:sender.view];
         touchLocation = [self convertPointFromView:touchLocation];
@@ -156,42 +174,20 @@
             }
         }
     }
-    // check to make sure it's in swipe zone
-    // check direction and act accordingly
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
-    
-}
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+//    UITouch *touch = [touches anyObject];
+//    CGPoint location = [touch locationInNode:self];
+//    SKNode *node = [self nodeAtPoint:location];
+//    
+//}
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"currentBeat"]){
-        double currTime = [_conductor getCurrentBeatForLoop:[_loopData getLoopName]];
-        double preBeat = 2;
-        double firingTime = currTime + preBeat;
-        double animationDuration = preBeat * 60/[_loopData getBPM];
-        if(firingTime > [_loopData getNumBeats]){ // now it oscilates from 0 to 16
-            firingTime -= [_loopData getNumBeats];
-        }
-        if(firingTime > _nextBeat && (!_resetLoopBeat ||
-                                      (_resetLoopBeat && (_resetLoopTime && (CACurrentMediaTime() - _resetLoopTime > [_loopData getNumBeats]-_lastBeat-preBeat)) && firingTime < .5 + [self getFirstBeat]))){
-            _resetLoopBeat = NO;
-            NSDictionary *beatMap = [_loopData getBeatMap];
-            NSArray *beatsToFire = [beatMap objectForKey:[NSNumber numberWithDouble:_nextBeat]];
-            for(NSString *instrumentName in beatsToFire){
-                [self dropArrow:instrumentName duration:animationDuration];
-            }
-            _nextBeat = [self getNextBeat:beatMap];// update next beat by iterating through keys
-        }
-    }
-}
 
-- (void)dropArrow:(NSString *)instrumentName duration:(double)animationDuration
+#pragma mark - GAME PLAY
+
+- (void)dropArrow:(NSNumber *)voiceNumber duration:(double)animationDuration
 {
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
@@ -291,6 +287,26 @@
         return (NSComparisonResult)NSOrderedDescending;
     }];
     return sortedKeys;
+}
+
+- (void)update:(NSTimeInterval)currentTime{
+    double currTime = [_conductor getCurrentBeatForLoop:[_loopData getLoopName]];
+    double preBeat = 2;
+    double firingTime = currTime + preBeat;
+    double animationDuration = preBeat * 60/[_loopData getBPM];
+    if(firingTime > [_loopData getNumBeats]){ // now it oscilates from 0 to 16
+        firingTime -= [_loopData getNumBeats];
+    }
+    if(firingTime > _nextBeat && (!_resetLoopBeat ||
+                                  (_resetLoopBeat && (_resetLoopTime && (CACurrentMediaTime() - _resetLoopTime > [_loopData getNumBeats]-_lastBeat-preBeat)) && firingTime < .5 + [self getFirstBeat]))){
+        _resetLoopBeat = NO;
+        NSDictionary *beatMap = [_loopData getBeatMap];
+        NSArray *beatsToFire = [beatMap objectForKey:[NSNumber numberWithDouble:_nextBeat]];
+        for(NSNumber *voiceNumber in beatsToFire){
+            [self dropArrow:voiceNumber duration:animationDuration];
+        }
+        _nextBeat = [self getNextBeat:beatMap];// update next beat by iterating through keys
+    }
 }
 
 @end

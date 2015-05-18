@@ -12,6 +12,8 @@
 	<dict>
 		<key>relaxation-drums</key>
 		<dict>
+			<key>minigame name</key>
+			<string>SongTrainScene</string>
 			<key>beat values</key>
 			<array>
 				<array>
@@ -45,6 +47,8 @@
 					<integer>8</integer>
 				</array>
 			</array>
+			<key>minigame name</key>
+			<string>SongSwipeScene</string>
 		</dict>
 		<key>relaxation-blue-sun</key>
 		<dict>
@@ -54,6 +58,8 @@
 					<integer>0</integer>
 				</array>
 			</array>
+			<key>minigame name</key>
+			<string>SongSwipeScene</string>
 		</dict>
 		<key>relaxation-bouncing-mark</key>
 		<dict>
@@ -70,6 +76,8 @@
 					<real>9.5</real>
 				</array>
 			</array>
+			<key>minigame name</key>
+			<string>SongSliderScene</string>
 		</dict>
 		<key>relaxation-carrier</key>
 		<dict>
@@ -94,6 +102,8 @@
 					<integer>8</integer>
 				</array>
 			</array>
+			<key>minigame name</key>
+			<string>SongSliderScene</string>
 		</dict>
 		<key>relaxation-cypress</key>
 		<dict>
@@ -118,9 +128,13 @@
 					<integer>15</integer>
 				</array>
 			</array>
+			<key>minigame name</key>
+			<string>SongSwipeScene</string>
 		</dict>
 		<key>relaxation-dance-organ</key>
 		<dict>
+			<key>minigame name</key>
+			<string>SongSliderScene</string>
 			<key>beat values</key>
 			<array>
 				<array>
@@ -167,6 +181,8 @@
 					<real>15.5</real>
 				</array>
 			</array>
+			<key>minigame name</key>
+			<string>SongSliderScene</string>
 		</dict>
 		<key>relaxation-dominant</key>
 		<dict>
@@ -179,6 +195,8 @@
 					<integer>12</integer>
 				</array>
 			</array>
+			<key>minigame name</key>
+			<string>SongSwipeScene</string>
 		</dict>
 		<key>relaxation-dub-pulse</key>
 		<dict>
@@ -191,6 +209,8 @@
 					<integer>12</integer>
 				</array>
 			</array>
+			<key>minigame name</key>
+			<string>SongSwipeScene</string>
 		</dict>
 		<key>relaxation-eighties-ep</key>
 		<dict>
@@ -219,6 +239,8 @@
 					<real>8.5</real>
 				</array>
 			</array>
+			<key>minigame name</key>
+			<string>SongSliderScene</string>
 		</dict>
 		<key>relaxation-empee-ep</key>
 		<dict>
@@ -237,6 +259,8 @@
 					<integer>14</integer>
 				</array>
 			</array>
+			<key>minigame name</key>
+			<string>SongTrainScene</string>
 		</dict>
 	</dict>
 </dict>

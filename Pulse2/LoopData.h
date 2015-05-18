@@ -12,6 +12,7 @@
 
 - (instancetype)initWithPlist:(NSString *)plistName loop:(NSString *)loopName;
 - (NSString *)getLoopName;
+- (NSString *)getMinigameName;
 - (int)getBPM;
 - (int)getNumBeats;
 - (int)getNumVoices;

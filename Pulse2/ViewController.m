@@ -44,13 +44,13 @@
 - (void)loadMinigame:(NSNotification *)notification {
     NSDictionary *info = notification.userInfo;
     
-    NSString *minigameName = [info objectForKey:@"minigameName"];
     NSString *loopName = [info objectForKey:@"loopName"];
     Conductor *conductor = [info objectForKey:@"conductor"];
     
     LoopData *loopData = [[LoopData alloc] initWithPlist:@"relaxation" loop:loopName];
-    
-    if ([minigameName isEqualToString:@"SongSlider"]) {
+    NSString *minigameName = [loopData getMinigameName];
+    SKScene *sceneToPresent;
+    if ([minigameName isEqualToString:@"SongSliderScene"]) {
         SongSliderScene *sliderScene = [[SongSliderScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size];
         SKTransition *transition = [SKTransition fadeWithDuration:1.0];
         [conductor fadeVolumeForLoop:loopName withDuration:1 fadeIn:YES];
@@ -58,6 +58,12 @@
         [skView presentScene:sliderScene transition:transition];
         [_gameScene removeFromParent];
     }
+    SKTransition *transition = [SKTransition doorsOpenHorizontalWithDuration:1.0];
+    transition.pausesOutgoingScene = TRUE;
+    [conductor fadeVolumeForLoop:loopName withDuration:1 fadeIn:YES];
+    SKView *skView = (SKView *)self.view;
+    [skView presentScene:sceneToPresent transition:transition];
+    [_gameScene removeFromParent];
 }
 
 - (BOOL)prefersStatusBarHidden {
