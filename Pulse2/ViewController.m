@@ -52,8 +52,7 @@
     
     if ([minigameName isEqualToString:@"SongSlider"]) {
         SongSliderScene *sliderScene = [[SongSliderScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size];
-        SKTransition *transition = [SKTransition doorsOpenHorizontalWithDuration:1.0];
-        transition.pausesOutgoingScene = TRUE;
+        SKTransition *transition = [SKTransition fadeWithDuration:1.0];
         [conductor fadeVolumeForLoop:loopName withDuration:1 fadeIn:YES];
         SKView *skView = (SKView *)self.view;
         [skView presentScene:sliderScene transition:transition];

@@ -9,6 +9,7 @@
 #import "GameScene.h"
 #import "AppDelegate.h"
 #import "LoopData.h"
+#import "UIDoubleTapGestureRecognizer.h"
 
 @interface GameScene ()
 
@@ -120,23 +121,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
 }
 
-- (void)addGestureRecognizers {
-//    self.swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goHome)];
-//    _swipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-//    [self.view addGestureRecognizer:_swipeRecognizer];
-    
-    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
-    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(haltCell:)];
-    panRecognizer.delegate = self;
-    tapRecognizer.delegate = self;
-    longPressRecognizer.delegate = self;
-    longPressRecognizer.minimumPressDuration = .2;
-    [[self view] addGestureRecognizer:panRecognizer];
-    [[self view] addGestureRecognizer:tapRecognizer];
-    [[self view] addGestureRecognizer:longPressRecognizer];
-}
-
 - (void)startScene {
     [_conductor start];
     
@@ -233,7 +217,36 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     }
 }
 
+
+
+- (void)addGestureRecognizers {
+    //    self.swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goHome)];
+    //    _swipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    //    [self.view addGestureRecognizer:_swipeRecognizer];
+    
+    UIDoubleTapGestureRecognizer *doubleTapRecognizer = [[UIDoubleTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTapFrom:)];
+    doubleTapRecognizer.numberOfTapsRequired = 2;
+    doubleTapRecognizer.delegate = self;
+    [[self view] addGestureRecognizer:doubleTapRecognizer];
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
+    tapRecognizer.delegate = self;
+    [tapRecognizer requireGestureRecognizerToFail:doubleTapRecognizer];
+    [[self view] addGestureRecognizer:tapRecognizer];
+    
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
+    panRecognizer.delegate = self;
+    [[self view] addGestureRecognizer:panRecognizer];
+    
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(haltCell:)];
+    longPressRecognizer.delegate = self;
+    longPressRecognizer.minimumPressDuration = .2;
+    [[self view] addGestureRecognizer:longPressRecognizer];
+    
+}
+
 - (void)handleTapFrom:(UITapGestureRecognizer *)recognizer{
+    NSLog(@"single tap");
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
     touchLocation = [self convertPointFromView:touchLocation];
     SKNode *touchedNode = [self nodeAtPoint:touchLocation];
@@ -243,13 +256,24 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         
         
         if ([interactor.name isEqualToString:@"relaxation-carrier"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"SongSlider", @"relaxation-carrier", _conductor] forKeys:@[@"minigameName", @"loopName", @"conductor"]]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"SongSlider", interactor.name, _conductor] forKeys:@[@"minigameName", @"loopName", @"conductor"]]];
         } else if ([interactor getState] == NO) {
             [interactor turnOn];
             //            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, 60, 127, 0);
         } else {
             [interactor turnOff];
         }
+    }
+}
+
+- (void)handleDoubleTapFrom:(UITapGestureRecognizer *)recognizer{
+    NSLog(@"double tap");
+    CGPoint touchLocation = [recognizer locationInView:recognizer.view];
+    touchLocation = [self convertPointFromView:touchLocation];
+    SKNode *touchedNode = [self nodeAtPoint:touchLocation];
+    
+    if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
+        SoundInteractor *interactor = (SoundInteractor *)touchedNode;
     }
 }
 

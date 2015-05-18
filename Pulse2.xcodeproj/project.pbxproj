@@ -36,6 +36,7 @@
 		BA4AA3AD1B02BA1F007E3D7B /* SongSwipeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */; };
 		BA4AA3B01B02BB81007E3D7B /* SongSliderScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3AF1B02BB81007E3D7B /* SongSliderScene.m */; };
 		BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB96FAB1AF81613001906D0 /* MainMenuScene.m */; };
+		BAB9D83E1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB9D83D1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m */; };
 		BAF06F281AEED4A000FBB4C3 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF06F271AEED4A000FBB4C3 /* SpriteKit.framework */; };
 		BAF06F311AEED62500FBB4C3 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF06F301AEED62500FBB4C3 /* GameScene.m */; };
 		BAF06F371AEED6F400FBB4C3 /* SoundInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */; };
@@ -97,6 +98,8 @@
 		BA4AA3AF1B02BB81007E3D7B /* SongSliderScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSliderScene.m; sourceTree = "<group>"; };
 		BAB96FAA1AF81613001906D0 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		BAB96FAB1AF81613001906D0 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
+		BAB9D83C1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDoubleTapGestureRecognizer.h; sourceTree = "<group>"; };
+		BAB9D83D1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDoubleTapGestureRecognizer.m; sourceTree = "<group>"; };
 		BAF06F271AEED4A000FBB4C3 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		BAF06F2F1AEED62500FBB4C3 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		BAF06F301AEED62500FBB4C3 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
@@ -181,6 +184,7 @@
 				BA4AA3A41B02B9C3007E3D7B /* Application */,
 				BA4AA3A31B02B9BC007E3D7B /* Main */,
 				BA4AA3A21B02B9AD007E3D7B /* Mini Games */,
+				BAB9D83B1B0A9361009D4F50 /* Utilities */,
 				BAB96FAD1AF81B0A001906D0 /* Presets */,
 				BAF06F381AEEE13000FBB4C3 /* Loop Data */,
 				BA2BD3031AF965EC008A4169 /* Sounds */,
@@ -275,6 +279,15 @@
 				BA2BD3051AF9664A008A4169 /* piano.aupreset */,
 			);
 			name = Presets;
+			sourceTree = "<group>";
+		};
+		BAB9D83B1B0A9361009D4F50 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BAB9D83C1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.h */,
+				BAB9D83D1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		BAF06F381AEEE13000FBB4C3 /* Loop Data */ = {
@@ -452,6 +465,7 @@
 				BA3C008D1AE7140B00911004 /* ViewController.m in Sources */,
 				BA3C008A1AE7140B00911004 /* AppDelegate.m in Sources */,
 				BAF06F311AEED62500FBB4C3 /* GameScene.m in Sources */,
+				BAB9D83E1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m in Sources */,
 				BA4AA3AC1B02BA1F007E3D7B /* SongTrainScene.m in Sources */,
 				BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */,
 				BA3C00871AE7140B00911004 /* main.m in Sources */,
