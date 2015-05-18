@@ -50,6 +50,11 @@
     NSArray *beatValues = [[self getLoopData] valueForKey:@"beat values"];
     return beatValues[voiceNumber];
 }
+
+- (NSString *)getMinigameName {
+    return [[self getLoopData] valueForKey:@"minigame name"];
+}
+
 - (NSDictionary *)getBeatMap {
     NSMutableDictionary *beatMap = [[NSMutableDictionary alloc] init];
     

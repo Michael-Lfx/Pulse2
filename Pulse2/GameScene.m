@@ -240,15 +240,12 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     
     if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
-        
-        
-        if ([interactor.name isEqualToString:@"relaxation-carrier"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"SongSliderScene", @"relaxation-carrier", _conductor] forKeys:@[@"minigameName", @"loopName", @"conductor"]]];
-        } else if ([interactor.name isEqualToString:@"relaxation-drums"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"SongTrainScene", @"relaxation-drums", _conductor] forKeys:@[@"minigameName", @"loopName", @"conductor"]]];
-        } else if ([interactor.name isEqualToString:@"relaxation-cypress"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"SongSwipeScene", @"relaxation-cypress", _conductor] forKeys:@[@"minigameName", @"loopName", @"conductor"]]];
-        } else if ([interactor getState] == NO) {
+        if([interactor isKindOfClass:[SoundInteractor class]]){
+            // FOR HENRY, change the above if statement to ((isDoubleTap && touchedNode.isUnlocked) || !(touchedNode.isUnlocked))
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[interactor.name, _conductor] forKeys:@[@"loopName", @"conductor"]]];
+        }
+        // add the else statement here (i.e. is single tap stuff)
+        else if ([interactor getState] == NO) {
             [interactor turnOn];
             //            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, 60, 127, 0);
         } else {

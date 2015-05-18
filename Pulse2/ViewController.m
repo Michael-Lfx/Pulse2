@@ -44,11 +44,11 @@
 - (void)loadMinigame:(NSNotification *)notification {
     NSDictionary *info = notification.userInfo;
     
-    NSString *minigameName = [info objectForKey:@"minigameName"];
     NSString *loopName = [info objectForKey:@"loopName"];
     Conductor *conductor = [info objectForKey:@"conductor"];
     
     LoopData *loopData = [[LoopData alloc] initWithPlist:@"relaxation" loop:loopName];
+    NSString *minigameName = [loopData getMinigameName];
     SKScene *sceneToPresent;
     if ([minigameName isEqualToString:@"SongSliderScene"]) {
         SongSliderScene *sliderScene = [[SongSliderScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size];
