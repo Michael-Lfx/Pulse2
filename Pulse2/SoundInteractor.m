@@ -13,6 +13,7 @@
 @property(nonatomic) Conductor *conductor;
 @property BOOL state;
 @property BOOL ready;
+@property BOOL unlocked;
 @property double averagedAmplitude;
 
 @property(nonatomic) SKAction *volumeUpAction;
@@ -50,6 +51,7 @@ double _ringFadeInTime = 0.2;
 - (void)resetValues {
     self.state = NO;
     self.ready = NO;
+    self.unlocked = NO;
     self.averagedAmplitude = 0.0;
     
     self.xScale = 0;
@@ -104,6 +106,16 @@ double _ringFadeInTime = 0.2;
 
 - (BOOL)getState {
     return _state;
+}
+
+- (BOOL)isUnlocked {
+    return _unlocked;
+}
+
+- (void)unlockNode {
+    if (_ready) {
+        _unlocked = YES;
+    }
 }
 
 - (void)turnOn {
