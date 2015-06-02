@@ -8,6 +8,6 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface MainMenuScene : SKScene
+@interface MainMenuScene : SKScene <UIGestureRecognizerDelegate>
 
 @end

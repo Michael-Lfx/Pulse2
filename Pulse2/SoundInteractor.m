@@ -51,7 +51,7 @@ double _ringFadeInTime = 0.2;
 - (void)resetValues {
     self.state = NO;
     self.ready = NO;
-    self.unlocked = NO;
+    self.unlocked = YES;
     self.averagedAmplitude = 0.0;
     
     self.xScale = 0;

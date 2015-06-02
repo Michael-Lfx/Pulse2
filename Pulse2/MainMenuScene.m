@@ -10,4 +10,10 @@
 
 @implementation MainMenuScene
 
+- (void)didMoveToView:(SKView *)view {
+    
+    SKSpriteNode *node = [SKSpriteNode spriteNodeWithImageNamed:@"menu_button_1"];
+    [self addChild:node];
+}
+
 @end
