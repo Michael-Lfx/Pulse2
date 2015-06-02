@@ -29,7 +29,7 @@
     self.scaleMode = SKSceneScaleModeAspectFit;
     
     // setup global variables
-    _nextBeat = [self getFirstBeat];
+    _nextBeat = [self getNearestHigherBeat];
     _resetLoopTime = 0;
     _resetLoopBeat = NO;
     _streakCounter = 0;
@@ -46,6 +46,10 @@
     [self addButtons];
     [self addTrain];
     [self initStreakDisplay];
+    
+    NSString *hihatPath = [[NSBundle mainBundle] pathForResource:@"hi_hat" ofType:@"caf"];
+    NSURL *hihatURL = [NSURL fileURLWithPath:hihatPath];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)hihatURL, &_hihatSound);
 }
 
 -(void) addButtons
@@ -69,7 +73,7 @@
 {
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    _train = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(30, 50)];
+    _train = [SKSpriteNode spriteNodeWithImageNamed:@"Train"];
     _train.position = CGPointMake(screenWidth/2, screenHeight/3);
     [self addChild:_train];
 }
@@ -125,7 +129,22 @@
     SKAction *jumpFirstHalf = [SKAction group:@[moveFirstHalf, rise]];
     SKAction *jumpSecondHalf = [SKAction group:@[moveSecondHalf, fall]];
     SKAction *jump = [SKAction sequence:@[jumpFirstHalf, jumpSecondHalf]];
-    [_train runAction:jump];
+    _trainIsJumping = YES;
+    [_train runAction:jump completion:^(void){
+        _trainIsJumping = NO;
+        CGPoint location = _train.frame.origin;
+        NSArray *nodes = [self nodesAtPoint:location];
+        BOOL trackFound = NO;
+        for (SKNode *node in nodes) {
+            if([node.name isEqualToString:@"track"])
+                trackFound = YES;
+        }
+        if(!trackFound){
+            [self flashRedScreen];
+            _streakCounter = 0;
+        }
+    }];
+    AudioServicesPlaySystemSound(_hihatSound);
 }
 
 - (void)flashRedScreen
@@ -150,17 +169,22 @@
 
 #pragma mark - TRAIN TRACKS
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"currentBeat"]){
-        
-    }
-}
-
 - (double)getFirstBeat
 {
     NSDictionary *beatMap = [_loopData getBeatMap];
     NSArray *sortedKeys = [self sortedBeats:beatMap];
+    return ((NSNumber *)sortedKeys[0]).doubleValue;
+}
+
+- (double)getNearestHigherBeat
+{
+    NSDictionary *beatMap = [_loopData getBeatMap];
+    NSArray *sortedKeys = [self sortedBeats:beatMap];
+    double currBeat = [_conductor getCurrentBeatForLoop:[_loopData getLoopName]];
+    for(int i = 0; i < beatMap.count; i ++){
+        if(((NSNumber *)sortedKeys[i]).doubleValue > currBeat)
+            return ((NSNumber *)sortedKeys[i]).doubleValue;
+    }
     return ((NSNumber *)sortedKeys[0]).doubleValue;
 }
 
@@ -196,7 +220,7 @@
     // initialize variables
     int noteNumber = voiceNumber.intValue + 1;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat initialDistance = screenHeight - _train.position.y - _train.size.height/2;
+    CGFloat initialDistance = screenHeight - _train.position.y;
     // calculate track length
     CGFloat trackSpacing = 20;
     CGFloat distancePerBeat = initialDistance/2;
@@ -213,7 +237,7 @@
 
 - (SKSpriteNode *)buildTrack:(double)length
 {
-    CGFloat trackWidth = _train.size.width/_train.xScale + 10;
+    CGFloat trackWidth = _train.size.width/_train.xScale - 10;
     SKSpriteNode *track = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(trackWidth, length)];
     
     //build side rails
@@ -233,18 +257,20 @@
     }
     
     // return track
+    track.name = @"track";
     return track;
 }
 
 - (void)moveTrack:(SKSpriteNode *)track initialDistance:(CGFloat)initialDistance duration:(double)animationDuration
 {
     //  move track
-    SKAction *moveTrackToTrain = [SKAction moveToY:_train.position.y + _train.size.height/2 duration:animationDuration];
+    SKAction *moveTrackToTrain = [SKAction moveToY:_train.position.y  duration:animationDuration];
     CGFloat outDestination = _train.position.y - track.size.height - _train.size.height/2;
-    CGFloat outDistance = _train.position.y + _train.size.height/2 - outDestination;
+    CGFloat outDistance = _train.position.y - outDestination;
     SKAction *moveTrackOut = [SKAction moveToY:outDestination duration:animationDuration * (outDistance/initialDistance)];
     [track runAction:moveTrackToTrain completion:^(void){
-        if(TRUE){ // evaluate what makes this true at this point in time
+        if((track.position.x >= _train.frame.origin.x - 10 && track.position.x <= _train.frame.origin.x + 10) ||
+           _trainIsJumping){ // evaluate what makes this true at this point in time
             _streakCounter ++;
         } else {
             _streakCounter = 0;
@@ -265,8 +291,8 @@
     if(firingTime > [_loopData getNumBeats]){ // now it oscilates from 0 to 16
         firingTime -= [_loopData getNumBeats];
     }
-    if(firingTime > _nextBeat && (!_resetLoopBeat || (_resetLoopBeat && firingTime < .5 + [self getFirstBeat] &&
-                                                      (_resetLoopTime && (CACurrentMediaTime() - _resetLoopTime > [_loopData getNumBeats]-_lastBeat-preBeat))))){
+    if(firingTime > _nextBeat && (!_resetLoopBeat || (_resetLoopBeat && firingTime < .5 + [self getFirstBeat]
+                              && (_resetLoopTime && (CACurrentMediaTime() - _resetLoopTime > [_loopData getNumBeats]-_lastBeat-preBeat))))){
         _resetLoopBeat = NO;
         NSDictionary *beatMap = [_loopData getBeatMap];
         NSArray *beatsToFire = [beatMap objectForKey:[NSNumber numberWithDouble:_nextBeat]];

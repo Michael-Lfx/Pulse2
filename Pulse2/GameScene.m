@@ -86,7 +86,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         interactor.physicsBody.contactTestBitMask = edgeCategory | ballCategory;
         
         [interactor resetValues];
-        if ([filename isEqualToString:@"relaxation-cypress"]) {
+        if ([filename isEqualToString:@"relaxation-drums"]) {
             interactor.strokeColor = [SKColor redColor];
         }
         [_soundInteractors addObject:interactor];

@@ -41,6 +41,8 @@
 		BAF06F371AEED6F400FBB4C3 /* SoundInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */; };
 		BAF06F541AEEE16200FBB4C3 /* relaxation.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAF06F461AEEE16200FBB4C3 /* relaxation.plist */; };
 		BAF58992314D5901ED41946D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB9D2BD43485FF5B2111854 /* libPods.a */; };
+		E6F3CC8D1B0AB15A0073AF32 /* hi_hat.caf in Resources */ = {isa = PBXBuildFile; fileRef = E6F3CC8C1B0AB15A0073AF32 /* hi_hat.caf */; };
+		E6F940A11B1D709D0026F49B /* Train.png in Resources */ = {isa = PBXBuildFile; fileRef = E6F940A01B1D709D0026F49B /* Train.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		BAF06F351AEED6F400FBB4C3 /* SoundInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundInteractor.h; sourceTree = "<group>"; };
 		BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundInteractor.m; sourceTree = "<group>"; };
 		BAF06F461AEEE16200FBB4C3 /* relaxation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = relaxation.plist; sourceTree = "<group>"; };
+		E6F3CC8C1B0AB15A0073AF32 /* hi_hat.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hi_hat.caf; sourceTree = "<group>"; };
+		E6F940A01B1D709D0026F49B /* Train.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Train.png; sourceTree = "<group>"; };
 		E7FB26D086C2121BEC49334E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -221,6 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				BA4AA39E1B02B9A1007E3D7B /* arrow.png */,
+				E6F940A01B1D709D0026F49B /* Train.png */,
+				E6F3CC8C1B0AB15A0073AF32 /* hi_hat.caf */,
 				BA4AA39F1B02B9A1007E3D7B /* Triangle_9.png */,
 			);
 			name = assets;
@@ -393,9 +399,11 @@
 				BA014C2C1AF05FE9001CAAE3 /* relaxation-dance-organ.mp3 in Resources */,
 				BA014C2D1AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 in Resources */,
 				BAF06F541AEEE16200FBB4C3 /* relaxation.plist in Resources */,
+				E6F3CC8D1B0AB15A0073AF32 /* hi_hat.caf in Resources */,
 				BA014C291AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 in Resources */,
 				BA4AA3A01B02B9A1007E3D7B /* arrow.png in Resources */,
 				BA014C271AF05FE9001CAAE3 /* relaxation-beach.mp3 in Resources */,
+				E6F940A11B1D709D0026F49B /* Train.png in Resources */,
 				BA014C2E1AF05FE9001CAAE3 /* relaxation-dominant.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

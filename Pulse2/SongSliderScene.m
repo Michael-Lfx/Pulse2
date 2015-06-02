@@ -26,7 +26,7 @@
     self.backgroundColor = [SKColor colorWithRed:10.0/255 green:55.0/255 blue:70.0/255 alpha:1.0];
     self.scaleMode = SKSceneScaleModeAspectFit;
     
-    _nextBeat = [self getFirstBeat];
+    _nextBeat = [self getNearestHigherBeat];
     _resetLoopTime = 0;
     _resetLoopBeat = NO;
     _streakCounter = 0;
@@ -110,6 +110,23 @@
 - (double)getFirstBeat
 {
     NSDictionary *beatMap = [_loopData getBeatMap];
+    NSArray *sortedKeys = [self sortedBeats:beatMap];
+    return ((NSNumber *)sortedKeys[0]).doubleValue;
+}
+
+- (double)getNearestHigherBeat
+{
+    NSDictionary *beatMap = [_loopData getBeatMap];
+    NSArray *sortedKeys = [self sortedBeats:beatMap];
+    double currBeat = [_conductor getCurrentBeatForLoop:[_loopData getLoopName]];
+    for(int i = 0; i < beatMap.count; i ++){
+        if(((NSNumber *)sortedKeys[i]).doubleValue > currBeat)
+            return ((NSNumber *)sortedKeys[i]).doubleValue;
+    }
+    return ((NSNumber *)sortedKeys[0]).doubleValue;
+}
+- (NSArray *)sortedBeats:(NSDictionary *)beatMap
+{
     NSArray *sortedKeys = [[beatMap allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         NSNumber *num1 = obj1;
         NSNumber *num2 = obj2;
@@ -118,7 +135,7 @@
         }
         return (NSComparisonResult)NSOrderedDescending;
     }];
-    return ((NSNumber *)sortedKeys[0]).doubleValue;
+    return sortedKeys;
 }
 
 - (double)getNextBeat:(NSDictionary *)beatMap
