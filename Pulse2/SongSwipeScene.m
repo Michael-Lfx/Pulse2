@@ -28,7 +28,7 @@
     self.scaleMode = SKSceneScaleModeAspectFit;
     
     // setup global variables
-    _nextBeat = [self getFirstBeat];
+    _nextBeat = [self getNearestHigherBeat];
     _resetLoopTime = 0;
     _resetLoopBeat = NO;
     _streakCounter = 0;
@@ -253,6 +253,18 @@
 {
     NSDictionary *beatMap = [_loopData getBeatMap];
     NSArray *sortedKeys = [self sortedBeats:beatMap];
+    return ((NSNumber *)sortedKeys[0]).doubleValue;
+}
+
+- (double)getNearestHigherBeat
+{
+    NSDictionary *beatMap = [_loopData getBeatMap];
+    NSArray *sortedKeys = [self sortedBeats:beatMap];
+    double currBeat = [_conductor getCurrentBeatForLoop:[_loopData getLoopName]];
+    for(int i = 0; i < beatMap.count; i ++){
+        if(((NSNumber *)sortedKeys[i]).doubleValue > currBeat)
+            return ((NSNumber *)sortedKeys[i]).doubleValue;
+    }
     return ((NSNumber *)sortedKeys[0]).doubleValue;
 }
 

@@ -19,6 +19,7 @@
 @property LoopData *loopData;
 @property double nextBeat;
 @property BOOL resetLoopBeat;
+@property BOOL trainIsJumping;
 @property double resetLoopTime;
 @property double lastBeat;
 @property SKSpriteNode *train;
@@ -26,5 +27,6 @@
 @property SKLabelNode *streakDisplay;
 @property CGFloat leftTrackCenter;
 @property CGFloat rightTrackCenter;
+@property SystemSoundID hihatSound;
 
 @end
