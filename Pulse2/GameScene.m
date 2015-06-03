@@ -41,6 +41,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     
     [self createSoundInteractors];
     [self addGestureRecognizers];
+    [self addMenuNode];
     [self startScene];
     _hasBeenInitialized = YES;
 }
@@ -86,9 +87,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         interactor.physicsBody.contactTestBitMask = edgeCategory | ballCategory;
         
         [interactor resetValues];
-        if ([filename isEqualToString:@"relaxation-drums"]) {
-            interactor.strokeColor = [SKColor redColor];
-        }
         [_soundInteractors addObject:interactor];
     }
     
@@ -118,6 +116,44 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     }
     
     [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
+    
+    SKShapeNode *menuNode = [SKShapeNode shapeNodeWithCircleOfRadius:_baseInteractorSize/2];
+    menuNode.position = CGPointMake(windowWidth/2, windowHeight/2);
+    menuNode.name = @"menuNode";
+    menuNode.lineWidth = 3;
+    menuNode.blendMode = SKBlendModeAdd;
+    menuNode.glowWidth = 5;
+    menuNode.fillColor = [SKColor redColor];
+    menuNode.strokeColor = [SKColor whiteColor];
+    
+}
+
+- (void)addMenuNode {
+    CGFloat windowWidth = self.size.width;
+    CGFloat windowHeight = self.size.height;
+    
+    SKShapeNode *menuNode = [SKShapeNode shapeNodeWithCircleOfRadius:_baseInteractorSize/2];
+    menuNode.position = CGPointMake(windowWidth/2, windowHeight/2);
+    menuNode.name = @"menuNode";
+    menuNode.lineWidth = 3;
+    menuNode.blendMode = SKBlendModeAdd;
+    menuNode.glowWidth = 5;
+    menuNode.fillColor = [SKColor redColor];
+    menuNode.strokeColor = [SKColor colorWithWhite:0.6 alpha:1.0];
+    
+    [menuNode setPhysicsBody:[SKPhysicsBody bodyWithCircleOfRadius:menuNode.frame.size.width/2]];
+    menuNode.physicsBody.affectedByGravity = NO;
+    menuNode.physicsBody.allowsRotation = NO;
+    menuNode.physicsBody.dynamic = YES;
+    menuNode.physicsBody.friction = 0.0f;
+    menuNode.physicsBody.restitution = 0.0f;
+    menuNode.physicsBody.linearDamping = 0.1f;
+    menuNode.physicsBody.angularDamping = 0.0f;
+    menuNode.physicsBody.categoryBitMask = ballCategory;
+    menuNode.physicsBody.collisionBitMask = ballCategory | edgeCategory;
+    menuNode.physicsBody.contactTestBitMask = edgeCategory | ballCategory;
+    
+    [self addChild:menuNode];
 }
 
 - (void)startScene {
@@ -256,6 +292,8 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         } else {
             [interactor turnOff];
         }
+    } else if ([touchedNode.name isEqualToString:@"menuNode"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToMainMenu" object:self userInfo:nil];
     }
 }
 

@@ -42,23 +42,26 @@ bool _nodesAdded = false;
     CGPoint centerPoint = CGPointMake(self.size.width/2, self.size.height/1.7);
     
     self.node1 = [SKSpriteNode spriteNodeWithImageNamed:@"menu_button_1"];
-    [_node1 setPosition:CGPointMake(centerPoint.x - 129.04/2 + _node1.size.width/2,
-                                    self.size.height - (centerPoint.y - 302.48/2 + _node1.size.height/2))];
+    [_node1 setPosition:CGPointMake(centerPoint.x - 64.32 + _node1.size.width/2,
+                                    self.size.height - (centerPoint.y - 151.5 + _node1.size.height/2))];
     [self addChild:_node1];
     
     self.node2 = [SKSpriteNode spriteNodeWithImageNamed:@"menu_button_2"];
-    [_node2 setPosition:CGPointMake(centerPoint.x - 217.17/2 + _node2.size.width/2,
-                                    self.size.height - (centerPoint.y - 244.53/2 + _node2.size.height/2))];
+    [_node2 setPosition:CGPointMake(centerPoint.x - 109.38 + _node2.size.width/2,
+                                    self.size.height - (centerPoint.y - 122.84 + _node2.size.height/2))];
+    _node2.alpha = 0.3;
     [self addChild:_node2];
     
     self.node3 = [SKSpriteNode spriteNodeWithImageNamed:@"menu_button_3"];
-    [_node3 setPosition:CGPointMake(centerPoint.x + 4.4/2 + _node3.size.width/2,
-                                    self.size.height - (centerPoint.y - 74.75/2 + _node3.size.height/2))];
+    [_node3 setPosition:CGPointMake(centerPoint.x + 2.46 + _node3.size.width/2,
+                                    self.size.height - (centerPoint.y - 37.49 + _node3.size.height/2))];
+    _node3.alpha = 0.3;
     [self addChild:_node3];
     
     self.node4 = [SKSpriteNode spriteNodeWithImageNamed:@"menu_button_4"];
-    [_node4 setPosition:CGPointMake(centerPoint.x - 233.22/2 + _node4.size.width/2,
-                                    self.size.height - (centerPoint.y + 19.43/2 + _node4.size.height/2))];
+    [_node4 setPosition:CGPointMake(centerPoint.x - 116.41 + _node4.size.width/2,
+                                    self.size.height - (centerPoint.y + 9.44 + _node4.size.height/2))];
+    _node4.alpha = 0.3;
     [self addChild:_node4];
     
     self.titleNode = [SKSpriteNode spriteNodeWithImageNamed:@"pulse_logo"];
