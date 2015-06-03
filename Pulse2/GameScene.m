@@ -220,9 +220,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 
 
 - (void)addGestureRecognizers {
-    //    self.swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goHome)];
-    //    _swipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    //    [self.view addGestureRecognizer:_swipeRecognizer];
     
     UIDoubleTapGestureRecognizer *doubleTapRecognizer = [[UIDoubleTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
     doubleTapRecognizer.numberOfTapsRequired = 2;
@@ -262,16 +259,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         }
     }
 }
-
-//- (void)handleDoubleTapFrom:(UITapGestureRecognizer *)recognizer{
-//    CGPoint touchLocation = [recognizer locationInView:recognizer.view];
-//    touchLocation = [self convertPointFromView:touchLocation];
-//    SKNode *touchedNode = [self nodeAtPoint:touchLocation];
-//    
-//    if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
-//        SoundInteractor *interactor = (SoundInteractor *)touchedNode;
-//    }
-//}
 
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
     if (recognizer.state == UIGestureRecognizerStateBegan) {
