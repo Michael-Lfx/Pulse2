@@ -218,7 +218,8 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 
 
 
-- (void)addGestureRecognizers {    
+- (void)addGestureRecognizers {
+    
     UIDoubleTapGestureRecognizer *doubleTapRecognizer = [[UIDoubleTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
     doubleTapRecognizer.numberOfTapsRequired = 2;
     doubleTapRecognizer.delegate = self;

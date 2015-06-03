@@ -36,13 +36,13 @@
     
 //    self.view.frameInterval = 2;
     
-    [self addSlider];
+    [self addSlider:view];
     [self addBallCover];
     [self initStreakDisplay];
     [self addBackButton];
 }
 
--(void) addSlider
+-(void) addSlider:(SKView *)view
 {
     float screenWidth = [UIScreen mainScreen].bounds.size.width;
     float screenHeight = [UIScreen mainScreen].bounds.size.height;
@@ -57,7 +57,7 @@
     [[UISlider appearance] setMaximumTrackTintColor:[UIColor colorWithWhite:1 alpha:0]];
     [[UISlider appearance] setMinimumTrackTintColor:[UIColor colorWithWhite:1 alpha:0]];
     _slider.continuous = YES;
-    [self.view addSubview:_slider];
+    [view addSubview:_slider];
 }
      
 -(void) addBallCover
@@ -95,7 +95,6 @@
     [self addChild:_streakDisplay];
 }
 
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
@@ -104,6 +103,7 @@
     
     if ([node.name isEqualToString:@"backButton"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:nil];
+        [_slider removeFromSuperview];
     }
 }
 

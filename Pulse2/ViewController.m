@@ -99,6 +99,7 @@
     transition.pausesIncomingScene = TRUE;
     SKView *skView = (SKView *)self.view;
     [skView presentScene:_gameScene transition:transition];
+    sceneToRemove.userInteractionEnabled = NO;
     [sceneToRemove removeFromParent];
 }
 
