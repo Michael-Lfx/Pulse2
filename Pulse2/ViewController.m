@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "GameScene.h"
+#import "MainMenuScene.h"
 #import "LoopData.h"
 #import "SongSliderScene.h"
 #import "SongTrainScene.h"
@@ -16,7 +17,7 @@
 @interface ViewController ()
 
 @property GameScene *gameScene;
-
+@property MainMenuScene *mainMenuScene;
 
 @end
 
@@ -27,6 +28,7 @@
     self.shouldHideStatusBar = YES;
     [self setNeedsStatusBarAppearanceUpdate];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSoundscape:) name:@"LoadSoundscape" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMinigame:) name:@"LoadMinigame" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToGameScene:) name:@"ReturnToGameScene" object:nil];
     
@@ -38,8 +40,26 @@
     skView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.95 alpha:1.0];
     
     CGSize screenSize = self.view.frame.size;
-    self.gameScene = [[GameScene alloc] initWithSize:screenSize];
-    [skView presentScene:_gameScene];
+//    self.gameScene = [[GameScene alloc] initWithSize:screenSize];
+//    [skView presentScene:_gameScene];
+    
+    self.mainMenuScene = [[MainMenuScene alloc] initWithSize:screenSize];
+    [skView presentScene:_mainMenuScene];
+}
+
+- (void)loadSoundscape:(NSNotification *)notification {
+    NSDictionary *info = notification.userInfo;
+    
+    NSString *soundscapeName = [info objectForKey:@"name"];
+    
+    CGSize screenSize = self.view.frame.size;
+    
+    if ([soundscapeName isEqualToString:@"relaxation"]) {
+        self.gameScene = [[GameScene alloc] initWithSize:screenSize];
+        [_mainMenuScene removeFromParent];
+        SKView *skView = (SKView *)self.view;
+        [skView presentScene:_gameScene];
+    }
 }
 
 - (void)loadMinigame:(NSNotification *)notification {
