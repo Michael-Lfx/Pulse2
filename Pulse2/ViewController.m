@@ -29,6 +29,7 @@
     [self setNeedsStatusBarAppearanceUpdate];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSoundscape:) name:@"LoadSoundscape" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToMainMenu:) name:@"ReturnToMainMenu" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMinigame:) name:@"LoadMinigame" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToGameScene:) name:@"ReturnToGameScene" object:nil];
     
@@ -60,6 +61,10 @@
         SKView *skView = (SKView *)self.view;
         [skView presentScene:_gameScene];
     }
+}
+
+- (void)returnToMainMenu:(NSNotification *)notification {
+    
 }
 
 - (void)loadMinigame:(NSNotification *)notification {
