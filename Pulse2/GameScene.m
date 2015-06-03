@@ -25,6 +25,8 @@ double interactorTimerDuration = 1.0;
 float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 
 - (void)didMoveToView:(SKView *)view {
+    if(_hasBeenInitialized)
+        return;
     
     self.backgroundColor = [SKColor colorWithRed:10.0/255 green:55.0/255 blue:70.0/255 alpha:1.0];
     self.scaleMode = SKSceneScaleModeAspectFit;
@@ -40,10 +42,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     [self createSoundInteractors];
     [self addGestureRecognizers];
     [self startScene];
-}
-
-- (void)willMoveFromView:(SKView *)view {
-    [self.view removeGestureRecognizer:_swipeRecognizer];
+    _hasBeenInitialized = YES;
 }
 
 - (void)createSoundInteractors {
@@ -219,11 +218,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 
 
 
-- (void)addGestureRecognizers {
-    //    self.swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goHome)];
-    //    _swipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    //    [self.view addGestureRecognizer:_swipeRecognizer];
-    
+- (void)addGestureRecognizers {    
     UIDoubleTapGestureRecognizer *doubleTapRecognizer = [[UIDoubleTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
     doubleTapRecognizer.numberOfTapsRequired = 2;
     doubleTapRecognizer.delegate = self;
@@ -262,16 +257,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         }
     }
 }
-
-//- (void)handleDoubleTapFrom:(UITapGestureRecognizer *)recognizer{
-//    CGPoint touchLocation = [recognizer locationInView:recognizer.view];
-//    touchLocation = [self convertPointFromView:touchLocation];
-//    SKNode *touchedNode = [self nodeAtPoint:touchLocation];
-//    
-//    if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
-//        SoundInteractor *interactor = (SoundInteractor *)touchedNode;
-//    }
-//}
 
 - (void)handlePanFrom:(UIPanGestureRecognizer *)recognizer {
     if (recognizer.state == UIGestureRecognizerStateBegan) {

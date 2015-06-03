@@ -39,7 +39,7 @@
     [self addSlider];
     [self addBallCover];
     [self initStreakDisplay];
-//    [self addChild: [self playButton]];
+    [self addBackButton];
 }
 
 -(void) addSlider
@@ -54,8 +54,8 @@
     UIImage *sliderThumb = [UIImage imageNamed: @"Triangle_9"];
     UIImage *sliderThumbScaled = [UIImage imageWithCGImage:sliderThumb.CGImage scale:2 orientation:UIImageOrientationUp];
     [[UISlider appearance] setThumbImage:sliderThumbScaled forState:UIControlStateNormal];
-    [[UISlider appearance] setMaximumTrackTintColor:self.backgroundColor];
-    [[UISlider appearance] setMinimumTrackTintColor:self.backgroundColor];
+    [[UISlider appearance] setMaximumTrackTintColor:[UIColor colorWithWhite:1 alpha:0]];
+    [[UISlider appearance] setMinimumTrackTintColor:[UIColor colorWithWhite:1 alpha:0]];
     _slider.continuous = YES;
     [self.view addSubview:_slider];
 }
@@ -68,6 +68,18 @@
     SKShapeNode *ballCover = [SKShapeNode shapeNodeWithRect:rect];
     ballCover.strokeColor = ballCover.fillColor = self.backgroundColor;
     [self addChild:ballCover];
+}
+
+- (void)addBackButton
+{
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    SKSpriteNode *backButton = [SKSpriteNode spriteNodeWithImageNamed:@"blurGlow2"];
+    backButton.position = CGPointMake(screenWidth/2, screenHeight);
+    backButton.name = @"backButton";//how the node is identified later
+    backButton.color = [SKColor greenColor];
+    backButton.colorBlendFactor = .9;
+    [self addChild:backButton];
 }
 
 -(void)initStreakDisplay{
@@ -83,13 +95,6 @@
     [self addChild:_streakDisplay];
 }
 
-//- (SKSpriteNode *)playButton
-//{
-//    SKSpriteNode *playButton = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(80,40)];
-//    playButton.position = CGPointMake(150, 60);
-//    playButton.name = @"playButton";//how the node is identified later
-//    return playButton;
-//}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -97,14 +102,9 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-//    if ([node.name isEqualToString:@"playButton"]) {
-//        NSLog(@"Is playing: %d", (BOOL)[_conductor getIsPlaying]);
-//        if((BOOL)[_conductor getIsPlaying]){
-//            [_conductor stop];
-//        } else {
-//            [_conductor start];
-//        }
-//    }
+    if ([node.name isEqualToString:@"backButton"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:nil];
+    }
 }
 
 - (double)getFirstBeat

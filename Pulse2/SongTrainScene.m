@@ -46,6 +46,7 @@
     [self addButtons];
     [self addTrain];
     [self initStreakDisplay];
+    [self addBackButton];
     
     NSString *hihatPath = [[NSBundle mainBundle] pathForResource:@"hi_hat" ofType:@"caf"];
     NSURL *hihatURL = [NSURL fileURLWithPath:hihatPath];
@@ -73,9 +74,21 @@
 {
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    _train = [SKSpriteNode spriteNodeWithImageNamed:@"Train"];
+    _train = [SKSpriteNode spriteNodeWithImageNamed:@"train"];
     _train.position = CGPointMake(screenWidth/2, screenHeight/3);
     [self addChild:_train];
+}
+
+- (void)addBackButton
+{
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    SKSpriteNode *backButton = [SKSpriteNode spriteNodeWithImageNamed:@"blurGlow2"];
+    backButton.position = CGPointMake(screenWidth/2, screenHeight);
+    backButton.name = @"backButton";//how the node is identified later
+    backButton.color = [SKColor greenColor];
+    backButton.colorBlendFactor = .9;
+    [self addChild:backButton];
 }
 
 -(void)initStreakDisplay
@@ -92,15 +105,6 @@
     [self addChild:_streakDisplay];
 }
 
-- (SKSpriteNode *)playButton
-{
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    SKSpriteNode *playButton = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(80,40)];
-    playButton.position = CGPointMake(screenWidth/2, 120);
-    playButton.name = @"playButton";//how the node is identified later
-    return playButton;
-}
-
 #pragma mark - INTERACTION
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -113,6 +117,8 @@
         [self hop:@"left"];
     } else if ([node.name isEqualToString:@"rightButton"]) {
         [self hop:@"right"];
+    } else if ([node.name isEqualToString:@"backButton"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:nil];
     }
 }
 

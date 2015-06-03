@@ -28,6 +28,7 @@
     [self setNeedsStatusBarAppearanceUpdate];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMinigame:) name:@"LoadMinigame" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToGameScene:) name:@"ReturnToGameScene" object:nil];
     
     // configure the view
     SKView *skView = (SKView *)self.view;
@@ -60,12 +61,25 @@
         SongSwipeScene *swipeScene = [[SongSwipeScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size];
         sceneToPresent = swipeScene;
     }
-    SKTransition *transition = [SKTransition doorsOpenHorizontalWithDuration:1.0];
+    SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionUp duration:1.5];
     transition.pausesOutgoingScene = TRUE;
+    transition.pausesIncomingScene = TRUE;
     [conductor fadeVolumeForLoop:loopName withDuration:1 fadeIn:YES];
     SKView *skView = (SKView *)self.view;
     [skView presentScene:sceneToPresent transition:transition];
     [_gameScene removeFromParent];
+}
+
+- (void)returnToGameScene:(NSNotification *)notification {
+    
+    SKScene *sceneToRemove = (SKScene *)notification.object;
+    
+    SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionDown duration:1.5];
+    transition.pausesOutgoingScene = TRUE;
+    transition.pausesIncomingScene = TRUE;
+    SKView *skView = (SKView *)self.view;
+    [skView presentScene:_gameScene transition:transition];
+    [sceneToRemove removeFromParent];
 }
 
 - (BOOL)prefersStatusBarHidden {

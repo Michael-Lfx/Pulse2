@@ -44,6 +44,7 @@
     [self addSwipeZone];
     [self addHitZone];
     [self addSwipeRecognizers];
+    [self addBackButton];
 }
 
 -(void)initStreakDisplay
@@ -80,6 +81,18 @@
     hitZone.position = CGPointMake(screenWidth/2, screenHeight/3 + hitZone.size.height/2);
     hitZone.name = @"hitZone";//how the node is identified later
     [self addChild:hitZone];
+}
+
+- (void)addBackButton
+{
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    SKSpriteNode *backButton = [SKSpriteNode spriteNodeWithImageNamed:@"blurGlow2"];
+    backButton.position = CGPointMake(screenWidth/2, screenHeight);
+    backButton.name = @"backButton";//how the node is identified later
+    backButton.color = [SKColor greenColor];
+    backButton.colorBlendFactor = .9;
+    [self addChild:backButton];
 }
 
 - (void)addSwipeRecognizers
@@ -172,9 +185,12 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     SKSpriteNode *touchedNode = (SKSpriteNode *)[self nodeAtPoint:location];
+    
     if([touchedNode.name isEqualToString:@"swipeZone"]){
         SKSpriteNode *hitZone = (SKSpriteNode *)[self childNodeWithName:@"hitZone"];
         _hitNodesAtTouch = [self nodesAtPoint:hitZone.position];
+    } else if ([touchedNode.name isEqualToString:@"backButton"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:nil];
     }
 }
 

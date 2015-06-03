@@ -16,8 +16,10 @@ static const uint32_t borderCategory = 0x1 << 4;
 
 @interface GameScene : SKScene <UIGestureRecognizerDelegate, SKPhysicsContactDelegate>
 
+// initialization
+@property BOOL hasBeenInitialized;
+
 // interactors
-//@property NSMutableArray *loopManagers;
 @property NSMutableArray *soundInteractors;
 @property SoundInteractor *draggedInteractor;
 @property double baseInteractorSize;
@@ -31,7 +33,6 @@ static const uint32_t borderCategory = 0x1 << 4;
 @property NSMutableArray *smoothedAmplitudes;
 
 // gesture recognizers
-@property UISwipeGestureRecognizer *swipeRecognizer;
 @property UIPanGestureRecognizer *panInteractorRecognizer;
 @property UITapGestureRecognizer *tapInteractorRecognizer;
 @property UILongPressGestureRecognizer *longPressRecognizer;
