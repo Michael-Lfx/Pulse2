@@ -99,9 +99,19 @@ bool _nodesAdded = false;
     touchLocation = [self convertPointFromView:touchLocation];
     SKNode *touchedNode = [self nodeAtPoint:touchLocation];
     
+    SKAction *expand = [SKAction scaleBy:10 duration:1];
+    SKAction *fadeIn = [SKAction fadeAlphaTo:1 duration:.6];
     if ([touchedNode isEqualToNode:_node1]) {
+        [_node1 runAction:[SKAction group:@[expand, fadeIn]]];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]];
-    }
+    } 
+}
+
+- (void)returnNodesToNormal{
+    [_node1 runAction:[SKAction scaleTo:1 duration:1]];
+    [_node2 runAction:[SKAction scaleTo:1 duration:1]];
+    [_node3 runAction:[SKAction scaleTo:1 duration:1]];
+    [_node4 runAction:[SKAction scaleTo:1 duration:1]];
 }
 
 @end

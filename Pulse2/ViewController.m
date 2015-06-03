@@ -16,7 +16,6 @@
 
 @interface ViewController ()
 
-@property GameScene *gameScene;
 @property MainMenuScene *mainMenuScene;
 
 @end
@@ -41,30 +40,41 @@
     skView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.95 alpha:1.0];
     
     CGSize screenSize = self.view.frame.size;
-//    self.gameScene = [[GameScene alloc] initWithSize:screenSize];
-//    [skView presentScene:_gameScene];
     
     self.mainMenuScene = [[MainMenuScene alloc] initWithSize:screenSize];
     [skView presentScene:_mainMenuScene];
 }
 
 - (void)loadSoundscape:(NSNotification *)notification {
+    _soundScapeView = [[SKView alloc] initWithFrame:self.view.frame];
     NSDictionary *info = notification.userInfo;
-    
     NSString *soundscapeName = [info objectForKey:@"name"];
-    
     CGSize screenSize = self.view.frame.size;
     
     if ([soundscapeName isEqualToString:@"relaxation"]) {
-        self.gameScene = [[GameScene alloc] initWithSize:screenSize];
         [_mainMenuScene removeFromParent];
-        SKView *skView = (SKView *)self.view;
-        [skView presentScene:_gameScene];
+        SKView *skView = (SKView *)_soundScapeView;
+        [skView presentScene: [[GameScene alloc] initWithSize:screenSize]];
     }
+    [UIView animateWithDuration:1.0 animations:^{
+        // just to wait
+    } completion:^(BOOL finished){
+        _soundScapeView.alpha = 0;
+        [self.view addSubview:_soundScapeView];
+        [UIView animateWithDuration:1.0 animations:^{
+            _soundScapeView.alpha=1;
+        }];
+    }];
 }
 
 - (void)returnToMainMenu:(NSNotification *)notification {
-    
+    [_mainMenuScene returnNodesToNormal];
+    [UIView animateWithDuration:1.0 animations:^{
+        _soundScapeView.alpha=0;
+    } completion:^(BOOL finished){
+        [_soundScapeView removeFromSuperview];
+        _soundScapeView = nil;
+    }];
 }
 
 - (void)loadMinigame:(NSNotification *)notification {
@@ -92,7 +102,7 @@
     [conductor fadeVolumeForLoop:loopName withDuration:1 fadeIn:YES];
     SKView *skView = (SKView *)self.view;
     [skView presentScene:sceneToPresent transition:transition];
-    [_gameScene removeFromParent];
+//    [_gameScene removeFromParent];
 }
 
 - (void)returnToGameScene:(NSNotification *)notification {
@@ -103,7 +113,7 @@
     transition.pausesOutgoingScene = TRUE;
     transition.pausesIncomingScene = TRUE;
     SKView *skView = (SKView *)self.view;
-    [skView presentScene:_gameScene transition:transition];
+//    [skView presentScene:_gameScene transition:transition];
     sceneToRemove.userInteractionEnabled = NO;
     [sceneToRemove removeFromParent];
 }

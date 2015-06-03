@@ -10,4 +10,6 @@
 
 @interface MainMenuScene : SKScene <UIGestureRecognizerDelegate>
 
+- (void)returnNodesToNormal;
+
 @end
