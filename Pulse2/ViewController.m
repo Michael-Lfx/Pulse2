@@ -54,12 +54,7 @@
     NSString *soundscapeName = [info objectForKey:@"name"];
     CGSize screenSize = self.view.frame.size;
     CGPoint pointToZoomTo;
-    
-    if ([soundscapeName isEqualToString:@"relaxation"]) {
-        [_soundScapeView presentScene: [[GameScene alloc] initWithSize:screenSize]];
-        pointToZoomTo = CGPointMake(_mainMenuView.center.x - 400, _mainMenuView.center.y + 300); // make this legit center for sections
-//        [(SKView *)self.view presentScene:[[GameScene alloc] initWithSize:screenSize] transition:[SKTransition crossFadeWithDuration:1]];
-    }
+    pointToZoomTo = CGPointMake(_mainMenuView.center.x - 400, _mainMenuView.center.y + 300); // make this legit center for sections
     _soundScapeView.alpha = 0;
     _mainMenuView.userInteractionEnabled = NO;
     [self.view addSubview:_soundScapeView];
@@ -70,6 +65,9 @@
     } completion:^(BOOL completed){
         [_mainMenuScene removeFromParent];
     }];
+    if ([soundscapeName isEqualToString:@"relaxation"]) {
+        [_soundScapeView presentScene: [[GameScene alloc] initWithSize:screenSize] transition:[SKTransition crossFadeWithDuration:.1]];
+    }
 }
 
 - (void)returnToMainMenu:(NSNotification *)notification {
@@ -93,6 +91,7 @@
     NSString *loopName = [info objectForKey:@"loopName"];
     Conductor *conductor = [info objectForKey:@"conductor"];
     CGPoint pointToZoomTo = [(NSValue *)[info objectForKey:@"nodeCoordinates"] CGPointValue];
+    CGSize nodeSize = [(NSValue *)[info objectForKey:@"nodeSize"] CGSizeValue];
     
     LoopData *loopData = [[LoopData alloc] initWithPlist:@"relaxation" loop:loopName];
     NSString *minigameName = [loopData getMinigameName];
@@ -109,11 +108,11 @@
     [self.view addSubview:_miniScapeView];
     [_soundScapeView.scene setPaused:YES];
     
-    CGFloat s = 10;
+    CGFloat s = 2 * self.view.frame.size.height/nodeSize.height;
     CGAffineTransform tr = CGAffineTransformScale(self.view.transform, s, s);
     CGFloat h = self.view.frame.size.height;
     CGFloat w = self.view.frame.size.width;
-    [UIView animateWithDuration:1.5 delay:0 options:0 animations:^{
+    [UIView animateWithDuration:1.2 delay:0 options:0 animations:^{
         _soundScapeView.transform = tr;
         _soundScapeView.center = CGPointMake(w-w*s/2 + (w - pointToZoomTo.x)*s, h*s/2 - (h - pointToZoomTo.y)*s);
     } completion:^(BOOL finished) {
@@ -125,12 +124,14 @@
 }
 
 - (void)returnToGameScene:(NSNotification *)notification {
-    [UIView animateWithDuration:1.0 animations:^{
+    [_soundScapeView.scene setPaused:NO];
+    [UIView animateWithDuration:.4 animations:^{
         _miniScapeView.alpha=0;
-        _soundScapeView.center = self.view.center;
+    }];
+    [UIView animateWithDuration:1.0 animations:^{
         _soundScapeView.transform = CGAffineTransformMakeScale(1, 1);
+        _soundScapeView.center = self.view.center;
     } completion:^(BOOL finished){
-        [_soundScapeView.scene setPaused:NO];
         [_miniScapeView removeFromSuperview];
         _miniScapeView = nil;
     }];
