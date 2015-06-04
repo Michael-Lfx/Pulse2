@@ -18,6 +18,13 @@ static const uint32_t borderCategory = 0x1 << 4;
 
 // initialization
 @property BOOL hasBeenInitialized;
+@property BOOL shutItDown;
+
+// audio
+@property AEAudioController *audioController;
+@property Conductor *conductor;
+@property AEAudioUnitChannel *collisionSound;
+@property NSMutableArray *soundChannels;
 
 // interactors
 @property NSMutableArray *soundInteractors;

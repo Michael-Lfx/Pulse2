@@ -11,13 +11,9 @@
 #import "LoopData.h"
 #import "UIDoubleTapGestureRecognizer.h"
 
-@interface GameScene ()
+//@interface GameScene ()
 
-@property AEAudioController *audioController;
-@property Conductor *conductor;
-@property AEAudioUnitChannel *collisionSound;
-
-@end
+//@end
 
 @implementation GameScene
 
@@ -33,6 +29,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     self.physicsBody.categoryBitMask = edgeCategory;
     self.physicsWorld.contactDelegate = self;
+    self.soundChannels = [NSMutableArray new];
     
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.audioController = delegate.audioController;
@@ -44,6 +41,12 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     [self addMenuNode];
     [self startScene];
     _hasBeenInitialized = YES;
+    _shutItDown = NO;
+}
+
+- (void)dealloc
+{
+
 }
 
 - (void)createSoundInteractors {
@@ -116,6 +119,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     }
     
     [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
+    [_soundChannels addObject:_collisionSound];
     
     SKShapeNode *menuNode = [SKShapeNode shapeNodeWithCircleOfRadius:_baseInteractorSize/2];
     menuNode.position = CGPointMake(windowWidth/2, windowHeight/2);
@@ -285,7 +289,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
         if(recognizer.numberOfTapsRequired == 2 || ![interactor isUnlocked]){ // double tap or a single tap on locked node
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[interactor.name, _conductor] forKeys:@[@"loopName", @"conductor"]]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[interactor.name, _conductor, [NSValue valueWithCGPoint:touchedNode.position]] forKeys:@[@"loopName", @"conductor", @"nodeCoordinates"]]];
         } else if ([interactor getState] == NO) { // single tap on unlocked node
             [interactor turnOn];
             //            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, 60, 127, 0);
@@ -293,7 +297,9 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
             [interactor turnOff];
         }
     } else if ([touchedNode.name isEqualToString:@"menuNode"]) {
+        [_conductor stop];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToMainMenu" object:self userInfo:nil];
+        _shutItDown = YES;
     }
 }
 
@@ -384,10 +390,22 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 }
 
 -(void)update:(CFTimeInterval)currentTime {
+    if(_shutItDown){
+        _soundInteractors = nil;
+        _draggedInteractor = nil;
+        [self removeAllChildren];
+        [self removeAllActions];
+        [self removeFromParent];
+        [self.audioController removeChannels:_soundChannels];
+        [_conductor releaseSounds]; ///THIS IS REALLY IMPORTANT, ADD BACK WHEN HENRY SEES ISSUE
+        return;
+    }
     /* Called before each frame is rendered */
-    for (SoundInteractor *interactor in _soundInteractors) {
-        if ([interactor isReady]) {
-            [interactor updateAppearance];
+    else{
+        for (SoundInteractor *interactor in _soundInteractors) {
+            if ([interactor isReady]) {
+                [interactor updateAppearance];
+            }
         }
     }
 }

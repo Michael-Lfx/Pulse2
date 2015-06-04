@@ -28,14 +28,15 @@ bool _nodesAdded = false;
 
 - (void)didMoveToView:(SKView *)view {
     
-    self.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
-    self.scaleMode = SKSceneScaleModeAspectFit;
-    
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.audioController = delegate.audioController;
-    
-    if (!_nodesAdded) [self addNodes];
-    [self addGestureRecognizers];
+    if (!_nodesAdded){
+        self.backgroundColor = [UIColor colorWithRed:0.15 green:0.15 blue:0.15 alpha:1.0];
+        self.scaleMode = SKSceneScaleModeAspectFit;
+        
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        self.audioController = delegate.audioController;
+        [self addNodes];
+        [self addGestureRecognizers];
+    }
 }
 
 - (void)addNodes {
@@ -99,19 +100,12 @@ bool _nodesAdded = false;
     touchLocation = [self convertPointFromView:touchLocation];
     SKNode *touchedNode = [self nodeAtPoint:touchLocation];
     
-    SKAction *expand = [SKAction scaleBy:10 duration:1];
-    SKAction *fadeIn = [SKAction fadeAlphaTo:1 duration:.6];
+//    SKAction *expand = [SKAction scaleBy:10 duration:1];
+//    SKAction *fadeIn = [SKAction fadeAlphaTo:1 duration:.6];
     if ([touchedNode isEqualToNode:_node1]) {
-        [_node1 runAction:[SKAction group:@[expand, fadeIn]]];
+//        [_node1 runAction:[SKAction group:@[expand, fadeIn]]];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]];
-    } 
-}
-
-- (void)returnNodesToNormal{
-    [_node1 runAction:[SKAction scaleTo:1 duration:1]];
-    [_node2 runAction:[SKAction scaleTo:1 duration:1]];
-    [_node3 runAction:[SKAction scaleTo:1 duration:1]];
-    [_node4 runAction:[SKAction scaleTo:1 duration:1]];
+    }
 }
 
 @end

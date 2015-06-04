@@ -48,6 +48,10 @@ double _ringFadeInTime = 0.2;
     return self;
 }
 
+- (void)dealloc{
+    NSLog(@"HI MOM");
+}
+
 - (void)resetValues {
     self.state = NO;
     self.ready = NO;

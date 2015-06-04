@@ -12,6 +12,7 @@
 @interface ViewController : UIViewController
 
 @property BOOL shouldHideStatusBar;
+@property SKView *mainMenuView;
 @property SKView *soundScapeView;
 @property SKView *miniScapeView;
 

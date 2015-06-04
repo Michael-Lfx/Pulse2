@@ -365,7 +365,7 @@
 				TargetAttributes = {
 					BA3C00801AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 365AV5B22T;
+						DevelopmentTeam = 65AAS3WP88;
 					};
 					BA3C00991AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -412,7 +412,6 @@
 				BA014C261AF05FE9001CAAE3 /* relaxation-drums.mp3 in Resources */,
 				BA014C301AF05FE9001CAAE3 /* relaxation-eighties-ep.mp3 in Resources */,
 				BA014C2C1AF05FE9001CAAE3 /* relaxation-dance-organ.mp3 in Resources */,
-				BA75449E1B1D68BC002AAED8 /* menu_button_3.png in Resources */,
 				E627909C1B1E4CE500435C4A /* blurGlow2.png in Resources */,
 				BA014C2D1AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 in Resources */,
 				E6B6D6FB1B1E7D3300F5BC7C /* train.png in Resources */,

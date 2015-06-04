@@ -20,6 +20,8 @@
 - (void)setVolumeForLoop:(NSString *)loopName withVolume:(double)volume;
 - (void)fadeVolumeForLoop:(NSString *)loopName withDuration:(double)duration fadeIn:(BOOL)fadeIn;
 
+- (void)releaseSounds;
+
 - (double)getPowerLevelForLoop:(NSString *)loopName;
 - (double)getCurrentBeatForLoop:(NSString *)loopName;
 - (NSArray *)getFilenames;

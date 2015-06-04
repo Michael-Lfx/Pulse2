@@ -62,6 +62,28 @@ double _beats;
     return self;
 }
 
+//- (void)dealloc
+//{
+//    [_audioController removeChannels:[_audioFilePlayers allValues]];
+//    for(NSValue *group in [_channelGroups allValues]){
+//        AEChannelGroupRef ref = group.pointerValue;
+//        [_audioController removeChannelGroup:ref];
+//    }
+//}
+
+- (void)releaseSounds
+{
+    [_audioController removeChannels:[_audioFilePlayers allValues]];
+    for(NSValue *group in [_channelGroups allValues]){
+        AEChannelGroupRef ref = group.pointerValue;
+        [_audioController removeChannelGroup:ref];
+    }
+    _audioFilePlayers = nil;
+    _channelGroups = nil;
+    _audioController = nil;
+    _data = nil;
+}
+
 - (void)start {
     for (NSString *filename in _audioFilePlayers) {
         AEAudioFilePlayer *player = [_audioFilePlayers objectForKey:filename];
