@@ -37,7 +37,7 @@
 		BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB96FAB1AF81613001906D0 /* MainMenuScene.m */; };
 		BAB9D83E1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB9D83D1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m */; };
 		BAF06F281AEED4A000FBB4C3 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF06F271AEED4A000FBB4C3 /* SpriteKit.framework */; };
-		BAF06F311AEED62500FBB4C3 /* RelaxationScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF06F301AEED62500FBB4C3 /* RelaxationScene.m */; };
+		BAF06F311AEED62500FBB4C3 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF06F301AEED62500FBB4C3 /* GameScene.m */; };
 		BAF06F371AEED6F400FBB4C3 /* SoundInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */; };
 		BAF06F541AEEE16200FBB4C3 /* relaxation.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAF06F461AEEE16200FBB4C3 /* relaxation.plist */; };
 		BAF58992314D5901ED41946D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB9D2BD43485FF5B2111854 /* libPods.a */; };
@@ -102,8 +102,8 @@
 		BAB9D83C1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDoubleTapGestureRecognizer.h; sourceTree = "<group>"; };
 		BAB9D83D1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDoubleTapGestureRecognizer.m; sourceTree = "<group>"; };
 		BAF06F271AEED4A000FBB4C3 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		BAF06F2F1AEED62500FBB4C3 /* RelaxationScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelaxationScene.h; sourceTree = "<group>"; };
-		BAF06F301AEED62500FBB4C3 /* RelaxationScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelaxationScene.m; sourceTree = "<group>"; };
+		BAF06F2F1AEED62500FBB4C3 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		BAF06F301AEED62500FBB4C3 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		BAF06F351AEED6F400FBB4C3 /* SoundInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundInteractor.h; sourceTree = "<group>"; };
 		BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundInteractor.m; sourceTree = "<group>"; };
 		BAF06F461AEEE16200FBB4C3 /* relaxation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = relaxation.plist; sourceTree = "<group>"; };
@@ -238,8 +238,8 @@
 		BA4AA3A31B02B9BC007E3D7B /* Soundscapes */ = {
 			isa = PBXGroup;
 			children = (
-				BAF06F2F1AEED62500FBB4C3 /* RelaxationScene.h */,
-				BAF06F301AEED62500FBB4C3 /* RelaxationScene.m */,
+				BAF06F2F1AEED62500FBB4C3 /* GameScene.h */,
+				BAF06F301AEED62500FBB4C3 /* GameScene.m */,
 				BA2BD3071AF98CA0008A4169 /* Conductor.h */,
 				BA2BD3081AF98CA0008A4169 /* Conductor.m */,
 				BA2BD30A1AF99D2D008A4169 /* LoopData.h */,
@@ -468,7 +468,7 @@
 				BA4AA3B01B02BB81007E3D7B /* SongSliderScene.m in Sources */,
 				BA3C008D1AE7140B00911004 /* ViewController.m in Sources */,
 				BA3C008A1AE7140B00911004 /* AppDelegate.m in Sources */,
-				BAF06F311AEED62500FBB4C3 /* RelaxationScene.m in Sources */,
+				BAF06F311AEED62500FBB4C3 /* GameScene.m in Sources */,
 				BAB9D83E1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m in Sources */,
 				BA4AA3AC1B02BA1F007E3D7B /* SongTrainScene.m in Sources */,
 				BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */,

@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 
 #import "MainMenuScene.h"
-#import "RelaxationScene.h"
+#import "GameScene.h"
 #import "SongSliderScene.h"
 #import "SongTrainScene.h"
 #import "SongSwipeScene.h"
@@ -70,8 +70,8 @@
     
     SKScene *sceneToPresent;
     if ([soundscapeName isEqualToString:@"relaxation"]) {
-        sceneToPresent = [[RelaxationScene alloc] initWithSize:screenSize];
-        ((RelaxationScene *)sceneToPresent).conductor = _conductor;
+        sceneToPresent = [[GameScene alloc] initWithSize:screenSize];
+        ((GameScene *)sceneToPresent).conductor = _conductor;
          // make this legit center for sections
 //        [(SKView *)self.view presentScene:[[GameScene alloc] initWithSize:screenSize] transition:[SKTransition crossFadeWithDuration:1]];
     }

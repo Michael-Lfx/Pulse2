@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Henry Thiemann. All rights reserved.
 //
 
-#import "RelaxationScene.h"
+#import "GameScene.h"
 //#import "AppDelegate.h"
 #import "LoopData.h"
 #import "UIDoubleTapGestureRecognizer.h"
@@ -15,7 +15,7 @@
 
 //@end
 
-@implementation RelaxationScene
+@implementation GameScene
 
 double interactorTimerDuration = 1.0;
 float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};

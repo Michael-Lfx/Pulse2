@@ -14,7 +14,6 @@
 
 
 - (instancetype)initWithAudioController:(AEAudioController *)audioController;
-//- (instancetype)initWithAudioController:(AEAudioController *)audioController plist:(NSString *)plist;
 
 - (void)loadSoundscapeWithPlistNamed:(NSString *)plist;
 - (void)releaseSoundscape;

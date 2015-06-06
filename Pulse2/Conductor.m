@@ -24,45 +24,6 @@ double _beats;
     return self;
 }
 
-
-- (instancetype)initWithAudioController:(AEAudioController *)audioController plist:(NSString *)plist {
-    self = [super init];
-    
-    if (self) {
-        
-        self.audioController = audioController;
-        
-        NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:plist ofType:@"plist"];
-        self.data = [[NSDictionary alloc] initWithContentsOfFile:pathToPlist];
-        
-        NSString *extension = [_data objectForKey:@"extension"];
-        _bpm = [[_data objectForKey:@"bpm"] doubleValue];
-        _beats = [[_data objectForKey:@"beats"] doubleValue];
-        
-        NSDictionary *audioFileData = [_data objectForKey:@"audio files"];
-        
-        self.audioFilePlayers = [[NSMutableDictionary alloc] init];
-        self.channelGroups = [[NSMutableDictionary alloc] init];
-        
-        for (NSString *filename in [audioFileData allKeys]) {
-            NSURL *url = [[NSBundle mainBundle] URLForResource:filename withExtension:extension];
-            
-            AEAudioFilePlayer *player = [AEAudioFilePlayer audioFilePlayerWithURL:url audioController:_audioController error:NULL];
-            player.loop = YES;
-            player.channelIsPlaying = NO;
-            player.volume = 0;
-            
-            AEChannelGroupRef group = [_audioController createChannelGroup];
-            [_audioController addChannels:[NSArray arrayWithObject:player] toChannelGroup:group];
-            
-            [_audioFilePlayers setObject:player forKey:filename];
-            [_channelGroups setObject:[NSValue valueWithPointer:group] forKey:filename];
-        }
-    }
-    
-    return self;
-}
-
 - (void)loadSoundscapeWithPlistNamed:(NSString *)plist {
     
     NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:plist ofType:@"plist"];
@@ -95,25 +56,11 @@ double _beats;
     _shouldCheckLevels = true;
 }
 
-//- (void)dealloc
-//{
-//    [_audioController removeChannels:[_audioFilePlayers allValues]];
-//    for(NSValue *group in [_channelGroups allValues]){
-//        AEChannelGroupRef ref = group.pointerValue;
-//        [_audioController removeChannelGroup:ref];
-//    }
-//}
-
 - (void)releaseSoundscape
 {
     _shouldCheckLevels = false;
     
     [_audioController removeChannels:[_audioFilePlayers allValues]];
-    
-//    for(NSValue *group in [_channelGroups allValues]){
-//        AEChannelGroupRef ref = group.pointerValue;
-//        [_audioController removeChannelGroup:ref];
-//    }
     
     _audioFilePlayers = nil;
     _channelGroups = nil;
