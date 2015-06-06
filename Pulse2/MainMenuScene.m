@@ -104,8 +104,9 @@ bool _nodesAdded = false;
     SKNode *touchedNode = [self nodeAtPoint:touchLocation];
     
 //    SKAction *expand = [SKAction scaleBy:10 duration:1];
-//    SKAction *fadeIn = [SKAction fadeAlphaTo:1 duration:.6];
-    NSLog(@"%@", touchedNode.name);
+//    SKAction *flashIn = [SKAction colorizeWithColor:[UIColor whiteColor] colorBlendFactor:1 duration:1];
+//    SKAction *flashBack = [SKAction colorizeWithColor:[UIColor whiteColor] colorBlendFactor:0 duration:.25];
+//    SKAction *flash = [SKAction sequence:@[flashIn]];
     if ([touchedNode isEqualToNode:_node1]) {
 //        [_node1 runAction:flashIn];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]];

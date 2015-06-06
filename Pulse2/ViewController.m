@@ -65,21 +65,11 @@
     
     [_conductor loadSoundscapeWithPlistNamed:soundscapeName];
     
+    self.soundScapeView = [[SKView alloc] initWithFrame:self.view.frame];
+    
     CGSize screenSize = self.view.frame.size;
     CGPoint pointToZoomTo;
-    
-    SKScene *sceneToPresent;
-    if ([soundscapeName isEqualToString:@"relaxation"]) {
-        sceneToPresent = [[GameScene alloc] initWithSize:screenSize];
-        ((GameScene *)sceneToPresent).conductor = _conductor;
-         // make this legit center for sections
-//        [(SKView *)self.view presentScene:[[GameScene alloc] initWithSize:screenSize] transition:[SKTransition crossFadeWithDuration:1]];
-    }
-    
-    self.soundScapeView = [[SKView alloc] initWithFrame:self.view.frame];
-    [_soundScapeView presentScene: sceneToPresent];
-    pointToZoomTo = CGPointMake(_mainMenuView.center.x - 400, _mainMenuView.center.y + 300);
-    
+    pointToZoomTo = CGPointMake(_mainMenuView.center.x - 400, _mainMenuView.center.y + 300); // make this legit center for sections
     _soundScapeView.alpha = 0;
     [self.view addSubview:_soundScapeView];
     _mainMenuView.userInteractionEnabled = NO;
@@ -92,8 +82,11 @@
         [_mainMenuScene removeFromParent];
         [_conductor start];
     }];
+    
     if ([soundscapeName isEqualToString:@"relaxation"]) {
-        [_soundScapeView presentScene: [[GameScene alloc] initWithSize:screenSize] transition:[SKTransition crossFadeWithDuration:.1]];
+        GameScene *relaxation = [[GameScene alloc] initWithSize:screenSize];
+        relaxation.conductor = _conductor;
+        [_soundScapeView presentScene: relaxation transition:[SKTransition crossFadeWithDuration:.1]];
     }
 }
 
