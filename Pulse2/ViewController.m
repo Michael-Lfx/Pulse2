@@ -7,16 +7,21 @@
 //
 
 #import "ViewController.h"
-#import "GameScene.h"
+#import "AppDelegate.h"
+
 #import "MainMenuScene.h"
-#import "LoopData.h"
+#import "GameScene.h"
 #import "SongSliderScene.h"
 #import "SongTrainScene.h"
 #import "SongSwipeScene.h"
 
+#import "Conductor.h"
+#import "LoopData.h"
+
 @interface ViewController ()
 
 @property MainMenuScene *mainMenuScene;
+@property Conductor *conductor;
 
 @end
 
@@ -24,6 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.shouldHideStatusBar = YES;
     [self setNeedsStatusBarAppearanceUpdate];
     
@@ -32,46 +38,62 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMinigame:) name:@"LoadMinigame" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToGameScene:) name:@"ReturnToGameScene" object:nil];
     
-    // configure the view
-    _mainMenuView = [[SKView alloc] initWithFrame:self.view.frame];
+    // create a global conductor
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.conductor = [[Conductor alloc] initWithAudioController:delegate.audioController];
+    
+    // configure the views
+    self.mainMenuView = [[SKView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:_mainMenuView];
-    SKView *skView = (SKView *)self.view;
-    skView.showsFPS = NO;
-    skView.showsNodeCount = NO;
-    skView.ignoresSiblingOrder = YES;
-    skView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.95 alpha:1.0];
+    
+    
+//    SKView *skView = (SKView *)self.view;
+//    skView.showsFPS = NO;
+//    skView.showsNodeCount = NO;
+//    skView.ignoresSiblingOrder = YES;
+//    skView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.95 alpha:1.0];
     
     CGSize screenSize = self.view.frame.size;
-    
-    _mainMenuScene = [[MainMenuScene alloc] initWithSize:screenSize];
+    self.mainMenuScene = [[MainMenuScene alloc] initWithSize:screenSize];
     [_mainMenuView presentScene:_mainMenuScene];
-//    [(SKView *)self.view presentScene:_mainMenuScene];
 }
 
 - (void)loadSoundscape:(NSNotification *)notification {
-    _soundScapeView = [[SKView alloc] initWithFrame:self.view.frame];
+    
     NSDictionary *info = notification.userInfo;
     NSString *soundscapeName = [info objectForKey:@"name"];
+    
+    [_conductor loadSoundscapeWithPlistNamed:soundscapeName];
+    
+    self.soundScapeView = [[SKView alloc] initWithFrame:self.view.frame];
+    
     CGSize screenSize = self.view.frame.size;
     CGPoint pointToZoomTo;
     pointToZoomTo = CGPointMake(_mainMenuView.center.x - 400, _mainMenuView.center.y + 300); // make this legit center for sections
     _soundScapeView.alpha = 0;
-    _mainMenuView.userInteractionEnabled = NO;
     [self.view addSubview:_soundScapeView];
+    _mainMenuView.userInteractionEnabled = NO;
+    
     [UIView animateWithDuration:1.0 animations:^{
         _mainMenuView.transform = CGAffineTransformMakeScale(10, 10);
         _mainMenuView.center = pointToZoomTo;
         _soundScapeView.alpha = 1;
     } completion:^(BOOL completed){
         [_mainMenuScene removeFromParent];
+        [_conductor start];
     }];
+    
     if ([soundscapeName isEqualToString:@"relaxation"]) {
-        [_soundScapeView presentScene: [[GameScene alloc] initWithSize:screenSize] transition:[SKTransition crossFadeWithDuration:.1]];
+        GameScene *relaxation = [[GameScene alloc] initWithSize:screenSize];
+        relaxation.conductor = _conductor;
+        [_soundScapeView presentScene: relaxation transition:[SKTransition crossFadeWithDuration:.1]];
     }
 }
 
 - (void)returnToMainMenu:(NSNotification *)notification {
 //    [(SKView *)self.view presentScene:_mainMenuScene transition:[SKTransition crossFadeWithDuration:1]];
+//    _conductor.shouldCheckLevels = false;
+    
     [_mainMenuView presentScene:_mainMenuScene];
     _mainMenuView.userInteractionEnabled = YES;
     [UIView animateWithDuration:1.0 animations:^{
@@ -79,6 +101,8 @@
         _mainMenuView.transform = CGAffineTransformMakeScale(1, 1);
         _mainMenuView.center = self.view.center;
     } completion:^(BOOL finished){
+        [_conductor stop];
+        [_conductor releaseSoundscape];
         [_soundScapeView presentScene:nil];
         [_soundScapeView removeFromSuperview];
         _soundScapeView = nil;
