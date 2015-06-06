@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 
 #import "MainMenuScene.h"
-#import "GameScene.h"
+#import "SoundscapeScene.h"
 #import "SongSliderScene.h"
 #import "SongTrainScene.h"
 #import "SongSwipeScene.h"
@@ -84,7 +84,7 @@
     }];
     
     if ([soundscapeName isEqualToString:@"relaxation"]) {
-        GameScene *relaxation = [[GameScene alloc] initWithSize:screenSize];
+        SoundscapeScene *relaxation = [[SoundscapeScene alloc] initWithSize:screenSize];
         relaxation.conductor = _conductor;
         [_soundScapeView presentScene: relaxation transition:[SKTransition crossFadeWithDuration:.1]];
     }
