@@ -41,7 +41,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     [self addMenuNode];
     [self startScene];
     _hasBeenInitialized = YES;
-    _shutItDown = NO;
 }
 
 - (void)createSoundInteractors {
@@ -292,7 +291,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     touchLocation = [self convertPointFromView:touchLocation];
     SKNode *touchedNode = [self nodeAtPoint:touchLocation];
     
-    if ([touchedNode isKindOfClass:[SoundInteractor class]] || [touchedNode isKindOfClass:[SoundInteractor class]]) {
+    if ([touchedNode isKindOfClass:[SoundInteractor class]] || [touchedNode.parent isKindOfClass:[SoundInteractor class]]) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
         CGPoint pointToZoomTo = touchedNode.position;
         pointToZoomTo.x += touchedNode.frame.size.width/7;
@@ -307,9 +306,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
             [interactor turnOff];
         }
     } else if ([touchedNode.name isEqualToString:@"menuNode"]) {
-        //        [_conductor stop];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToMainMenu" object:self userInfo:nil];
-        //        _shutItDown = YES;
     }
 }
 
@@ -400,24 +397,11 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 }
 
 -(void)update:(CFTimeInterval)currentTime {
-    //    if(_shutItDown){
-    //        _soundInteractors = nil;
-    //        _draggedInteractor = nil;
-    //        [self removeAllChildren];
-    //        [self removeAllActions];
-    //        [self removeFromParent];
-    //        [self.audioController removeChannels:_soundChannels];
-    //        [_conductor releaseSounds]; ///THIS IS REALLY IMPORTANT, ADD BACK WHEN HENRY SEES ISSUE
-    //        return;
-    //    }
-    /* Called before each frame is rendered */
-    //    else{
     for (SoundInteractor *interactor in _soundInteractors) {
         if ([interactor isReady]) {
             [interactor updateAppearance];
         }
     }
-    //    }
 }
 
 @end
