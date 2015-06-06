@@ -65,21 +65,11 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         if(y < _baseInteractorSize/2) y += _baseInteractorSize/2;
         
         // create interactor, attach to audio file player
-        SoundInteractor *interactor = [[ SoundInteractor alloc] initWithImageNamed:@"node_locked"];
-        SKSpriteNode *onMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_unlocked_on"];
-        onMask.name = @"onMask";
-        onMask.alpha = 0;
-        onMask.userInteractionEnabled = NO;
-        SKSpriteNode *offMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_unlocked_off"];
-        offMask.name = @"offMask";
-        offMask.alpha = 0;
-        offMask.userInteractionEnabled = NO;
-        [interactor addChild:offMask];
-        [interactor addChild:onMask];
+        SoundInteractor *interactor = [[ SoundInteractor alloc] initWithImageNamed:@"node_background"];
+        [interactor setUpInteractor];
         
         interactor.position = CGPointMake(x, y);
         interactor.name = filename;
-        [interactor connectToConductor:_conductor];
         
         // set physics properties
         [interactor setPhysicsBody:[SKPhysicsBody bodyWithTexture:interactor.texture alphaThreshold:0 size:interactor.size]];
@@ -125,30 +115,16 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     //
     //    [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
     //    [_soundChannels addObject:_collisionSound];
-    
-    SKShapeNode *menuNode = [SKShapeNode shapeNodeWithCircleOfRadius:_baseInteractorSize/2];
-    menuNode.position = CGPointMake(windowWidth/2, windowHeight/2);
-    menuNode.name = @"menuNode";
-    menuNode.lineWidth = 3;
-    menuNode.blendMode = SKBlendModeAdd;
-    menuNode.glowWidth = 5;
-    menuNode.fillColor = [SKColor redColor];
-    menuNode.strokeColor = [SKColor whiteColor];
-    
 }
 
 - (void)addMenuNode {
     CGFloat windowWidth = self.size.width;
     CGFloat windowHeight = self.size.height;
     
-    SKShapeNode *menuNode = [SKShapeNode shapeNodeWithCircleOfRadius:_baseInteractorSize/2];
+    SKSpriteNode *menuNode = [SKSpriteNode spriteNodeWithImageNamed:@"node_home"];
     menuNode.position = CGPointMake(windowWidth/2, windowHeight/2);
     menuNode.name = @"menuNode";
-    menuNode.lineWidth = 3;
     menuNode.blendMode = SKBlendModeAdd;
-    menuNode.glowWidth = 5;
-    menuNode.fillColor = [SKColor redColor];
-    menuNode.strokeColor = [SKColor colorWithWhite:0.6 alpha:1.0];
     
     [menuNode setPhysicsBody:[SKPhysicsBody bodyWithCircleOfRadius:menuNode.frame.size.width/2]];
     menuNode.physicsBody.affectedByGravity = NO;
@@ -290,8 +266,9 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
     touchLocation = [self convertPointFromView:touchLocation];
     SKNode *touchedNode = [self nodeAtPoint:touchLocation];
-    
-    if ([touchedNode isKindOfClass:[SoundInteractor class]] || [touchedNode.parent isKindOfClass:[SoundInteractor class]]) {
+    if([touchedNode.parent isKindOfClass:[SoundInteractor class]])
+        touchedNode = touchedNode.parent;
+    if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
         CGPoint pointToZoomTo = touchedNode.position;
         pointToZoomTo.x += touchedNode.frame.size.width/7;
@@ -344,8 +321,10 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 - (void)setPanNodeForTouch:(CGPoint)location
 {
     SKNode *touchedNode = [self nodeAtPoint:location];
+    if([touchedNode.parent isKindOfClass:[SoundInteractor class]])
+        touchedNode = touchedNode.parent;
     
-    if ([touchedNode isKindOfClass:[SoundInteractor class]] || [touchedNode.parent isKindOfClass:[SoundInteractor class]]) {
+    if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
         _draggedInteractor = interactor;
         _draggedInteractor.physicsBody.velocity = CGVectorMake(0, 0);

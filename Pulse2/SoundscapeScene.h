@@ -28,6 +28,7 @@ static const uint32_t borderCategory = 0x1 << 4;
 // interactors
 @property NSMutableArray *soundInteractors;
 @property SoundInteractor *draggedInteractor;
+@property SoundInteractor *tappedInteractor;
 @property double baseInteractorSize;
 
 // timers

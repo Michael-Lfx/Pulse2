@@ -111,6 +111,26 @@ double _ringFadeInTime = 0.2;
     _state = NO;
 }
 
+- (void)setUpInteractor
+{
+    SKSpriteNode *lockedMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_locked"];
+    lockedMask.name = @"onMask";
+    lockedMask.userInteractionEnabled = NO;
+    SKSpriteNode *onMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_unlocked_on"];
+    onMask.name = @"onMask";
+    onMask.alpha = 0;
+    onMask.userInteractionEnabled = NO;
+    SKSpriteNode *offMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_unlocked_off"];
+    offMask.name = @"offMask";
+    offMask.alpha = 0;
+    offMask.userInteractionEnabled = NO;
+    [self addChild:lockedMask];
+    [self addChild:offMask];
+    [self addChild:onMask];
+    
+    [self connectToConductor:_conductor];
+}
+
 - (void)updateAppearance {
     double powerLevel = [_conductor getPowerLevelForLoop:self.name];
     [self runAction:[SKAction scaleTo:1 + powerLevel duration:0.07]];
