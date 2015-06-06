@@ -66,7 +66,18 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         if(y < _baseInteractorSize/2) y += _baseInteractorSize/2;
         
         // create interactor, attach to audio file player
-        SoundInteractor *interactor = [SoundInteractor shapeNodeWithCircleOfRadius:_baseInteractorSize/2];
+        SoundInteractor *interactor = [[ SoundInteractor alloc] initWithImageNamed:@"node_locked"];
+        SKSpriteNode *onMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_unlocked_on"];
+        onMask.name = @"onMask";
+        onMask.alpha = 0;
+        onMask.userInteractionEnabled = NO;
+        SKSpriteNode *offMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_unlocked_off"];
+        offMask.name = @"offMask";
+        offMask.alpha = 0;
+        offMask.userInteractionEnabled = NO;
+        [interactor addChild:offMask];
+        [interactor addChild:onMask];
+        
         interactor.position = CGPointMake(x, y);
         interactor.name = filename;
         [interactor connectToConductor:_conductor];
@@ -142,7 +153,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     
     [menuNode setPhysicsBody:[SKPhysicsBody bodyWithCircleOfRadius:menuNode.frame.size.width/2]];
     menuNode.physicsBody.affectedByGravity = NO;
-    menuNode.physicsBody.allowsRotation = NO;
+    menuNode.physicsBody.allowsRotation = YES;
     menuNode.physicsBody.dynamic = YES;
     menuNode.physicsBody.friction = 0.0f;
     menuNode.physicsBody.restitution = 0.0f;
@@ -281,7 +292,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     touchLocation = [self convertPointFromView:touchLocation];
     SKNode *touchedNode = [self nodeAtPoint:touchLocation];
     
-    if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
+    if ([touchedNode isKindOfClass:[SoundInteractor class]] || [touchedNode isKindOfClass:[SoundInteractor class]]) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
         CGPoint pointToZoomTo = touchedNode.position;
         pointToZoomTo.x += touchedNode.frame.size.width/7;
@@ -337,7 +348,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 {
     SKNode *touchedNode = [self nodeAtPoint:location];
     
-    if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
+    if ([touchedNode isKindOfClass:[SoundInteractor class]] || [touchedNode.parent isKindOfClass:[SoundInteractor class]]) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
         _draggedInteractor = interactor;
         _draggedInteractor.physicsBody.velocity = CGVectorMake(0, 0);
