@@ -44,11 +44,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     _shutItDown = NO;
 }
 
-- (void)dealloc
-{
-
-}
-
 - (void)createSoundInteractors {
     CGFloat windowWidth = self.size.width;
     CGFloat windowHeight = self.size.height;
@@ -288,8 +283,12 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     
     if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
+        CGPoint pointToZoomTo = touchedNode.position;
+        pointToZoomTo.x += touchedNode.frame.size.width/7;
+        pointToZoomTo.y += touchedNode.frame.size.height/4;
         if(recognizer.numberOfTapsRequired == 2 || ![interactor isUnlocked]){ // double tap or a single tap on locked node
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[interactor.name, _conductor, [NSValue valueWithCGPoint:touchedNode.position]] forKeys:@[@"loopName", @"conductor", @"nodeCoordinates"]]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[interactor.name, _conductor, [NSValue valueWithCGPoint:pointToZoomTo], [NSValue valueWithCGSize:touchedNode.frame.size]] forKeys:@[@"loopName", @"conductor", @"nodeCoordinates", @"nodeSize"]]];
+            [interactor turnOn];
         } else if ([interactor getState] == NO) { // single tap on unlocked node
             [interactor turnOn];
             //            MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, 60, 127, 0);

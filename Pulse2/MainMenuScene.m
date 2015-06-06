@@ -107,8 +107,10 @@ bool _nodesAdded = false;
 //    SKAction *fadeIn = [SKAction fadeAlphaTo:1 duration:.6];
     NSLog(@"%@", touchedNode.name);
     if ([touchedNode isEqualToNode:_node1]) {
-//        [_node1 runAction:[SKAction group:@[expand, fadeIn]]];
+//        [_node1 runAction:flashIn];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]];
+    } else if([touchedNode isEqualToNode:_node2]){
+        NSLog(@"tapping red");
     }
 }
 
