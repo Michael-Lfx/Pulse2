@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Henry Thiemann. All rights reserved.
 //
 
-#import "GameScene.h"
-#import "AppDelegate.h"
+#import "RelaxationScene.h"
+//#import "AppDelegate.h"
 #import "LoopData.h"
 #import "UIDoubleTapGestureRecognizer.h"
 
@@ -15,7 +15,7 @@
 
 //@end
 
-@implementation GameScene
+@implementation RelaxationScene
 
 double interactorTimerDuration = 1.0;
 float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
@@ -29,12 +29,12 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     self.physicsBody.categoryBitMask = edgeCategory;
     self.physicsWorld.contactDelegate = self;
-    self.soundChannels = [NSMutableArray new];
+//    self.soundChannels = [NSMutableArray new];
     
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.audioController = delegate.audioController;
+//    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    self.audioController = delegate.audioController;
     
-    self.conductor = [[Conductor alloc] initWithAudioController:_audioController plist:@"relaxation"];
+//    self.conductor = [[Conductor alloc] initWithAudioController:_audioController plist:@"relaxation"];
     
     [self createSoundInteractors];
     [self addGestureRecognizers];
@@ -95,31 +95,31 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     
     self.draggedInteractor = nil;
     
-    AudioComponentDescription component = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
-                                                                          kAudioUnitType_MusicDevice,
-                                                                          kAudioUnitSubType_Sampler);
-    NSError *error = NULL;
-    self.collisionSound = [[AEAudioUnitChannel alloc] initWithComponentDescription:component audioController:_audioController error:&error];
-    if (!_collisionSound) {
-        // report error
-    } else {
-        
-        NSURL *presetURL = [[NSBundle mainBundle] URLForResource:@"piano" withExtension:@"aupreset"];
-        
-        OSStatus result = noErr;
-        AUSamplerInstrumentData auPreset = {0};
-        auPreset.fileURL = (__bridge CFURLRef)presetURL;
-        auPreset.instrumentType = kInstrumentType_AUPreset;
-        result = AudioUnitSetProperty(_collisionSound.audioUnit,
-                             kAUSamplerProperty_LoadInstrument,
-                             kAudioUnitScope_Global,
-                             0,
-                             &auPreset,
-                             sizeof(auPreset));
-    }
-    
-    [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
-    [_soundChannels addObject:_collisionSound];
+//    AudioComponentDescription component = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
+//                                                                          kAudioUnitType_MusicDevice,
+//                                                                          kAudioUnitSubType_Sampler);
+//    NSError *error = NULL;
+//    self.collisionSound = [[AEAudioUnitChannel alloc] initWithComponentDescription:component audioController:_audioController error:&error];
+//    if (!_collisionSound) {
+//        // report error
+//    } else {
+//        
+//        NSURL *presetURL = [[NSBundle mainBundle] URLForResource:@"piano" withExtension:@"aupreset"];
+//        
+//        OSStatus result = noErr;
+//        AUSamplerInstrumentData auPreset = {0};
+//        auPreset.fileURL = (__bridge CFURLRef)presetURL;
+//        auPreset.instrumentType = kInstrumentType_AUPreset;
+//        result = AudioUnitSetProperty(_collisionSound.audioUnit,
+//                             kAUSamplerProperty_LoadInstrument,
+//                             kAudioUnitScope_Global,
+//                             0,
+//                             &auPreset,
+//                             sizeof(auPreset));
+//    }
+//    
+//    [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
+//    [_soundChannels addObject:_collisionSound];
     
     SKShapeNode *menuNode = [SKShapeNode shapeNodeWithCircleOfRadius:_baseInteractorSize/2];
     menuNode.position = CGPointMake(windowWidth/2, windowHeight/2);
@@ -248,12 +248,12 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         
     }
     
-    if (contactImpulse > 1) {
-        int r = arc4random_uniform(6);
-        float vel = pow(10, 1/(-contactImpulse));
-        int intVel = roundf(vel * 50);
-        MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, collisionFrequencies[r], intVel, 0);
-    }
+//    if (contactImpulse > 1) {
+//        int r = arc4random_uniform(6);
+//        float vel = pow(10, 1/(-contactImpulse));
+//        int intVel = roundf(vel * 50);
+//        MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, collisionFrequencies[r], intVel, 0);
+//    }
 }
 
 
@@ -297,9 +297,9 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
             [interactor turnOff];
         }
     } else if ([touchedNode.name isEqualToString:@"menuNode"]) {
-        [_conductor stop];
+//        [_conductor stop];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToMainMenu" object:self userInfo:nil];
-        _shutItDown = YES;
+//        _shutItDown = YES;
     }
 }
 
@@ -390,24 +390,24 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 }
 
 -(void)update:(CFTimeInterval)currentTime {
-    if(_shutItDown){
-        _soundInteractors = nil;
-        _draggedInteractor = nil;
-        [self removeAllChildren];
-        [self removeAllActions];
-        [self removeFromParent];
-        [self.audioController removeChannels:_soundChannels];
-        [_conductor releaseSounds]; ///THIS IS REALLY IMPORTANT, ADD BACK WHEN HENRY SEES ISSUE
-        return;
-    }
+//    if(_shutItDown){
+//        _soundInteractors = nil;
+//        _draggedInteractor = nil;
+//        [self removeAllChildren];
+//        [self removeAllActions];
+//        [self removeFromParent];
+//        [self.audioController removeChannels:_soundChannels];
+//        [_conductor releaseSounds]; ///THIS IS REALLY IMPORTANT, ADD BACK WHEN HENRY SEES ISSUE
+//        return;
+//    }
     /* Called before each frame is rendered */
-    else{
+//    else{
         for (SoundInteractor *interactor in _soundInteractors) {
             if ([interactor isReady]) {
                 [interactor updateAppearance];
             }
         }
-    }
+//    }
 }
 
 @end

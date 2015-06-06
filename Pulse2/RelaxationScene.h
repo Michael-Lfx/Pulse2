@@ -14,17 +14,17 @@ static const uint32_t edgeCategory = 0x1 << 0;
 static const uint32_t ballCategory = 0x1 << 1;
 static const uint32_t borderCategory = 0x1 << 4;
 
-@interface GameScene : SKScene <UIGestureRecognizerDelegate, SKPhysicsContactDelegate>
+@interface RelaxationScene : SKScene <UIGestureRecognizerDelegate, SKPhysicsContactDelegate>
 
 // initialization
 @property BOOL hasBeenInitialized;
 @property BOOL shutItDown;
 
 // audio
-@property AEAudioController *audioController;
+//@property AEAudioController *audioController;
 @property Conductor *conductor;
-@property AEAudioUnitChannel *collisionSound;
-@property NSMutableArray *soundChannels;
+//@property AEAudioUnitChannel *collisionSound;
+//@property NSMutableArray *soundChannels;
 
 // interactors
 @property NSMutableArray *soundInteractors;
