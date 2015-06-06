@@ -34,6 +34,7 @@
 		BA4AA3AC1B02BA1F007E3D7B /* SongTrainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3A81B02BA1F007E3D7B /* SongTrainScene.m */; };
 		BA4AA3AD1B02BA1F007E3D7B /* SongSwipeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */; };
 		BA4AA3B01B02BB81007E3D7B /* SongSliderScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3AF1B02BB81007E3D7B /* SongSliderScene.m */; };
+		BAA47FE81B237B3C0072241E /* OrbGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA47FE71B237B3C0072241E /* OrbGameScene.m */; };
 		BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB96FAB1AF81613001906D0 /* MainMenuScene.m */; };
 		BAB9D83E1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB9D83D1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m */; };
 		BABCBEE51B237ABD003FE0E5 /* SoundscapeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BABCBEE41B237ABD003FE0E5 /* SoundscapeScene.m */; };
@@ -97,6 +98,8 @@
 		BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSwipeScene.m; sourceTree = "<group>"; };
 		BA4AA3AE1B02BB81007E3D7B /* SongSliderScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSliderScene.h; sourceTree = "<group>"; };
 		BA4AA3AF1B02BB81007E3D7B /* SongSliderScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSliderScene.m; sourceTree = "<group>"; };
+		BAA47FE61B237B3C0072241E /* OrbGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbGameScene.h; sourceTree = "<group>"; };
+		BAA47FE71B237B3C0072241E /* OrbGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbGameScene.m; sourceTree = "<group>"; };
 		BAB96FAA1AF81613001906D0 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		BAB96FAB1AF81613001906D0 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
 		BAB9D83C1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDoubleTapGestureRecognizer.h; sourceTree = "<group>"; };
@@ -231,6 +234,8 @@
 				BA4AA3A81B02BA1F007E3D7B /* SongTrainScene.m */,
 				BA4AA3A91B02BA1F007E3D7B /* SongSwipeScene.h */,
 				BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */,
+				BAA47FE61B237B3C0072241E /* OrbGameScene.h */,
+				BAA47FE71B237B3C0072241E /* OrbGameScene.m */,
 			);
 			name = "Mini Games";
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 				BABCBEE51B237ABD003FE0E5 /* SoundscapeScene.m in Sources */,
 				BAB9D83E1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m in Sources */,
 				BA4AA3AC1B02BA1F007E3D7B /* SongTrainScene.m in Sources */,
+				BAA47FE81B237B3C0072241E /* OrbGameScene.m in Sources */,
 				BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */,
 				BA3C00871AE7140B00911004 /* main.m in Sources */,
 				BA2BD3091AF98CA0008A4169 /* Conductor.m in Sources */,
