@@ -10,7 +10,7 @@
 #import <TheAmazingAudioEngine/TheAmazingAudioEngine.h>
 #import "Conductor.h"
 
-@interface SoundInteractor : SKShapeNode
+@interface SoundInteractor : SKSpriteNode
 
 - (void)resetValues;
 // set SoundFilePlayer object

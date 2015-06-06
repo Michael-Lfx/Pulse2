@@ -212,12 +212,12 @@
 
 - (void)displayDirections
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Melodic Balls"
-                                                    message:@"Try to catch the falling balls in the cup! Catch 20 in a row to unlock this sound!"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Gotcha!"
-                                          otherButtonTitles:nil];
-    [alert show];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Melodic Balls"
+//                                                    message:@"Try to catch the falling balls in the cup! Catch 20 in a row to unlock this sound!"
+//                                                   delegate:nil
+//                                          cancelButtonTitle:@"Gotcha!"
+//                                          otherButtonTitles:nil];
+//    [alert show];
 }
 
 - (void)update:(NSTimeInterval)currentTime {
