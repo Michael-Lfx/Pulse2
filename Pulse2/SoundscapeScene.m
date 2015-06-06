@@ -83,14 +83,14 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         [interactor connectToConductor:_conductor];
         
         // set physics properties
-        [interactor setPhysicsBody:[SKPhysicsBody bodyWithCircleOfRadius:interactor.frame.size.width/2]];
+        [interactor setPhysicsBody:[SKPhysicsBody bodyWithTexture:interactor.texture alphaThreshold:0 size:interactor.size]];
         interactor.physicsBody.affectedByGravity = NO;
-        interactor.physicsBody.allowsRotation = NO;
+        interactor.physicsBody.allowsRotation = YES;
         interactor.physicsBody.dynamic = YES;
         interactor.physicsBody.friction = 0.0f;
         interactor.physicsBody.restitution = 0.0f;
         interactor.physicsBody.linearDamping = 0.1f;
-        interactor.physicsBody.angularDamping = 0.0f;
+        interactor.physicsBody.angularDamping = 0.2f;
         interactor.physicsBody.categoryBitMask = ballCategory;
         interactor.physicsBody.collisionBitMask = ballCategory | edgeCategory;
         interactor.physicsBody.contactTestBitMask = edgeCategory | ballCategory;
