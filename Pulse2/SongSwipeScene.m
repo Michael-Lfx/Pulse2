@@ -117,6 +117,16 @@
     [self.view addGestureRecognizer:downSwipeRecognizer];
 }
 
+- (void)displayDirections
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Swipe Time"
+                                                    message:@"Swipe to the rhythm of this loop. 20 successful swipes in a row will unlock this loop!"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Okie-dokie"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
 #pragma mark - GUESTURES
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
@@ -161,11 +171,16 @@
 - (void)clearNodes:(NSArray *)arrowNodes forSwipeDirection:(NSString *)direction
 {
     for(SKNode *node in arrowNodes){
-        if([node.name isEqualToString:direction]){
+        if([node.name isEqualToString:direction] && node.position.y < self.view.frame.size.height/2){
             [node removeAllActions];
             [self removeChildrenInArray:@[node]];
             _streakCounter++;
             [self updateStreakCounterDisplay];
+            if (_streakCounter == 20){
+                [self flashColoredScreen:[UIColor greenColor]];
+                _streakDisplay.colorBlendFactor = .8;
+                _streakDisplay.color = [UIColor greenColor];
+            }
         }
     }
     for(SKNode *node in _hitNodesAtTouch){
@@ -174,6 +189,11 @@
             [self removeChildrenInArray:@[node]];
             _streakCounter++;
             [self updateStreakCounterDisplay];
+            if (_streakCounter == 20){
+                [self flashColoredScreen:[UIColor greenColor]];
+                _streakDisplay.colorBlendFactor = .8;
+                _streakDisplay.color = [UIColor greenColor];
+            }
         }
     }
     _hitNodesAtTouch = @[];
@@ -213,7 +233,7 @@
         SKAction *dropArrow2 = [SKAction moveToY:screenHeight/4 + arrow.frame.size.height/2 duration:duration];
         [arrow runAction:dropArrow2 completion:^(void){
             _streakCounter = 0;
-            [self flashRedScreen];
+            [self flashColoredScreen:[UIColor redColor]];
             [self updateStreakCounterDisplay];
             [self removeChildrenInArray:@[arrow]];
         }];
@@ -245,18 +265,18 @@
     }
 }
 
-- (void)flashRedScreen
+- (void)flashColoredScreen:(UIColor *)colorToFlash
 {
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGRect rect = CGRectMake(0, 0, screenWidth, screenHeight);
-    SKShapeNode *redCover = [SKShapeNode shapeNodeWithRect:rect];
-    redCover.fillColor = [SKColor redColor];
-    redCover.userInteractionEnabled = NO;
-    [self addChild:redCover];
+    SKShapeNode *coloredCover = [SKShapeNode shapeNodeWithRect:rect];
+    coloredCover.fillColor = colorToFlash;
+    coloredCover.userInteractionEnabled = NO;
+    [self addChild:coloredCover];
     SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:.4];
-    [redCover runAction:fadeOut completion:^(void){
-        [self removeChildrenInArray:@[redCover]];
+    [coloredCover runAction:fadeOut completion:^(void){
+        [self removeChildrenInArray:@[coloredCover]];
     }];
 }
 

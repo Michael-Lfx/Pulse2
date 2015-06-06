@@ -107,6 +107,16 @@
 
 #pragma mark - INTERACTION
 
+- (void)displayDirections
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Train Trax"
+                                                    message:@"Hop to the rhythm of this loop to keep the train on the tracks! 20 successful hops in a row will unlock this loop!"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Thanks Bruh"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [touches anyObject];
@@ -146,25 +156,25 @@
                 trackFound = YES;
         }
         if(!trackFound){
-            [self flashRedScreen];
+            [self flashColoredScreen:[UIColor redColor]];
             _streakCounter = 0;
         }
     }];
     AudioServicesPlaySystemSound(_hihatSound);
 }
 
-- (void)flashRedScreen
+- (void)flashColoredScreen:(UIColor *)colorToFlash
 {
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGRect rect = CGRectMake(0, 0, screenWidth, screenHeight);
-    SKShapeNode *redCover = [SKShapeNode shapeNodeWithRect:rect];
-    redCover.fillColor = [SKColor redColor];
-    redCover.userInteractionEnabled = NO;
-    [self addChild:redCover];
+    SKShapeNode *coloredCover = [SKShapeNode shapeNodeWithRect:rect];
+    coloredCover.fillColor = colorToFlash;
+    coloredCover.userInteractionEnabled = NO;
+    [self addChild:coloredCover];
     SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:.4];
-    [redCover runAction:fadeOut completion:^(void){
-        [self removeChildrenInArray:@[redCover]];
+    [coloredCover runAction:fadeOut completion:^(void){
+        [self removeChildrenInArray:@[coloredCover]];
     }];
 }
 
@@ -278,9 +288,14 @@
         if((track.position.x >= _train.frame.origin.x - 10 && track.position.x <= _train.frame.origin.x + 10) ||
            _trainIsJumping){ // evaluate what makes this true at this point in time
             _streakCounter ++;
+            if(_streakCounter == 20){
+                [self flashColoredScreen:[UIColor greenColor]];
+                _streakDisplay.colorBlendFactor = .8;
+                _streakDisplay.color = [UIColor greenColor];
+            }
         } else {
             _streakCounter = 0;
-            [self flashRedScreen];
+            [self flashColoredScreen:[UIColor redColor]];
         }
         [self updateStreakCounterDisplay];
         [track runAction:moveTrackOut completion:^(void){

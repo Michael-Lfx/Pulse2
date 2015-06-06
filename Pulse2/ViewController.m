@@ -119,6 +119,8 @@
         [UIView animateWithDuration:1.0 animations:^{
             _miniScapeView.alpha = 1;
         }];
+        if([_miniScapeView.scene isKindOfClass:[SongSliderScene class]])
+            [(SongSliderScene *)_miniScapeView.scene displayDirections];
     }];
     
 }

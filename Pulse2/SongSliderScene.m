@@ -175,33 +175,49 @@
     [circle runAction:dropBall completion:^(void){
         if(_slider.value >= _slider.maximumValue * (column/(double)numVoices) && _slider.value <= _slider.maximumValue * (column+1)/(double)numVoices){
             _streakCounter ++;
+            if(_streakCounter == 20){
+                [self flashColoredScreen:[UIColor greenColor]];
+                _streakDisplay.color = [UIColor greenColor];
+                _streakDisplay.colorBlendFactor = .8;
+                // send notification to unlock node
+            }
         } else {
             _streakCounter = 0;
-            [self flashRedScreen];
+            [self flashColoredScreen:[UIColor redColor]];
         }
         [self updateStreakCounterDisplay];
         [self removeChildrenInArray:@[circle]];
     }];
 }
 
-- (void)flashRedScreen
+- (void)flashColoredScreen:(UIColor *)colorToFlash
 {
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGRect rect = CGRectMake(0, 0, screenWidth, screenHeight);
-    SKShapeNode *redCover = [SKShapeNode shapeNodeWithRect:rect];
-    redCover.fillColor = [SKColor redColor];
-    redCover.userInteractionEnabled = NO;
-    [self addChild:redCover];
+    SKShapeNode *coloredCover = [SKShapeNode shapeNodeWithRect:rect];
+    coloredCover.fillColor = colorToFlash;
+    coloredCover.userInteractionEnabled = NO;
+    [self addChild:coloredCover];
     SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:.4];
-    [redCover runAction:fadeOut completion:^(void){
-        [self removeChildrenInArray:@[redCover]];
+    [coloredCover runAction:fadeOut completion:^(void){
+        [self removeChildrenInArray:@[coloredCover]];
     }];
 }
 
 - (void)updateStreakCounterDisplay
 {
     _streakDisplay.text = [NSString stringWithFormat:@"%i", _streakCounter];
+}
+
+- (void)displayDirections
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Melodic Balls"
+                                                    message:@"Try to catch the falling balls in the cup! Catch 20 in a row to unlock this sound!"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Gotcha!"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)update:(NSTimeInterval)currentTime {

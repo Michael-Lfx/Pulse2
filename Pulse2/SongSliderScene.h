@@ -25,5 +25,7 @@
 @property int streakCounter;
 @property SKLabelNode *streakDisplay;
 
+- (void)displayDirections;
+
 
 @end

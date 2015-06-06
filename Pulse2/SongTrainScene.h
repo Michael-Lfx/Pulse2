@@ -29,4 +29,6 @@
 @property CGFloat rightTrackCenter;
 @property SystemSoundID hihatSound;
 
+- (void)displayDirections;
+
 @end

@@ -28,6 +28,7 @@
 double _beginningStrokeGray = 0.05;
 double _endingStrokeGray = 0.6;
 double _grayScaleValueOff = 0.2;
+double _grayScaleValueLocked = 0.5;
 double _grayScaleValueOn = 1.0;
 double _alphaValue = 0.4;
 
@@ -55,7 +56,7 @@ double _ringFadeInTime = 0.2;
 - (void)resetValues {
     self.state = NO;
     self.ready = NO;
-    self.unlocked = YES;
+    self.unlocked = NO;
     self.averagedAmplitude = 0.0;
     
     self.xScale = 0;
@@ -82,8 +83,13 @@ double _ringFadeInTime = 0.2;
     self.volumeDownAction = [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
         double targetValue = (elapsedTime / _volumeFadeTime);
         double beginValue = 1 - targetValue;
+        double grayValue;
         
-        double grayValue = beginValue * _grayScaleValueOn + targetValue * _grayScaleValueOff;
+        if(self.unlocked){
+            grayValue = beginValue * _grayScaleValueOn + targetValue * _grayScaleValueOff;
+        } else {
+            grayValue = beginValue * _grayScaleValueOn + targetValue * _grayScaleValueLocked;
+        }
         self.fillColor = [SKColor colorWithWhite:grayValue alpha:1.0];
         
         [_conductor setVolumeForLoop:self.name withVolume:beginValue];
