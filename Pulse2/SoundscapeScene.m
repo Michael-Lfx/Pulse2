@@ -41,6 +41,8 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     [self addMenuNode];
     [self startScene];
     _hasBeenInitialized = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToGameScene:) name:@"ReturnToGameScene" object:nil];
 }
 
 - (void)createSoundInteractors {
@@ -70,6 +72,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         
         interactor.position = CGPointMake(x, y);
         interactor.name = filename;
+        [interactor connectToConductor:_conductor];
         
         // set physics properties
         [interactor setPhysicsBody:[SKPhysicsBody bodyWithTexture:interactor.texture alphaThreshold:0 size:interactor.size]];
@@ -124,9 +127,9 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     SKSpriteNode *menuNode = [SKSpriteNode spriteNodeWithImageNamed:@"node_home"];
     menuNode.position = CGPointMake(windowWidth/2, windowHeight/2);
     menuNode.name = @"menuNode";
-    menuNode.blendMode = SKBlendModeAdd;
+//    menuNode.blendMode = nil;
     
-    [menuNode setPhysicsBody:[SKPhysicsBody bodyWithCircleOfRadius:menuNode.frame.size.width/2]];
+    [menuNode setPhysicsBody:[SKPhysicsBody bodyWithTexture:menuNode.texture alphaThreshold:0 size:menuNode.size]];
     menuNode.physicsBody.affectedByGravity = NO;
     menuNode.physicsBody.allowsRotation = YES;
     menuNode.physicsBody.dynamic = YES;
@@ -266,14 +269,16 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
     touchLocation = [self convertPointFromView:touchLocation];
     SKNode *touchedNode = [self nodeAtPoint:touchLocation];
-    if([touchedNode.parent isKindOfClass:[SoundInteractor class]])
+    if([touchedNode.parent isKindOfClass:[SoundInteractor class]]){
         touchedNode = touchedNode.parent;
-    if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
+    }
+    if ([touchedNode isKindOfClass:[SoundInteractor class]] && ((SoundInteractor *)touchedNode).isReady) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
         CGPoint pointToZoomTo = touchedNode.position;
         pointToZoomTo.x += touchedNode.frame.size.width/7;
         pointToZoomTo.y += touchedNode.frame.size.height/4;
         if(recognizer.numberOfTapsRequired == 2 || ![interactor isUnlocked]){ // double tap or a single tap on locked node
+            _tappedInteractor = interactor;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[interactor.name, _conductor, [NSValue valueWithCGPoint:pointToZoomTo], [NSValue valueWithCGSize:touchedNode.frame.size]] forKeys:@[@"loopName", @"conductor", @"nodeCoordinates", @"nodeSize"]]];
             [interactor turnOn];
         } else if ([interactor getState] == NO) { // single tap on unlocked node
@@ -311,7 +316,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
                     _draggedInteractor.physicsBody.velocity = CGVectorMake(velocity.x/scale, -velocity.y/scale);
                 }];
             }
-            
             _draggedInteractor = nil;
         }
         
@@ -373,6 +377,17 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
             [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) return YES;
     
     return NO;
+}
+
+- (void)returnToGameScene:(NSNotification *)notification
+{
+    BOOL wasSuccessful = [(NSNumber *)notification.userInfo[@"reachedGoal"] boolValue];
+    if(!wasSuccessful && !_tappedInteractor.isUnlocked){
+        [_tappedInteractor lockNode];
+    } else if(!_tappedInteractor.isUnlocked) {
+        [_tappedInteractor unlockNode];
+    }
+    _tappedInteractor = nil;
 }
 
 -(void)update:(CFTimeInterval)currentTime {

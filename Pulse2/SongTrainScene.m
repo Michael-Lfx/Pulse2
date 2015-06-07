@@ -37,6 +37,7 @@
     float screenWidth = [UIScreen mainScreen].bounds.size.width;
     _leftTrackCenter = screenWidth/3;
     _rightTrackCenter = screenWidth*2/3;
+    _reachedGoal = NO;
     
     
     [_conductor addObserver:self forKeyPath:@"currentBeat" options:0 context:nil];
@@ -128,7 +129,7 @@
     } else if ([node.name isEqualToString:@"rightButton"]) {
         [self hop:@"right"];
     } else if ([node.name isEqualToString:@"backButton"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     }
 }
 
@@ -289,6 +290,7 @@
            _trainIsJumping){ // evaluate what makes this true at this point in time
             _streakCounter ++;
             if(_streakCounter == 20){
+                _reachedGoal = YES;
                 [self flashColoredScreen:[UIColor greenColor]];
                 _streakDisplay.colorBlendFactor = .8;
                 _streakDisplay.color = [UIColor greenColor];

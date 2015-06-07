@@ -20,6 +20,7 @@
 @property double nextBeat;
 @property BOOL resetLoopBeat;
 @property BOOL trainIsJumping;
+@property BOOL reachedGoal;
 @property double resetLoopTime;
 @property double lastBeat;
 @property SKSpriteNode *train;

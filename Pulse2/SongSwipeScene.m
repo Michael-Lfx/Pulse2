@@ -34,6 +34,7 @@
     _streakCounter = 0;
     _hitNodesAtTouch = @[];
     _lastBeat = -1; // this signals we don't know what last beat is.
+    _reachedGoal = NO;
     
     
     [_conductor addObserver:self forKeyPath:@"currentBeat" options:0 context:nil];
@@ -176,7 +177,8 @@
             [self removeChildrenInArray:@[node]];
             _streakCounter++;
             [self updateStreakCounterDisplay];
-            if (_streakCounter == 20){
+            if (_streakCounter == 5){
+                _reachedGoal = YES;
                 [self flashColoredScreen:[UIColor greenColor]];
                 _streakDisplay.colorBlendFactor = .8;
                 _streakDisplay.color = [UIColor greenColor];
@@ -189,7 +191,8 @@
             [self removeChildrenInArray:@[node]];
             _streakCounter++;
             [self updateStreakCounterDisplay];
-            if (_streakCounter == 20){
+            if (_streakCounter == 5){
+                _reachedGoal = YES;
                 [self flashColoredScreen:[UIColor greenColor]];
                 _streakDisplay.colorBlendFactor = .8;
                 _streakDisplay.color = [UIColor greenColor];
@@ -210,7 +213,7 @@
         SKSpriteNode *hitZone = (SKSpriteNode *)[self childNodeWithName:@"hitZone"];
         _hitNodesAtTouch = [self nodesAtPoint:hitZone.position];
     } else if ([touchedNode.name isEqualToString:@"backButton"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     }
 }
 

@@ -1,14 +1,14 @@
 //
-//  SongSliderScene.m
+//  SongTapScene.m
 //  protogame191
 //
 //  Created by Ben McK on 4/27/15.
 //  Copyright (c) 2015 Henry Thiemann. All rights reserved.
 //
 
-#import "SongSliderScene.h"
+#import "SongTapScene.h"
 
-@implementation SongSliderScene
+@implementation SongTapScene
 
 - (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor size:(CGSize)size {
     self = [super initWithSize:size];
@@ -31,43 +31,27 @@
     _resetLoopBeat = NO;
     _streakCounter = 0;
     _lastBeat = -1; // this signals we don't know what last beat is.
+    _reachedGoal = NO;
     
     [_conductor addObserver:self forKeyPath:@"currentBeat" options:0 context:nil];
     
-//    self.view.frameInterval = 2;
+    //    self.view.frameInterval = 2;
     
-    [self addSlider:view];
-    [self addBallCover];
+    [self addPlayhead];
     [self initStreakDisplay];
     [self addBackButton];
 }
 
--(void) addSlider:(SKView *)view
-{
-    float screenWidth = [UIScreen mainScreen].bounds.size.width;
-    float screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGRect frame = CGRectMake(0, screenHeight * 3/4, screenWidth, 60);
-    _slider = [[UISlider alloc] initWithFrame:frame];
-    [_slider setBackgroundColor:[UIColor clearColor]];
-    _slider.minimumValue = 0.0;
-    _slider.maximumValue = 100.0;
-    UIImage *sliderThumb = [UIImage imageNamed: @"Triangle_9"];
-    UIImage *sliderThumbScaled = [UIImage imageWithCGImage:sliderThumb.CGImage scale:2 orientation:UIImageOrientationUp];
-    [[UISlider appearance] setThumbImage:sliderThumbScaled forState:UIControlStateNormal];
-    [[UISlider appearance] setMaximumTrackTintColor:[UIColor colorWithWhite:1 alpha:0]];
-    [[UISlider appearance] setMinimumTrackTintColor:[UIColor colorWithWhite:1 alpha:0]];
-    _slider.continuous = YES;
-    [view addSubview:_slider];
-}
-     
--(void) addBallCover
+-(void) addPlayhead
 {
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGRect rect = CGRectMake(0, 0, screenWidth, (screenHeight -_slider.frame.origin.y));
-    SKShapeNode *ballCover = [SKShapeNode shapeNodeWithRect:rect];
-    ballCover.strokeColor = ballCover.fillColor = self.backgroundColor;
-    [self addChild:ballCover];
+    CGRect rect = CGRectMake(0, 0, screenWidth, 3);
+    SKShapeNode *playHead = [SKShapeNode shapeNodeWithRect:rect];
+    playHead.position = CGPointMake(0, screenHeight/5 + 40); // 40 is ball height
+    playHead.name = @"playhead";
+    playHead.strokeColor = playHead.fillColor = [UIColor greenColor];
+    [self addChild:playHead];
 }
 
 - (void)addBackButton
@@ -102,9 +86,30 @@
     SKNode *node = [self nodeAtPoint:location];
     
     if ([node.name isEqualToString:@"backButton"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:nil];
-        [_slider removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
+    } else {
+        CGFloat errorAllowed = 30;
+        SKNode *playhead = [self childNodeWithName:@"playhead"];
+        for (SKShapeNode *node in [self children]){
+            if([node.name isEqualToString:@"droppedBall"]){
+                if(node.position.y<playhead.position.y + errorAllowed && node.position.y > playhead.position.y - errorAllowed &&
+                   location.y < playhead.position.y + errorAllowed && location.y > playhead.position.y - errorAllowed &&
+                   node.position.x<location.x + errorAllowed && node.position.x > location.x - errorAllowed){
+                    _streakCounter ++;
+                    [node setFillColor:[UIColor greenColor]];
+                    [self updateStreakCounterDisplay];
+                    if(_streakCounter == 10){
+                        _reachedGoal = YES;
+                        [self flashColoredScreen:[UIColor greenColor]];
+                        _streakDisplay.color = [UIColor greenColor];
+                        _streakDisplay.colorBlendFactor = .8;
+                    }
+                }
+            }
+        }
     }
+    
+    
 }
 
 - (double)getFirstBeat
@@ -125,6 +130,7 @@
     }
     return ((NSNumber *)sortedKeys[0]).doubleValue;
 }
+
 - (NSArray *)sortedBeats:(NSDictionary *)beatMap
 {
     NSArray *sortedKeys = [[beatMap allKeys] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
@@ -167,26 +173,25 @@
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     SKShapeNode *circle = [SKShapeNode shapeNodeWithCircleOfRadius:20];
-    circle.fillColor = [SKColor greenColor];
-    [circle setPosition:CGPointMake(column * screenWidth/numVoices + (screenWidth/numVoices)/2, screenHeight + circle.frame.size.height/2)];
+    CGFloat initialPositionY = screenHeight + circle.frame.size.height/2;
+    CGFloat midPositionY = screenHeight/5 + circle.frame.size.height/2;
+    circle.fillColor = [SKColor purpleColor];
+    [circle setPosition:CGPointMake(column * screenWidth/numVoices + (screenWidth/numVoices)/2, initialPositionY)];
     [self addChild:circle];
+    circle.name = @"droppedBall";
     circle.zPosition = -1;
-    SKAction *dropBall = [SKAction moveToY:screenHeight/5 + circle.frame.size.height/2 duration:animationDuration];
+    SKAction *dropBall = [SKAction moveToY:midPositionY duration:animationDuration];
     [circle runAction:dropBall completion:^(void){
-        if(_slider.value >= _slider.maximumValue * (column/(double)numVoices) && _slider.value <= _slider.maximumValue * (column+1)/(double)numVoices){
-            _streakCounter ++;
-            if(_streakCounter == 20){
-                [self flashColoredScreen:[UIColor greenColor]];
-                _streakDisplay.color = [UIColor greenColor];
-                _streakDisplay.colorBlendFactor = .8;
-                // send notification to unlock node
-            }
-        } else {
+        if(![circle.fillColor isEqual:[UIColor greenColor]]){
             _streakCounter = 0;
+            [circle setFillColor:[UIColor redColor]];
             [self flashColoredScreen:[UIColor redColor]];
+            [self updateStreakCounterDisplay];
         }
-        [self updateStreakCounterDisplay];
-        [self removeChildrenInArray:@[circle]];
+        CGFloat animateOutDuration = circle.position.y/(initialPositionY - midPositionY) * animationDuration;
+        [circle runAction:[SKAction moveToY:0 duration:animateOutDuration] completion:^(void){
+            [self removeChildrenInArray:@[circle]];
+        }];
     }];
 }
 
@@ -210,14 +215,15 @@
     _streakDisplay.text = [NSString stringWithFormat:@"%i", _streakCounter];
 }
 
+
 - (void)displayDirections
 {
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Melodic Balls"
-//                                                    message:@"Try to catch the falling balls in the cup! Catch 20 in a row to unlock this sound!"
-//                                                   delegate:nil
-//                                          cancelButtonTitle:@"Gotcha!"
-//                                          otherButtonTitles:nil];
-//    [alert show];
+    //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Melodic Balls"
+    //                                                    message:@"Try to catch the falling balls in the cup! Catch 20 in a row to unlock this sound!"
+    //                                                   delegate:nil
+    //                                          cancelButtonTitle:@"Gotcha!"
+    //                                          otherButtonTitles:nil];
+    //    [alert show];
 }
 
 - (void)update:(NSTimeInterval)currentTime {

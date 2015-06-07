@@ -30,7 +30,7 @@ double _endingStrokeGray = 0.6;
 double _grayScaleValueOff = 0.2;
 double _grayScaleValueLocked = 0.5;
 double _grayScaleValueOn = 1.0;
-double _alphaValue = 0.4;
+double _alphaValue = .9;
 
 // animation timings
 double _volumeFadeTime = 1.0;
@@ -42,6 +42,7 @@ double _ringFadeInTime = 0.2;
     self.ready = NO;
     self.unlocked = NO;
     self.averagedAmplitude = 0.0;
+//    self.blendMode = SKBlendModeReplace;
     
     self.xScale = 0;
     self.yScale = 0;
@@ -56,6 +57,7 @@ double _ringFadeInTime = 0.2;
         double targetValue = (elapsedTime / _volumeFadeTime);
         [self childNodeWithName:@"onMask"].alpha = 1;
         [self childNodeWithName:@"offMask"].alpha = 0;
+        [self childNodeWithName:@"lockedMask"].alpha = 0;
         
         [_conductor setVolumeForLoop:self.name withVolume:targetValue];
     }];
@@ -63,6 +65,7 @@ double _ringFadeInTime = 0.2;
     self.volumeDownAction = [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
         double targetValue = (elapsedTime / _volumeFadeTime);
         double beginValue = 1 - targetValue;
+        [self childNodeWithName:@"lockedMask"].alpha = 0;
         [self childNodeWithName:@"onMask"].alpha = 0;
         [self childNodeWithName:@"offMask"].alpha = 1;
         
@@ -97,6 +100,20 @@ double _ringFadeInTime = 0.2;
     }
 }
 
+- (void)lockNode
+{
+    _unlocked = NO;
+    [self runAction: [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+        double targetValue = (elapsedTime / _volumeFadeTime);
+        double beginValue = 1 - targetValue;
+        [self childNodeWithName:@"lockedMask"].alpha = 1;
+        [self childNodeWithName:@"onMask"].alpha = 0;
+        [self childNodeWithName:@"offMask"].alpha = 0;
+        
+        [_conductor setVolumeForLoop:self.name withVolume:beginValue];
+    }]];
+}
+
 - (void)turnOn {
     if (_ready) {
         [self removeActionForKey:@"VolumeDown"];
@@ -114,7 +131,7 @@ double _ringFadeInTime = 0.2;
 - (void)setUpInteractor
 {
     SKSpriteNode *lockedMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_locked"];
-    lockedMask.name = @"onMask";
+    lockedMask.name = @"lockedMask";
     lockedMask.userInteractionEnabled = NO;
     SKSpriteNode *onMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_unlocked_on"];
     onMask.name = @"onMask";
@@ -127,8 +144,6 @@ double _ringFadeInTime = 0.2;
     [self addChild:lockedMask];
     [self addChild:offMask];
     [self addChild:onMask];
-    
-    [self connectToConductor:_conductor];
 }
 
 - (void)updateAppearance {

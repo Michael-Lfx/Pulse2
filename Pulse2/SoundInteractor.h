@@ -23,8 +23,11 @@
 - (BOOL)getState;
 // get unlockedState
 - (BOOL)isUnlocked;
-// indicate node is unlocked and ready to be tapped
+
+// change lockState and relevant appearance
 - (void)unlockNode;
+- (void)lockNode;
+
 // turn on with volume and color fade in
 - (void)turnOn;
 // turn off with volume and color fade out
@@ -33,5 +36,6 @@
 - (void)updateAppearance;
 
 - (void)setUpInteractor;
+
 
 @end

@@ -11,7 +11,7 @@
 
 #import "MainMenuScene.h"
 #import "SoundscapeScene.h"
-#import "SongSliderScene.h"
+#import "SongTapScene.h"
 #import "SongTrainScene.h"
 #import "SongSwipeScene.h"
 
@@ -120,8 +120,8 @@
     LoopData *loopData = [[LoopData alloc] initWithPlist:@"relaxation" loop:loopName];
     NSString *minigameName = [loopData getMinigameName];
     _miniScapeView = [[SKView alloc] initWithFrame:self.view.frame];
-    if ([minigameName isEqualToString:@"SongSliderScene"]) {
-        [_miniScapeView presentScene: [[SongSliderScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size]];
+    if ([minigameName isEqualToString:@"SongTapScene"]) {
+        [_miniScapeView presentScene: [[SongTapScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size]];
     } else if ([minigameName isEqualToString:@"SongTrainScene"]) {
         [_miniScapeView presentScene:[[SongTrainScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size]];
     } else {
@@ -143,8 +143,8 @@
         [UIView animateWithDuration:1.0 animations:^{
             _miniScapeView.alpha = 1;
         }];
-        if([_miniScapeView.scene isKindOfClass:[SongSliderScene class]])
-            [(SongSliderScene *)_miniScapeView.scene displayDirections];
+        if([_miniScapeView.scene isKindOfClass:[SongTapScene class]])
+            [(SongTapScene *)_miniScapeView.scene displayDirections];
     }];
     
 }
