@@ -14,6 +14,7 @@
 #import "SongSliderScene.h"
 #import "SongTrainScene.h"
 #import "SongSwipeScene.h"
+#import "OrbGameScene.h"
 
 #import "Conductor.h"
 #import "LoopData.h"
@@ -113,10 +114,10 @@
     NSDictionary *info = notification.userInfo;
     
     NSString *loopName = [info objectForKey:@"loopName"];
+//    NSLog(@"%@", loopName);
     Conductor *conductor = [info objectForKey:@"conductor"];
     CGPoint pointToZoomTo = [(NSValue *)[info objectForKey:@"nodeCoordinates"] CGPointValue];
     CGSize nodeSize = [(NSValue *)[info objectForKey:@"nodeSize"] CGSizeValue];
-    
     LoopData *loopData = [[LoopData alloc] initWithPlist:@"relaxation" loop:loopName];
     NSString *minigameName = [loopData getMinigameName];
     _miniScapeView = [[SKView alloc] initWithFrame:self.view.frame];
@@ -124,8 +125,10 @@
         [_miniScapeView presentScene: [[SongSliderScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size]];
     } else if ([minigameName isEqualToString:@"SongTrainScene"]) {
         [_miniScapeView presentScene:[[SongTrainScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size]];
-    } else {
+    } else if ([minigameName isEqualToString:@"SongSwipeScene"]) {
         [_miniScapeView presentScene: [[SongSwipeScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size]];
+    } else if ([minigameName isEqualToString:@"OrbGameScene"]) {
+        [_miniScapeView presentScene: [[OrbGameScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size]];
     }
     [conductor fadeVolumeForLoop:loopName withDuration:1 fadeIn:YES];
     _miniScapeView.alpha = 0;

@@ -56,7 +56,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     NSArray *filenames = [_conductor getFilenames];
     
     for (NSString *filename in filenames) {
-        
         // random position within bounds of screen
         CGFloat x = (random()/(CGFloat)RAND_MAX) * windowWidth;
         CGFloat y = (random()/(CGFloat)RAND_MAX) * windowHeight;

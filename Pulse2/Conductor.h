@@ -34,6 +34,7 @@
 
 @property(nonatomic) NSMutableDictionary *audioFilePlayers;
 @property(nonatomic) NSMutableDictionary *channelGroups;
+@property AEChannelGroupRef masterChannel;
 
 @property BOOL shouldCheckLevels;
 

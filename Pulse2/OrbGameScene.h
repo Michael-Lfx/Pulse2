@@ -18,4 +18,21 @@
 @property Conductor *conductor;
 @property LoopData *loopData;
 
+@property NSArray *beatValues;
+@property double prevBeat;
+@property double nextBeat;
+
+@property SKSpriteNode *orb;
+@property NSMutableArray *targets;
+
+@property NSArray *targetPositions;
+@property CGPoint prevPosition;
+@property CGPoint nextPosition;
+@property int prevNum;
+@property int nextNum;
+
+@property BOOL beatChecked;
+@property BOOL notePlayed;
+@property BOOL ready;
+
 @end

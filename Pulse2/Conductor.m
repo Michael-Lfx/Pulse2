@@ -53,6 +53,9 @@ double _beats;
         [_channelGroups setObject:[NSValue valueWithPointer:group] forKey:filename];
     }
     
+    self.masterChannel = [_audioController createChannelGroup];
+    [_audioController addChannels:[_audioFilePlayers allValues] toChannelGroup:_masterChannel];
+    
     _shouldCheckLevels = true;
 }
 

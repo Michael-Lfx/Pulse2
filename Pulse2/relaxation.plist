@@ -48,7 +48,7 @@
 				</array>
 			</array>
 			<key>minigame name</key>
-			<string>SongSwipeScene</string>
+			<string>OrbGameScene</string>
 		</dict>
 		<key>relaxation-blue-sun</key>
 		<dict>
@@ -59,7 +59,7 @@
 				</array>
 			</array>
 			<key>minigame name</key>
-			<string>SongSwipeScene</string>
+			<string>OrbGameScene</string>
 		</dict>
 		<key>relaxation-bouncing-mark</key>
 		<dict>
@@ -129,7 +129,7 @@
 				</array>
 			</array>
 			<key>minigame name</key>
-			<string>SongSwipeScene</string>
+			<string>OrbGameScene</string>
 		</dict>
 		<key>relaxation-dance-organ</key>
 		<dict>
@@ -196,7 +196,7 @@
 				</array>
 			</array>
 			<key>minigame name</key>
-			<string>SongSwipeScene</string>
+			<string>OrbGameScene</string>
 		</dict>
 		<key>relaxation-dub-pulse</key>
 		<dict>
@@ -210,7 +210,7 @@
 				</array>
 			</array>
 			<key>minigame name</key>
-			<string>SongSwipeScene</string>
+			<string>OrbGameScene</string>
 		</dict>
 		<key>relaxation-eighties-ep</key>
 		<dict>
