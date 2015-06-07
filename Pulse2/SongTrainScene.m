@@ -110,12 +110,23 @@
 
 - (void)displayDirections
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Train Trax"
-                                                    message:@"Hop to the rhythm of this loop to keep the train on the tracks! 20 successful hops in a row will unlock this loop!"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Thanks Bruh"
-                                          otherButtonTitles:nil];
-    [alert show];
+    // TODO FOR HENRY - CHANGE FILENAME ON NEXT LINE TO BE APPROPRIATE
+    SKSpriteNode *directions = [SKSpriteNode spriteNodeWithImageNamed:@"train2"];
+    directions.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    directions.userInteractionEnabled = NO;
+    directions.name = @"directions";
+    directions.userInteractionEnabled = NO;
+    [self addChild:directions];
+    [self performSelector:@selector(fadeOutDirections) withObject:nil afterDelay:4];   // ADJUST DELAY TO BE APPROPRIATE
+    
+}
+- (void)fadeOutDirections
+{
+    SKSpriteNode *directions = (SKSpriteNode *)[self childNodeWithName:@"directions"];
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:1.5];
+    [directions runAction:fadeOut completion:^(void){
+        [self removeChildrenInArray:@[directions]];
+    }];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

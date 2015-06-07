@@ -88,7 +88,7 @@
     if ([node.name isEqualToString:@"backButton"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     } else {
-        CGFloat errorAllowed = 30;
+        CGFloat errorAllowed = 25;
         SKNode *playhead = [self childNodeWithName:@"playhead"];
         for (SKShapeNode *node in [self children]){
             if([node.name isEqualToString:@"droppedBall"]){
@@ -218,12 +218,23 @@
 
 - (void)displayDirections
 {
-    //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Melodic Balls"
-    //                                                    message:@"Try to catch the falling balls in the cup! Catch 20 in a row to unlock this sound!"
-    //                                                   delegate:nil
-    //                                          cancelButtonTitle:@"Gotcha!"
-    //                                          otherButtonTitles:nil];
-    //    [alert show];
+    // TODO FOR HENRY - CHANGE FILENAME ON NEXT LINE TO BE APPROPRIATE
+    SKSpriteNode *directions = [SKSpriteNode spriteNodeWithImageNamed:@"train2"];
+    directions.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    directions.userInteractionEnabled = NO;
+    directions.name = @"directions";
+    directions.userInteractionEnabled = NO;
+    [self addChild:directions];
+    [self performSelector:@selector(fadeOutDirections) withObject:nil afterDelay:4];   // ADJUST DELAY TO BE APPROPRIATE
+    
+}
+- (void)fadeOutDirections
+{
+    SKSpriteNode *directions = (SKSpriteNode *)[self childNodeWithName:@"directions"];
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:1.5];
+    [directions runAction:fadeOut completion:^(void){
+        [self removeChildrenInArray:@[directions]];
+    }];
 }
 
 - (void)update:(NSTimeInterval)currentTime {

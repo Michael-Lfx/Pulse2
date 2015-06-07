@@ -120,12 +120,24 @@
 
 - (void)displayDirections
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Swipe Time"
-                                                    message:@"Swipe to the rhythm of this loop. 20 successful swipes in a row will unlock this loop!"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Okie-dokie"
-                                          otherButtonTitles:nil];
-    [alert show];
+    // TODO FOR HENRY - CHANGE FILENAME ON NEXT LINE TO BE APPROPRIATE
+    SKSpriteNode *directions = [SKSpriteNode spriteNodeWithImageNamed:@"train2"];
+    directions.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    directions.userInteractionEnabled = NO;
+    directions.name = @"directions";
+    directions.userInteractionEnabled = NO;
+    [self addChild:directions];
+    [self performSelector:@selector(fadeOutDirections) withObject:nil afterDelay:4];   // ADJUST DELAY TO BE APPROPRIATE
+    
+}
+
+- (void)fadeOutDirections
+{
+    SKSpriteNode *directions = (SKSpriteNode *)[self childNodeWithName:@"directions"];
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:1.5];
+    [directions runAction:fadeOut completion:^(void){
+        [self removeChildrenInArray:@[directions]];
+    }];
 }
 
 #pragma mark - GUESTURES

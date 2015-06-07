@@ -145,6 +145,10 @@
         }];
         if([_miniScapeView.scene isKindOfClass:[SongTapScene class]])
             [(SongTapScene *)_miniScapeView.scene displayDirections];
+        else if([_miniScapeView.scene isKindOfClass:[SongTrainScene class]])
+            [(SongTrainScene *)_miniScapeView.scene displayDirections];
+        else if([_miniScapeView.scene isKindOfClass:[SongSwipeScene class]])
+            [(SongSwipeScene *)_miniScapeView.scene displayDirections];
     }];
     
 }
