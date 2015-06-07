@@ -44,7 +44,7 @@
 		E627909A1B1E4AED00435C4A /* blurGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = E62790991B1E4AED00435C4A /* blurGlow.png */; };
 		E627909C1B1E4CE500435C4A /* blurGlow2.png in Resources */ = {isa = PBXBuildFile; fileRef = E627909B1B1E4CE500435C4A /* blurGlow2.png */; };
 		E662A84E1B23AE8100AEFF7E /* SongTapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E662A84D1B23AE8100AEFF7E /* SongTapScene.m */; };
-		E6B6D6FB1B1E7D3300F5BC7C /* train.png in Resources */ = {isa = PBXBuildFile; fileRef = E6B6D6FA1B1E7D3300F5BC7C /* train.png */; };
+		E662A8541B23C49200AEFF7E /* train2.png in Resources */ = {isa = PBXBuildFile; fileRef = E662A8531B23C49200AEFF7E /* train2.png */; };
 		E6F3CC8D1B0AB15A0073AF32 /* hi_hat.caf in Resources */ = {isa = PBXBuildFile; fileRef = E6F3CC8C1B0AB15A0073AF32 /* hi_hat.caf */; };
 /* End PBXBuildFile section */
 
@@ -112,7 +112,7 @@
 		E627909B1B1E4CE500435C4A /* blurGlow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blurGlow2.png; sourceTree = "<group>"; };
 		E662A84C1B23AE8100AEFF7E /* SongTapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTapScene.h; sourceTree = "<group>"; };
 		E662A84D1B23AE8100AEFF7E /* SongTapScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTapScene.m; sourceTree = "<group>"; };
-		E6B6D6FA1B1E7D3300F5BC7C /* train.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = train.png; sourceTree = "<group>"; };
+		E662A8531B23C49200AEFF7E /* train2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = train2.png; sourceTree = "<group>"; };
 		E6F3CC8C1B0AB15A0073AF32 /* hi_hat.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hi_hat.caf; sourceTree = "<group>"; };
 		E7FB26D086C2121BEC49334E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -217,9 +217,9 @@
 			children = (
 				BA4AA39E1B02B9A1007E3D7B /* arrow.png */,
 				E62790991B1E4AED00435C4A /* blurGlow.png */,
+				E662A8531B23C49200AEFF7E /* train2.png */,
 				E627909B1B1E4CE500435C4A /* blurGlow2.png */,
 				E6F3CC8C1B0AB15A0073AF32 /* hi_hat.caf */,
-				E6B6D6FA1B1E7D3300F5BC7C /* train.png */,
 				BA4AA39F1B02B9A1007E3D7B /* Triangle_9.png */,
 			);
 			name = assets;
@@ -407,11 +407,11 @@
 				E627909A1B1E4AED00435C4A /* blurGlow.png in Resources */,
 				BA2BD3041AF965EC008A4169 /* Sounds in Resources */,
 				BA014C261AF05FE9001CAAE3 /* relaxation-drums.mp3 in Resources */,
+				E662A8541B23C49200AEFF7E /* train2.png in Resources */,
 				BA014C301AF05FE9001CAAE3 /* relaxation-eighties-ep.mp3 in Resources */,
 				BA014C2C1AF05FE9001CAAE3 /* relaxation-dance-organ.mp3 in Resources */,
 				E627909C1B1E4CE500435C4A /* blurGlow2.png in Resources */,
 				BA014C2D1AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 in Resources */,
-				E6B6D6FB1B1E7D3300F5BC7C /* train.png in Resources */,
 				BAF06F541AEEE16200FBB4C3 /* relaxation.plist in Resources */,
 				E6F3CC8D1B0AB15A0073AF32 /* hi_hat.caf in Resources */,
 				BA014C291AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 in Resources */,

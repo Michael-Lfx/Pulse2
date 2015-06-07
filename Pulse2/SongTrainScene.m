@@ -75,7 +75,7 @@
 {
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    _train = [SKSpriteNode spriteNodeWithImageNamed:@"train"];
+    _train = [SKSpriteNode spriteNodeWithImageNamed:@"train2"];
     _train.position = CGPointMake(screenWidth/2, screenHeight/3);
     [self addChild:_train];
 }
@@ -237,7 +237,7 @@
     // initialize variables
     int noteNumber = voiceNumber.intValue + 1;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat initialDistance = screenHeight - _train.position.y;
+    CGFloat initialDistance = screenHeight - _train.position.y - _train.size.height/2;
     // calculate track length
     CGFloat trackSpacing = 20;
     CGFloat distancePerBeat = initialDistance/2;
@@ -281,9 +281,9 @@
 - (void)moveTrack:(SKSpriteNode *)track initialDistance:(CGFloat)initialDistance duration:(double)animationDuration
 {
     //  move track
-    SKAction *moveTrackToTrain = [SKAction moveToY:_train.position.y  duration:animationDuration];
+    SKAction *moveTrackToTrain = [SKAction moveToY:_train.position.y + _train.size.height/2 duration:animationDuration];
     CGFloat outDestination = _train.position.y - track.size.height - _train.size.height/2;
-    CGFloat outDistance = _train.position.y - outDestination;
+    CGFloat outDistance = _train.position.y + _train.size.height/2 - outDestination;
     SKAction *moveTrackOut = [SKAction moveToY:outDestination duration:animationDuration * (outDistance/initialDistance)];
     [track runAction:moveTrackToTrain completion:^(void){
         if((track.position.x >= _train.frame.origin.x - 10 && track.position.x <= _train.frame.origin.x + 10) ||
