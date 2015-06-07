@@ -1,5 +1,5 @@
 //
-//  SongSliderScene.h
+//  SongTapScene.h
 //  protogame191
 //
 //  Created by Ben McK on 4/27/15.
@@ -11,7 +11,7 @@
 #import "LoopData.h"
 #import "Conductor.h"
 
-@interface SongSliderScene : SKScene
+@interface SongTapScene : SKScene
 
 - (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor size:(CGSize)size;
 
@@ -24,6 +24,7 @@
 @property UISlider *slider;
 @property int streakCounter;
 @property SKLabelNode *streakDisplay;
+@property BOOL reachedGoal;
 
 - (void)displayDirections;
 

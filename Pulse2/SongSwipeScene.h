@@ -24,6 +24,7 @@
 @property NSArray* hitNodesAtTouch;
 @property int streakCounter;
 @property SKLabelNode *streakDisplay;
+@property BOOL reachedGoal;
 
 - (void)displayDirections;
 

@@ -30,41 +30,24 @@ double _endingStrokeGray = 0.6;
 double _grayScaleValueOff = 0.2;
 double _grayScaleValueLocked = 0.5;
 double _grayScaleValueOn = 1.0;
-double _alphaValue = 0.4;
+double _alphaValue = .9;
 
 // animation timings
 double _volumeFadeTime = 1.0;
 double _appearAnimationTime = 2.5;
 double _ringFadeInTime = 0.2;
 
-- (instancetype)init {
-    self = [super init];
-    
-    if (self) {
-        self.lineWidth = 3;
-        self.blendMode = SKBlendModeAdd;
-        self.glowWidth = 5;
-    }
-    
-    return self;
-}
-
-- (void)dealloc{
-    NSLog(@"HI MOM");
-}
-
 - (void)resetValues {
     self.state = NO;
     self.ready = NO;
     self.unlocked = NO;
     self.averagedAmplitude = 0.0;
+//    self.blendMode = SKBlendModeReplace;
     
     self.xScale = 0;
     self.yScale = 0;
     
     self.alpha = 0;
-    self.fillColor = [SKColor colorWithWhite:_grayScaleValueOff alpha:1.0];
-    self.strokeColor = [SKColor colorWithWhite:_beginningStrokeGray alpha:1.0];
 }
 
 - (void)connectToConductor:(Conductor *)conductor {
@@ -72,10 +55,9 @@ double _ringFadeInTime = 0.2;
     
     self.volumeUpAction = [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
         double targetValue = (elapsedTime / _volumeFadeTime);
-        double beginValue = 1 - targetValue;
-        
-        double grayValue = beginValue * _grayScaleValueOff + targetValue * _grayScaleValueOn;
-        self.fillColor = [SKColor colorWithWhite:grayValue alpha:1.0];
+        [self childNodeWithName:@"onMask"].alpha = 1;
+        [self childNodeWithName:@"offMask"].alpha = 0;
+        [self childNodeWithName:@"lockedMask"].alpha = 0;
         
         [_conductor setVolumeForLoop:self.name withVolume:targetValue];
     }];
@@ -83,14 +65,9 @@ double _ringFadeInTime = 0.2;
     self.volumeDownAction = [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
         double targetValue = (elapsedTime / _volumeFadeTime);
         double beginValue = 1 - targetValue;
-        double grayValue;
-        
-        if(self.unlocked){
-            grayValue = beginValue * _grayScaleValueOn + targetValue * _grayScaleValueOff;
-        } else {
-            grayValue = beginValue * _grayScaleValueOn + targetValue * _grayScaleValueLocked;
-        }
-        self.fillColor = [SKColor colorWithWhite:grayValue alpha:1.0];
+        [self childNodeWithName:@"lockedMask"].alpha = 0;
+        [self childNodeWithName:@"onMask"].alpha = 0;
+        [self childNodeWithName:@"offMask"].alpha = 1;
         
         [_conductor setVolumeForLoop:self.name withVolume:beginValue];
     }];
@@ -102,12 +79,7 @@ double _ringFadeInTime = 0.2;
     }];
     
     // fade alpha in, then fade outer ring in
-    [self runAction:[SKAction fadeAlphaTo:_alphaValue duration:_appearAnimationTime - _ringFadeInTime] completion:^{
-        [self runAction:[SKAction customActionWithDuration:_ringFadeInTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-            double grayValue = _beginningStrokeGray * ((_ringFadeInTime - elapsedTime) / _ringFadeInTime) + _endingStrokeGray * (elapsedTime / _ringFadeInTime);
-            self.strokeColor = [SKColor colorWithWhite:grayValue alpha:1.0];
-        }]];
-    }];
+    [self runAction:[SKAction fadeAlphaTo:_alphaValue duration:_appearAnimationTime - _ringFadeInTime]];
 }
 
 - (BOOL)isReady {
@@ -128,6 +100,20 @@ double _ringFadeInTime = 0.2;
     }
 }
 
+- (void)lockNode
+{
+    _unlocked = NO;
+    [self runAction: [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+        double targetValue = (elapsedTime / _volumeFadeTime);
+        double beginValue = 1 - targetValue;
+        [self childNodeWithName:@"lockedMask"].alpha = 1;
+        [self childNodeWithName:@"onMask"].alpha = 0;
+        [self childNodeWithName:@"offMask"].alpha = 0;
+        
+        [_conductor setVolumeForLoop:self.name withVolume:beginValue];
+    }]];
+}
+
 - (void)turnOn {
     if (_ready) {
         [self removeActionForKey:@"VolumeDown"];
@@ -140,6 +126,24 @@ double _ringFadeInTime = 0.2;
     [self removeActionForKey:@"VolumeUp"];
     [self runAction:_volumeDownAction withKey:@"VolumeDown"];
     _state = NO;
+}
+
+- (void)setUpInteractor
+{
+    SKSpriteNode *lockedMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_locked"];
+    lockedMask.name = @"lockedMask";
+    lockedMask.userInteractionEnabled = NO;
+    SKSpriteNode *onMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_unlocked_on"];
+    onMask.name = @"onMask";
+    onMask.alpha = 0;
+    onMask.userInteractionEnabled = NO;
+    SKSpriteNode *offMask = [SKSpriteNode spriteNodeWithImageNamed:@"node_unlocked_off"];
+    offMask.name = @"offMask";
+    offMask.alpha = 0;
+    offMask.userInteractionEnabled = NO;
+    [self addChild:lockedMask];
+    [self addChild:offMask];
+    [self addChild:onMask];
 }
 
 - (void)updateAppearance {

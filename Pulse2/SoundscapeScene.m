@@ -41,7 +41,8 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     [self addMenuNode];
     [self startScene];
     _hasBeenInitialized = YES;
-    _shutItDown = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToGameScene:) name:@"ReturnToGameScene" object:nil];
 }
 
 - (void)createSoundInteractors {
@@ -65,20 +66,22 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         if(y < _baseInteractorSize/2) y += _baseInteractorSize/2;
         
         // create interactor, attach to audio file player
-        SoundInteractor *interactor = [SoundInteractor shapeNodeWithCircleOfRadius:_baseInteractorSize/2];
+        SoundInteractor *interactor = [[ SoundInteractor alloc] initWithImageNamed:@"node_background"];
+        [interactor setUpInteractor];
+        
         interactor.position = CGPointMake(x, y);
         interactor.name = filename;
         [interactor connectToConductor:_conductor];
         
         // set physics properties
-        [interactor setPhysicsBody:[SKPhysicsBody bodyWithCircleOfRadius:interactor.frame.size.width/2]];
+        [interactor setPhysicsBody:[SKPhysicsBody bodyWithTexture:interactor.texture alphaThreshold:0 size:interactor.size]];
         interactor.physicsBody.affectedByGravity = NO;
-        interactor.physicsBody.allowsRotation = NO;
+        interactor.physicsBody.allowsRotation = YES;
         interactor.physicsBody.dynamic = YES;
         interactor.physicsBody.friction = 0.0f;
         interactor.physicsBody.restitution = 0.0f;
         interactor.physicsBody.linearDamping = 0.1f;
-        interactor.physicsBody.angularDamping = 0.0f;
+        interactor.physicsBody.angularDamping = 0.2f;
         interactor.physicsBody.categoryBitMask = ballCategory;
         interactor.physicsBody.collisionBitMask = ballCategory | edgeCategory;
         interactor.physicsBody.contactTestBitMask = edgeCategory | ballCategory;
@@ -114,34 +117,20 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     //
     //    [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
     //    [_soundChannels addObject:_collisionSound];
-    
-    SKShapeNode *menuNode = [SKShapeNode shapeNodeWithCircleOfRadius:_baseInteractorSize/2];
-    menuNode.position = CGPointMake(windowWidth/2, windowHeight/2);
-    menuNode.name = @"menuNode";
-    menuNode.lineWidth = 3;
-    menuNode.blendMode = SKBlendModeAdd;
-    menuNode.glowWidth = 5;
-    menuNode.fillColor = [SKColor redColor];
-    menuNode.strokeColor = [SKColor whiteColor];
-    
 }
 
 - (void)addMenuNode {
     CGFloat windowWidth = self.size.width;
     CGFloat windowHeight = self.size.height;
     
-    SKShapeNode *menuNode = [SKShapeNode shapeNodeWithCircleOfRadius:_baseInteractorSize/2];
+    SKSpriteNode *menuNode = [SKSpriteNode spriteNodeWithImageNamed:@"node_home"];
     menuNode.position = CGPointMake(windowWidth/2, windowHeight/2);
     menuNode.name = @"menuNode";
-    menuNode.lineWidth = 3;
-    menuNode.blendMode = SKBlendModeAdd;
-    menuNode.glowWidth = 5;
-    menuNode.fillColor = [SKColor redColor];
-    menuNode.strokeColor = [SKColor colorWithWhite:0.6 alpha:1.0];
+//    menuNode.blendMode = nil;
     
-    [menuNode setPhysicsBody:[SKPhysicsBody bodyWithCircleOfRadius:menuNode.frame.size.width/2]];
+    [menuNode setPhysicsBody:[SKPhysicsBody bodyWithTexture:menuNode.texture alphaThreshold:0 size:menuNode.size]];
     menuNode.physicsBody.affectedByGravity = NO;
-    menuNode.physicsBody.allowsRotation = NO;
+    menuNode.physicsBody.allowsRotation = YES;
     menuNode.physicsBody.dynamic = YES;
     menuNode.physicsBody.friction = 0.0f;
     menuNode.physicsBody.restitution = 0.0f;
@@ -279,13 +268,16 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
     touchLocation = [self convertPointFromView:touchLocation];
     SKNode *touchedNode = [self nodeAtPoint:touchLocation];
-    
-    if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
+    if([touchedNode.parent isKindOfClass:[SoundInteractor class]]){
+        touchedNode = touchedNode.parent;
+    }
+    if ([touchedNode isKindOfClass:[SoundInteractor class]] && ((SoundInteractor *)touchedNode).isReady) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
         CGPoint pointToZoomTo = touchedNode.position;
         pointToZoomTo.x += touchedNode.frame.size.width/7;
         pointToZoomTo.y += touchedNode.frame.size.height/4;
         if(recognizer.numberOfTapsRequired == 2 || ![interactor isUnlocked]){ // double tap or a single tap on locked node
+            _tappedInteractor = interactor;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[interactor.name, _conductor, [NSValue valueWithCGPoint:pointToZoomTo], [NSValue valueWithCGSize:touchedNode.frame.size]] forKeys:@[@"loopName", @"conductor", @"nodeCoordinates", @"nodeSize"]]];
             [interactor turnOn];
         } else if ([interactor getState] == NO) { // single tap on unlocked node
@@ -295,9 +287,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
             [interactor turnOff];
         }
     } else if ([touchedNode.name isEqualToString:@"menuNode"]) {
-        //        [_conductor stop];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToMainMenu" object:self userInfo:nil];
-        //        _shutItDown = YES;
     }
 }
 
@@ -325,7 +315,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
                     _draggedInteractor.physicsBody.velocity = CGVectorMake(velocity.x/scale, -velocity.y/scale);
                 }];
             }
-            
             _draggedInteractor = nil;
         }
         
@@ -335,6 +324,8 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 - (void)setPanNodeForTouch:(CGPoint)location
 {
     SKNode *touchedNode = [self nodeAtPoint:location];
+    if([touchedNode.parent isKindOfClass:[SoundInteractor class]])
+        touchedNode = touchedNode.parent;
     
     if ([touchedNode isKindOfClass:[SoundInteractor class]]) {
         SoundInteractor *interactor = (SoundInteractor *)touchedNode;
@@ -387,25 +378,23 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     return NO;
 }
 
+- (void)returnToGameScene:(NSNotification *)notification
+{
+    BOOL wasSuccessful = [(NSNumber *)notification.userInfo[@"reachedGoal"] boolValue];
+    if(!wasSuccessful && !_tappedInteractor.isUnlocked){
+        [_tappedInteractor lockNode];
+    } else if(!_tappedInteractor.isUnlocked) {
+        [_tappedInteractor unlockNode];
+    }
+    _tappedInteractor = nil;
+}
+
 -(void)update:(CFTimeInterval)currentTime {
-    //    if(_shutItDown){
-    //        _soundInteractors = nil;
-    //        _draggedInteractor = nil;
-    //        [self removeAllChildren];
-    //        [self removeAllActions];
-    //        [self removeFromParent];
-    //        [self.audioController removeChannels:_soundChannels];
-    //        [_conductor releaseSounds]; ///THIS IS REALLY IMPORTANT, ADD BACK WHEN HENRY SEES ISSUE
-    //        return;
-    //    }
-    /* Called before each frame is rendered */
-    //    else{
     for (SoundInteractor *interactor in _soundInteractors) {
         if ([interactor isReady]) {
             [interactor updateAppearance];
         }
     }
-    //    }
 }
 
 @end

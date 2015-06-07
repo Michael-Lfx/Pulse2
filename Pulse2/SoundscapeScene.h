@@ -18,7 +18,6 @@ static const uint32_t borderCategory = 0x1 << 4;
 
 // initialization
 @property BOOL hasBeenInitialized;
-@property BOOL shutItDown;
 
 // audio
 //@property AEAudioController *audioController;
@@ -29,6 +28,7 @@ static const uint32_t borderCategory = 0x1 << 4;
 // interactors
 @property NSMutableArray *soundInteractors;
 @property SoundInteractor *draggedInteractor;
+@property SoundInteractor *tappedInteractor;
 @property double baseInteractorSize;
 
 // timers

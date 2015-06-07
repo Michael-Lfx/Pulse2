@@ -10,7 +10,7 @@
 #import <TheAmazingAudioEngine/TheAmazingAudioEngine.h>
 #import "Conductor.h"
 
-@interface SoundInteractor : SKShapeNode
+@interface SoundInteractor : SKSpriteNode
 
 - (void)resetValues;
 // set SoundFilePlayer object
@@ -23,13 +23,19 @@
 - (BOOL)getState;
 // get unlockedState
 - (BOOL)isUnlocked;
-// indicate node is unlocked and ready to be tapped
+
+// change lockState and relevant appearance
 - (void)unlockNode;
+- (void)lockNode;
+
 // turn on with volume and color fade in
 - (void)turnOn;
 // turn off with volume and color fade out
 - (void)turnOff;
 // update size of interactor according to current sound amplitude
 - (void)updateAppearance;
+
+- (void)setUpInteractor;
+
 
 @end

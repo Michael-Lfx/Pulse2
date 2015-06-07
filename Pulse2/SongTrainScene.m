@@ -37,6 +37,7 @@
     float screenWidth = [UIScreen mainScreen].bounds.size.width;
     _leftTrackCenter = screenWidth/3;
     _rightTrackCenter = screenWidth*2/3;
+    _reachedGoal = NO;
     
     
     [_conductor addObserver:self forKeyPath:@"currentBeat" options:0 context:nil];
@@ -74,7 +75,7 @@
 {
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    _train = [SKSpriteNode spriteNodeWithImageNamed:@"train"];
+    _train = [SKSpriteNode spriteNodeWithImageNamed:@"train2"];
     _train.position = CGPointMake(screenWidth/2, screenHeight/3);
     [self addChild:_train];
 }
@@ -109,12 +110,23 @@
 
 - (void)displayDirections
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Train Trax"
-                                                    message:@"Hop to the rhythm of this loop to keep the train on the tracks! 20 successful hops in a row will unlock this loop!"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Thanks Bruh"
-                                          otherButtonTitles:nil];
-    [alert show];
+    // TODO FOR HENRY - CHANGE FILENAME ON NEXT LINE TO BE APPROPRIATE
+    SKSpriteNode *directions = [SKSpriteNode spriteNodeWithImageNamed:@"train2"];
+    directions.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    directions.userInteractionEnabled = NO;
+    directions.name = @"directions";
+    directions.userInteractionEnabled = NO;
+    [self addChild:directions];
+    [self performSelector:@selector(fadeOutDirections) withObject:nil afterDelay:4];   // ADJUST DELAY TO BE APPROPRIATE
+    
+}
+- (void)fadeOutDirections
+{
+    SKSpriteNode *directions = (SKSpriteNode *)[self childNodeWithName:@"directions"];
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:1.5];
+    [directions runAction:fadeOut completion:^(void){
+        [self removeChildrenInArray:@[directions]];
+    }];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -128,7 +140,7 @@
     } else if ([node.name isEqualToString:@"rightButton"]) {
         [self hop:@"right"];
     } else if ([node.name isEqualToString:@"backButton"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     }
 }
 
@@ -236,7 +248,7 @@
     // initialize variables
     int noteNumber = voiceNumber.intValue + 1;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat initialDistance = screenHeight - _train.position.y;
+    CGFloat initialDistance = screenHeight - _train.position.y - _train.size.height/2;
     // calculate track length
     CGFloat trackSpacing = 20;
     CGFloat distancePerBeat = initialDistance/2;
@@ -280,15 +292,16 @@
 - (void)moveTrack:(SKSpriteNode *)track initialDistance:(CGFloat)initialDistance duration:(double)animationDuration
 {
     //  move track
-    SKAction *moveTrackToTrain = [SKAction moveToY:_train.position.y  duration:animationDuration];
+    SKAction *moveTrackToTrain = [SKAction moveToY:_train.position.y + _train.size.height/2 duration:animationDuration];
     CGFloat outDestination = _train.position.y - track.size.height - _train.size.height/2;
-    CGFloat outDistance = _train.position.y - outDestination;
+    CGFloat outDistance = _train.position.y + _train.size.height/2 - outDestination;
     SKAction *moveTrackOut = [SKAction moveToY:outDestination duration:animationDuration * (outDistance/initialDistance)];
     [track runAction:moveTrackToTrain completion:^(void){
         if((track.position.x >= _train.frame.origin.x - 10 && track.position.x <= _train.frame.origin.x + 10) ||
            _trainIsJumping){ // evaluate what makes this true at this point in time
             _streakCounter ++;
             if(_streakCounter == 20){
+                _reachedGoal = YES;
                 [self flashColoredScreen:[UIColor greenColor]];
                 _streakDisplay.colorBlendFactor = .8;
                 _streakDisplay.color = [UIColor greenColor];

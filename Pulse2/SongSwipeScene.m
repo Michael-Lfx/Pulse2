@@ -34,6 +34,7 @@
     _streakCounter = 0;
     _hitNodesAtTouch = @[];
     _lastBeat = -1; // this signals we don't know what last beat is.
+    _reachedGoal = NO;
     
     
     [_conductor addObserver:self forKeyPath:@"currentBeat" options:0 context:nil];
@@ -119,12 +120,24 @@
 
 - (void)displayDirections
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Swipe Time"
-                                                    message:@"Swipe to the rhythm of this loop. 20 successful swipes in a row will unlock this loop!"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Okie-dokie"
-                                          otherButtonTitles:nil];
-    [alert show];
+    // TODO FOR HENRY - CHANGE FILENAME ON NEXT LINE TO BE APPROPRIATE
+    SKSpriteNode *directions = [SKSpriteNode spriteNodeWithImageNamed:@"train2"];
+    directions.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    directions.userInteractionEnabled = NO;
+    directions.name = @"directions";
+    directions.userInteractionEnabled = NO;
+    [self addChild:directions];
+    [self performSelector:@selector(fadeOutDirections) withObject:nil afterDelay:4];   // ADJUST DELAY TO BE APPROPRIATE
+    
+}
+
+- (void)fadeOutDirections
+{
+    SKSpriteNode *directions = (SKSpriteNode *)[self childNodeWithName:@"directions"];
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:1.5];
+    [directions runAction:fadeOut completion:^(void){
+        [self removeChildrenInArray:@[directions]];
+    }];
 }
 
 #pragma mark - GUESTURES
@@ -176,7 +189,8 @@
             [self removeChildrenInArray:@[node]];
             _streakCounter++;
             [self updateStreakCounterDisplay];
-            if (_streakCounter == 20){
+            if (_streakCounter == 5){
+                _reachedGoal = YES;
                 [self flashColoredScreen:[UIColor greenColor]];
                 _streakDisplay.colorBlendFactor = .8;
                 _streakDisplay.color = [UIColor greenColor];
@@ -189,7 +203,8 @@
             [self removeChildrenInArray:@[node]];
             _streakCounter++;
             [self updateStreakCounterDisplay];
-            if (_streakCounter == 20){
+            if (_streakCounter == 5){
+                _reachedGoal = YES;
                 [self flashColoredScreen:[UIColor greenColor]];
                 _streakDisplay.colorBlendFactor = .8;
                 _streakDisplay.color = [UIColor greenColor];
@@ -210,7 +225,7 @@
         SKSpriteNode *hitZone = (SKSpriteNode *)[self childNodeWithName:@"hitZone"];
         _hitNodesAtTouch = [self nodesAtPoint:hitZone.position];
     } else if ([touchedNode.name isEqualToString:@"backButton"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     }
 }
 
