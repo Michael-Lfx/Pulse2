@@ -121,6 +121,7 @@
     [self performSelector:@selector(fadeOutDirections) withObject:nil afterDelay:4];   // ADJUST DELAY TO BE APPROPRIATE
     
 }
+
 - (void)fadeOutDirections
 {
     SKSpriteNode *directions = (SKSpriteNode *)[self childNodeWithName:@"directions"];
@@ -141,6 +142,10 @@
     } else if ([node.name isEqualToString:@"rightButton"]) {
         [self hop:@"right"];
     } else if ([node.name isEqualToString:@"backButton"]) {
+        if(_reachedGoal){
+            int timesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenTrainGame"];
+            [[NSUserDefaults standardUserDefaults] setInteger:timesBeaten + 1 forKey:@"timesBeatenTrainGame"];
+        }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     }
 }
@@ -161,7 +166,7 @@
     _trainIsJumping = YES;
     [_train runAction:jump completion:^(void){
         _trainIsJumping = NO;
-        CGPoint location = _train.frame.origin;
+        CGPoint location = _train.position;
         NSArray *nodes = [self nodesAtPoint:location];
         BOOL trackFound = NO;
         for (SKNode *node in nodes) {
@@ -209,11 +214,17 @@
 {
     NSDictionary *beatMap = [_loopData getBeatMap];
     NSArray *sortedKeys = [self sortedBeats:beatMap];
-    double currBeat = [_conductor getCurrentBeatForLoop:[_loopData getLoopName]];
+    double currBeat = [_conductor getCurrentBeatForLoop:[_loopData getLoopName]] + 2;
+    if(currBeat > [_loopData getNumBeats]){
+        currBeat -=  [_loopData getNumBeats];
+    }
     for(int i = 0; i < beatMap.count; i ++){
-        if(((NSNumber *)sortedKeys[i]).doubleValue > currBeat)
+        if(((NSNumber *)sortedKeys[i]).doubleValue >= currBeat)
             return ((NSNumber *)sortedKeys[i]).doubleValue;
     }
+    _lastBeat = ((NSNumber *)sortedKeys[beatMap.count-1]).doubleValue;
+    _resetLoopTime = CACurrentMediaTime() - _lastBeat;
+    _resetLoopBeat = YES;
     return ((NSNumber *)sortedKeys[0]).doubleValue;
 }
 
@@ -303,13 +314,13 @@
             _streakCounter ++;
             if(_streakCounter == 1){
                 _reachedGoal = YES;
-                [self flashColoredScreen:[UIColor greenColor]];
+//                [self flashColoredScreen:[UIColor greenColor]];
                 _streakDisplay.colorBlendFactor = .8;
                 _streakDisplay.color = [UIColor greenColor];
             }
         } else {
             _streakCounter = 0;
-            [self flashColoredScreen:[UIColor redColor]];
+//            [self flashColoredScreen:[UIColor redColor]];
         }
         [self updateStreakCounterDisplay];
         [track runAction:moveTrackOut completion:^(void){

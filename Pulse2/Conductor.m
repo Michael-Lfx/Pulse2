@@ -178,4 +178,9 @@ double _beats;
     return [[_data objectForKey:@"audio files"] allKeys];
 }
 
+- (NSString *)getSoundscapeName
+{
+    return [_data objectForKey: @"name"];
+}
+
 @end

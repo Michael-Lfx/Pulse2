@@ -27,12 +27,12 @@
     self.backgroundColor = [_graphics getBackgroundColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
     
-    _nextBeat = [self getNearestHigherBeat];
     _resetLoopTime = 0;
     _resetLoopBeat = NO;
     _streakCounter = 0;
     _lastBeat = -1; // this signals we don't know what last beat is.
     _reachedGoal = NO;
+    _nextBeat = [self getNearestHigherBeat];
     
     [_conductor addObserver:self forKeyPath:@"currentBeat" options:0 context:nil];
     
@@ -87,6 +87,10 @@
     SKNode *tappedNode = [self nodeAtPoint:location];
     
     if ([tappedNode.name isEqualToString:@"backButton"]) {
+        if(_reachedGoal){
+            int timesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenTrainGame"];
+            [[NSUserDefaults standardUserDefaults] setInteger:timesBeaten + 1 forKey:@"timesBeatenTrainGame"];
+        }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     } else {
         CGFloat errorAllowed = 50;
@@ -124,11 +128,17 @@
 {
     NSDictionary *beatMap = [_loopData getBeatMap];
     NSArray *sortedKeys = [self sortedBeats:beatMap];
-    double currBeat = [_conductor getCurrentBeatForLoop:[_loopData getLoopName]];
+    double currBeat = [_conductor getCurrentBeatForLoop:[_loopData getLoopName]] + 2;
+    if(currBeat > [_loopData getNumBeats]){
+        currBeat -=  [_loopData getNumBeats];
+    }
     for(int i = 0; i < beatMap.count; i ++){
-        if(((NSNumber *)sortedKeys[i]).doubleValue > currBeat)
+        if(((NSNumber *)sortedKeys[i]).doubleValue >= currBeat)
             return ((NSNumber *)sortedKeys[i]).doubleValue;
     }
+    _lastBeat = ((NSNumber *)sortedKeys[beatMap.count-1]).doubleValue;
+    _resetLoopTime = CACurrentMediaTime() - _lastBeat;
+    _resetLoopBeat = YES;
     return ((NSNumber *)sortedKeys[0]).doubleValue;
 }
 

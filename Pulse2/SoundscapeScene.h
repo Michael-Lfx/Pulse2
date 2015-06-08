@@ -19,6 +19,7 @@ static const uint32_t borderCategory = 0x1 << 4;
 
 // initialization
 @property BOOL hasBeenInitialized;
+@property NSString *unlockedNodesDictName;
 
 // audio
 //@property AEAudioController *audioController;

@@ -55,7 +55,8 @@ double _appearAnimationTime = 2.5;
 - (void)connectToConductor:(Conductor *)conductor {
     self.conductor = conductor;
     
-    self.volumeUpAction = [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+    self.volumeUpAction = [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node,
+                                                                                           CGFloat elapsedTime) {
         double targetValue = (elapsedTime / _volumeFadeTime);
 //        [self childNodeWithName:@"onMask"].alpha = 1;
 //        [self childNodeWithName:@"offMask"].alpha = 0;
@@ -96,10 +97,8 @@ double _appearAnimationTime = 2.5;
 }
 
 - (void)unlockNode {
-    if (_ready) {
-        _unlocked = YES;
-        self.color = [_graphics getInteractorOnColor];
-    }
+    _unlocked = YES;
+    self.color = [_graphics getInteractorOnColor];
 }
 
 - (void)lockNode

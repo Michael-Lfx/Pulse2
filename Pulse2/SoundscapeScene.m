@@ -59,6 +59,14 @@ double interactorTimerDuration = 1.0;
     
     NSArray *filenames = [_conductor getFilenames];
     
+    _unlockedNodesDictName = [NSString stringWithFormat:@"%@UnlockedNodes", [_conductor getSoundscapeName]];
+    if(![[NSUserDefaults standardUserDefaults] objectForKey:_unlockedNodesDictName]){
+        NSMutableDictionary *unlockedDict = [NSMutableDictionary dictionary];
+        [[NSUserDefaults standardUserDefaults] setObject:unlockedDict forKey:_unlockedNodesDictName];
+    }
+
+    NSDictionary *unlockedNodesDict = [[NSUserDefaults standardUserDefaults] objectForKey:_unlockedNodesDictName];
+    
     for (NSString *filename in filenames) {
         // random position within bounds of screen
         CGFloat x = (random()/(CGFloat)RAND_MAX) * windowWidth;
@@ -91,6 +99,13 @@ double interactorTimerDuration = 1.0;
         interactor.physicsBody.contactTestBitMask = edgeCategory | ballCategory;
         
         [interactor resetValues];
+        
+        if([unlockedNodesDict objectForKey:filename]){
+            [self addChild:interactor];
+            [interactor unlockNode];
+            [interactor appearWithGrowAnimation];
+            [self applyImpulseToInteractor:interactor];
+        }
         [_soundInteractors addObject:interactor];
     }
     
@@ -139,23 +154,21 @@ double interactorTimerDuration = 1.0;
     [_interactorTimer fire];
 }
 
-- (void)bringInNewLoop {
-    if (_interactorCount == 0) {
-        for(int i = 0; i <= 3; i++){
-            [self addNextInteractor];
-        }
-    } else {
-        [self addNextInteractor];
-    }
-}
-
 -(void)addNextInteractor
 {
     if (_interactorCount >= _soundInteractors.count) {
         [_interactorTimer invalidate];
         return;
     }
+    NSDictionary *unlockedNodesDict = [[NSUserDefaults standardUserDefaults] objectForKey:_unlockedNodesDictName];
     SoundInteractor *interactor = _soundInteractors[_interactorCount];
+    
+    if([unlockedNodesDict objectForKey:interactor.name]){
+        _interactorCount++;
+        [self addNextInteractor];
+        return;
+    }
+    
     [self addChild:interactor];
     [interactor appearWithGrowAnimation];
     [self applyImpulseToInteractor:interactor];
@@ -376,6 +389,13 @@ double interactorTimerDuration = 1.0;
     } else if (!wasSuccessful && _tappedInteractor.isUnlocked) {
         [_tappedInteractor turnOnSimple];
     } else if(!_tappedInteractor.isUnlocked) {
+        NSMutableDictionary *unlockedNodesDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:_unlockedNodesDictName]];
+        [unlockedNodesDict setValue: [NSNumber numberWithBool:YES] forKey:_tappedInteractor.name];
+        [[NSUserDefaults standardUserDefaults] setValue:unlockedNodesDict forKey:_unlockedNodesDictName];
+        if(unlockedNodesDict.count == _interactorCount){
+            int unlockedScenes = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"soundscapesCompleted"];
+            [[NSUserDefaults standardUserDefaults] setInteger:unlockedScenes + 1 forKey:@"soundscapesCompleted"];
+        }
         [_tappedInteractor unlockNode];
         [_tappedInteractor turnOnSimple];
     }

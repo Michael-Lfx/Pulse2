@@ -40,6 +40,8 @@ bool _nodesAdded = false;
     } else {
         _loadingNode.alpha = 0;
     }
+    
+    [self unlockRelevantScapes];
 }
 
 - (void)addNodes {
@@ -87,28 +89,25 @@ bool _nodesAdded = false;
 
 - (void)addGestureRecognizers {
     
-//    UIDoubleTapGestureRecognizer *doubleTapRecognizer = [[UIDoubleTapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
-//    doubleTapRecognizer.numberOfTapsRequired = 2;
-//    doubleTapRecognizer.delegate = self;
-//    [[self view] addGestureRecognizer:doubleTapRecognizer];
-    
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
     tapRecognizer.delegate = self;
-//    [tapRecognizer requireGestureRecognizerToFail:doubleTapRecognizer];
     [[self view] addGestureRecognizer:tapRecognizer];
-    
-//    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanFrom:)];
-//    panRecognizer.delegate = self;
-//    [[self view] addGestureRecognizer:panRecognizer];
-//    
-//    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(haltCell:)];
-//    longPressRecognizer.delegate = self;
-//    longPressRecognizer.minimumPressDuration = .2;
-//    [[self view] addGestureRecognizer:longPressRecognizer];
     
 }
 
-- (void)handleTapFrom:(UITapGestureRecognizer *)recognizer{
+- (void)unlockRelevantScapes
+{
+    int scapesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"soundscapesCompleted"];
+    if(scapesBeaten >=1)
+        _node2.alpha = 1;
+    if(scapesBeaten >=2)
+        _node3.alpha = 1;
+    if(scapesBeaten >=3)
+        _node4.alpha = 1;
+}
+
+- (void)handleTapFrom:(UITapGestureRecognizer *)recognizer
+{
     CGPoint touchLocation = [recognizer locationInView:recognizer.view];
     touchLocation = [self convertPointFromView:touchLocation];
     SKNode *touchedNode = [self nodeAtPoint:touchLocation];
@@ -121,7 +120,29 @@ bool _nodesAdded = false;
             }];
         }];
     } else if([touchedNode isEqualToNode:_node2]){
-        NSLog(@"tapping red");
+        if(_node2.alpha != 1) return;
+        [_loadingNode runAction:[SKAction fadeAlphaTo:1.0 duration:0.5]];
+        [_node2 runAction:[SKAction colorizeWithColor:[UIColor orangeColor] colorBlendFactor:1.0 duration:0.05] completion:^{
+            [_node2 runAction:[SKAction colorizeWithColorBlendFactor:0.0 duration:0.5] completion:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]]; // CHANGE RELAXATION TO APPROPRIATE NAME
+            }];
+        }];
+    } else if([touchedNode isEqualToNode:_node3]){
+        if(_node3.alpha != 1) return;
+        [_loadingNode runAction:[SKAction fadeAlphaTo:1.0 duration:0.5]];
+        [_node3 runAction:[SKAction colorizeWithColor:[UIColor yellowColor] colorBlendFactor:1.0 duration:0.05] completion:^{
+            [_node3 runAction:[SKAction colorizeWithColorBlendFactor:0.0 duration:0.5] completion:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]]; // CHANGE RELAXATION TO APPROPRIATE NAME
+            }];
+        }];
+    } else if([touchedNode isEqualToNode:_node4]){
+        if(_node4.alpha != 1) return;
+        [_loadingNode runAction:[SKAction fadeAlphaTo:1.0 duration:0.5]];
+        [_node4 runAction:[SKAction colorizeWithColor:[UIColor purpleColor] colorBlendFactor:1.0 duration:0.05] completion:^{
+            [_node4 runAction:[SKAction colorizeWithColorBlendFactor:0.0 duration:0.5] completion:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]]; // CHANGE RELAXATION TO APPROPRIATE NAME
+            }];
+        }];
     }
 }
 

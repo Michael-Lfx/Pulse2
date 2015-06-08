@@ -31,6 +31,7 @@
 - (double)getPowerLevelForLoop:(NSString *)loopName;
 - (double)getCurrentBeatForLoop:(NSString *)loopName;
 - (NSArray *)getFilenames;
+- (NSString *)getSoundscapeName;
 
 @property(nonatomic) AEAudioController *audioController;
 
@@ -38,6 +39,7 @@
 
 @property(nonatomic) NSMutableDictionary *audioFilePlayers;
 @property(nonatomic) NSMutableDictionary *channelGroups;
+
 @property AEAudioFilePlayer *theMinigameLoop;
 
 @property AEAudioUnitChannel *collisionSound;
