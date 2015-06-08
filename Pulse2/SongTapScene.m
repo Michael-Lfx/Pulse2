@@ -30,7 +30,8 @@
     _nextBeat = [self getNearestHigherBeat];
     _resetLoopTime = 0;
     _resetLoopBeat = NO;
-    _streakCounter = 0;
+    _currentScore = 0;
+    _targetScore = [[_loopData getBeatMap] count];
     _lastBeat = -1; // this signals we don't know what last beat is.
     _reachedGoal = NO;
     
@@ -40,7 +41,8 @@
     
     [self addPlayhead];
     [self initStreakDisplay];
-    [self addBackButton];
+//    [self addBackButton];
+    [self addInteractor];
 }
 
 -(void) addPlayhead
@@ -67,10 +69,26 @@
     [self addChild:backButton];
 }
 
+- (void)addInteractor {
+    self.interactor = [[MinigameInteractor alloc] initWithTexture:[_graphics getTextureForInteractor:[_loopData getLoopName]]];
+    
+    _interactor.graphics = _graphics;
+    [_interactor setUpInteractor];
+    
+    _interactor.position = CGPointMake(self.size.width/2, self.size.height*0.75);
+    _interactor.zPosition = -2;
+    _interactor.name = [_loopData getLoopName];
+    _interactor.color = [_graphics getInteractorOnColor];
+    
+    [_interactor connectToConductor:_conductor];
+    
+    [self addChild:_interactor];
+}
+
 -(void)initStreakDisplay{
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    _streakDisplay = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%i", _streakCounter]];
+    _streakDisplay = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%i", (int)_currentScore]];
     _streakDisplay.fontSize = 18;
     _streakDisplay.fontColor = [UIColor whiteColor];
     _streakDisplay.fontName = @"Avenir-Medium";
@@ -86,7 +104,7 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *tappedNode = [self nodeAtPoint:location];
     
-    if ([tappedNode.name isEqualToString:@"backButton"]) {
+    if ([tappedNode.name isEqualToString:[_loopData getLoopName]]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     } else {
         CGFloat errorAllowed = 50;
@@ -96,15 +114,16 @@
                 if(node.position.y<playhead.position.y + errorAllowed && node.position.y > playhead.position.y - errorAllowed &&
                    location.y < playhead.position.y + errorAllowed && location.y > playhead.position.y - errorAllowed &&
                    node.position.x<location.x + errorAllowed && node.position.x > location.x - errorAllowed){
-                    _streakCounter ++;
+                    _currentScore ++;
                     [node setFillColor:[UIColor greenColor]];
                     [self updateStreakCounterDisplay];
-                    if(_streakCounter == 1){
+                    if(_currentScore == _targetScore){
                         _reachedGoal = YES;
-                        [self flashColoredScreen:[UIColor greenColor]];
                         _streakDisplay.color = [UIColor greenColor];
                         _streakDisplay.colorBlendFactor = .8;
+                        [_interactor setPercentFull:1];
                     }
+                    if (!_reachedGoal) [_interactor setPercentFull:_currentScore / _targetScore];
                 }
             }
         }
@@ -184,7 +203,9 @@
     SKAction *dropBall = [SKAction moveToY:midPositionY duration:animationDuration];
     [circle runAction:dropBall completion:^(void){
         if(![circle.fillColor isEqual:[UIColor greenColor]]){
-            _streakCounter = 0;
+            _currentScore -= 3;
+            if (_currentScore < 0) _currentScore = 0;
+            [_interactor setPercentFull:_currentScore/_targetScore];
             [circle setFillColor:[UIColor redColor]];
             [self flashColoredScreen:[UIColor redColor]];
             [self updateStreakCounterDisplay];
@@ -213,7 +234,7 @@
 
 - (void)updateStreakCounterDisplay
 {
-    _streakDisplay.text = [NSString stringWithFormat:@"%i", _streakCounter];
+    _streakDisplay.text = [NSString stringWithFormat:@"%i", (int)_currentScore];
 }
 
 
@@ -257,6 +278,8 @@
         }
         _nextBeat = [self getNextBeat:beatMap];// update next beat by iterating through keys
     }
+    
+    [_interactor updateAppearance];
 }
 
 @end
