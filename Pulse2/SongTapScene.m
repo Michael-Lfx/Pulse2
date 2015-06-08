@@ -30,8 +30,9 @@
     _nextBeat = [self getNearestHigherBeat];
     _resetLoopTime = 0;
     _resetLoopBeat = NO;
+    _streakCounter = 0;
     _currentScore = 0;
-    _targetScore = [[_loopData getBeatMap] count];
+    _targetScore = [[_loopData getBeatMap] count]*2;
     _lastBeat = -1; // this signals we don't know what last beat is.
     _reachedGoal = NO;
     
@@ -53,7 +54,9 @@
     SKShapeNode *playHead = [SKShapeNode shapeNodeWithRect:rect];
     playHead.position = CGPointMake(0, screenHeight/5 + 40); // 40 is ball height
     playHead.name = @"playhead";
-    playHead.strokeColor = playHead.fillColor = [UIColor greenColor];
+    playHead.strokeColor = playHead.fillColor = [_graphics getInteractorOnColor];
+    playHead.glowWidth = 2;
+    playHead.zPosition = -1;
     [self addChild:playHead];
 }
 
@@ -88,7 +91,7 @@
 -(void)initStreakDisplay{
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    _streakDisplay = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%i", (int)_currentScore]];
+    _streakDisplay = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%i", _streakCounter]];
     _streakDisplay.fontSize = 18;
     _streakDisplay.fontColor = [UIColor whiteColor];
     _streakDisplay.fontName = @"Avenir-Medium";
@@ -107,23 +110,27 @@
     if ([tappedNode.name isEqualToString:[_loopData getLoopName]]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     } else {
-        CGFloat errorAllowed = 50;
+        CGFloat errorAllowed = 40;
         SKNode *playhead = [self childNodeWithName:@"playhead"];
         for (SKShapeNode *node in [self children]){
-            if([node.name isEqualToString:@"droppedBall"]){
+            if([node.name isEqualToString:@"droppedBall"] && ![node.fillColor isEqual:[_graphics getInteractorOffColor]]){
                 if(node.position.y<playhead.position.y + errorAllowed && node.position.y > playhead.position.y - errorAllowed &&
                    location.y < playhead.position.y + errorAllowed && location.y > playhead.position.y - errorAllowed &&
                    node.position.x<location.x + errorAllowed && node.position.x > location.x - errorAllowed){
-                    _currentScore ++;
-                    [node setFillColor:[UIColor greenColor]];
+                    _streakCounter ++;
+//                    [node setFillColor:[UIColor greenColor]];
+//                    [node setStrokeColor:[UIColor greenColor]];
+                    [node runAction:[SKAction scaleTo:5 duration:0.5]];
+                    [node runAction:[SKAction fadeAlphaTo:0 duration:0.5]];
                     [self updateStreakCounterDisplay];
-                    if(_currentScore == _targetScore){
+                    if (!_reachedGoal) _currentScore++;
+                    
+                    if (_currentScore < _targetScore) {
+                        [_interactor setPercentFull:_currentScore/_targetScore];
+                    } else if (_currentScore == _targetScore){
                         _reachedGoal = YES;
-                        _streakDisplay.color = [UIColor greenColor];
-                        _streakDisplay.colorBlendFactor = .8;
                         [_interactor setPercentFull:1];
                     }
-                    if (!_reachedGoal) [_interactor setPercentFull:_currentScore / _targetScore];
                 }
             }
         }
@@ -192,24 +199,35 @@
     int column = numVoices - noteNumber;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    SKShapeNode *circle = [SKShapeNode shapeNodeWithCircleOfRadius:20];
+    SKShapeNode *circle = [SKShapeNode shapeNodeWithCircleOfRadius:18];
     CGFloat initialPositionY = screenHeight + circle.frame.size.height/2;
-    CGFloat midPositionY = screenHeight/5 + circle.frame.size.height/2;
-    circle.fillColor = [SKColor purpleColor];
+    CGFloat midPositionY = screenHeight/5 + 40;
+    CGFloat underPositionY = midPositionY - 10;
+    circle.fillColor = [SKColor whiteColor];
+    circle.strokeColor = [SKColor whiteColor];
+    circle.glowWidth = 3;
+    
     [circle setPosition:CGPointMake(column * screenWidth/numVoices + (screenWidth/numVoices)/2, initialPositionY)];
     [self addChild:circle];
     circle.name = @"droppedBall";
     circle.zPosition = -1;
     SKAction *dropBall = [SKAction moveToY:midPositionY duration:animationDuration];
     [circle runAction:dropBall completion:^(void){
-        if(![circle.fillColor isEqual:[UIColor greenColor]]){
-            _currentScore -= 3;
-            if (_currentScore < 0) _currentScore = 0;
-            [_interactor setPercentFull:_currentScore/_targetScore];
-            [circle setFillColor:[UIColor redColor]];
-            [self flashColoredScreen:[UIColor redColor]];
-            [self updateStreakCounterDisplay];
-        }
+        [circle runAction:[SKAction moveToY:underPositionY duration:(animationDuration/midPositionY)*(midPositionY-underPositionY)] completion:^{
+            if(circle.xScale == 1){
+                [circle setFillColor:[_graphics getInteractorOffColor]];
+                [circle setStrokeColor:[_graphics getInteractorOffColor]];
+                _streakCounter = 0;
+                [self updateStreakCounterDisplay];
+                
+                if (!_reachedGoal) {
+                    _currentScore -= 2;
+                    if (_currentScore < 0) _currentScore = 0;
+                    [_interactor setPercentFull:_currentScore/_targetScore];
+                }
+            }
+        }];
+        
         CGFloat animateOutDuration = circle.position.y/(initialPositionY - midPositionY) * animationDuration;
         [circle runAction:[SKAction moveToY:0 duration:animateOutDuration] completion:^(void){
             [self removeChildrenInArray:@[circle]];
@@ -217,24 +235,9 @@
     }];
 }
 
-- (void)flashColoredScreen:(UIColor *)colorToFlash
-{
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    CGRect rect = CGRectMake(0, 0, screenWidth, screenHeight);
-    SKShapeNode *coloredCover = [SKShapeNode shapeNodeWithRect:rect];
-    coloredCover.fillColor = colorToFlash;
-    coloredCover.userInteractionEnabled = NO;
-    [self addChild:coloredCover];
-    SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:.4];
-    [coloredCover runAction:fadeOut completion:^(void){
-        [self removeChildrenInArray:@[coloredCover]];
-    }];
-}
-
 - (void)updateStreakCounterDisplay
 {
-    _streakDisplay.text = [NSString stringWithFormat:@"%i", (int)_currentScore];
+    _streakDisplay.text = [NSString stringWithFormat:@"%i", _streakCounter];
 }
 
 
@@ -250,6 +253,7 @@
     [self performSelector:@selector(fadeOutDirections) withObject:nil afterDelay:4];   // ADJUST DELAY TO BE APPROPRIATE
     
 }
+
 - (void)fadeOutDirections
 {
     SKSpriteNode *directions = (SKSpriteNode *)[self childNodeWithName:@"directions"];

@@ -26,11 +26,11 @@
 @property double resetLoopTime;
 @property double lastBeat;
 @property UISlider *slider;
+@property int streakCounter;
+@property double currentScore;
+@property double targetScore;
 @property SKLabelNode *streakDisplay;
 @property BOOL reachedGoal;
-
-@property double targetScore;
-@property double currentScore;
 
 - (void)displayDirections;
 

@@ -18,6 +18,7 @@
 
 // update size of interactor according to current sound amplitude
 - (void)updateAppearance;
+- (double)getScale;
 
 - (void)setUpInteractor;
 
