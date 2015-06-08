@@ -24,8 +24,9 @@
         self.ready = NO;
         self.beatChecked = NO;
         self.notePlayed = NO;
+        self.noteMissed = NO;
         self.reachedGoal = NO;
-        self.targetScore = [_beatValues count];
+        self.targetScore = [_beatValues count]*2;
         self.currentScore = 0;
     }
     
@@ -126,11 +127,15 @@
         SKSpriteNode *target = (SKSpriteNode *)node;
 //        int targetNum = [[target.name substringFromIndex:6] integerValue];
         double distance = hypot(target.position.x - _orb.position.x, target.position.y - _orb.position.y);
-        if ([target intersectsNode:_orb] && distance < target.size.width/5) {
+        if (!_noteMissed && [target intersectsNode:_orb] && distance < 20) {
             [self handleHitOnTarget:target];
             _notePlayed = true;
         } else {
-            [self handleMissOnTarget:target];
+            SKAction *flashOn = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1.0 duration:0.1];
+            SKAction *flashOff = [SKAction colorizeWithColorBlendFactor:0.0 duration:0.7];
+            [target runAction:flashOn completion:^{
+                [target runAction:flashOff];
+            }];
         }
     } else if ([node.name isEqualToString:[_loopData getLoopName]]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
@@ -154,14 +159,17 @@
 }
 
 - (void)handleMissOnTarget:(SKSpriteNode *)target {
+    _noteMissed = true;
     SKAction *flashOn = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1.0 duration:0.1];
     SKAction *flashOff = [SKAction colorizeWithColorBlendFactor:0.0 duration:0.7];
     [target runAction:flashOn completion:^{
-        [target runAction:flashOff];
+        [target runAction:flashOff completion:^{
+            _noteMissed = false;
+        }];
     }];
     
     if (!_reachedGoal) {
-        _currentScore -= 3;
+        _currentScore -= 2;
         if (_currentScore < 0) _currentScore = 0;
         [_interactor setPercentFull:_currentScore/_targetScore];
     }
@@ -192,10 +200,12 @@
         _prevPosition = _nextPosition;
         _nextPosition = [_targetPositions[r] CGPointValue];
         _beatChecked = false;
+        _noteMissed = false;
     }
     
     _prevBeat = prevBeat;
     _nextBeat = nextBeat;
+    
 }
 
 - (void)update:(NSTimeInterval)currentTime {
@@ -212,7 +222,7 @@
         currentDiff = [_loopData getNumBeats] - currentBeat;
     }
     
-    if (totalDiff - currentDiff > 0.1 && !_beatChecked) {
+    if (totalDiff - currentDiff > 0.15 && !_beatChecked) {
         if (!_notePlayed) {
             SKSpriteNode *missedTarget;
             for (SKSpriteNode *target in _targets) {
@@ -234,7 +244,9 @@
     _orb.position = position;
     
     [_interactor updateAppearance];
-    
+    double scale = [_interactor getScale];
+    _orb.xScale = scale;
+    _orb.yScale = scale;
 }
 
 @end

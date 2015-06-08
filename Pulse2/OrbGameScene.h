@@ -37,6 +37,7 @@
 
 @property BOOL beatChecked;
 @property BOOL notePlayed;
+@property BOOL noteMissed;
 @property BOOL ready;
 
 @property double targetScore;

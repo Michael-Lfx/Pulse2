@@ -11,6 +11,7 @@
 #import "LoopData.h"
 #import "Conductor.h"
 #import "GraphicsController.h"
+#import "MinigameInteractor.h"
 
 @interface SongTapScene : SKScene
 
@@ -19,12 +20,15 @@
 @property GraphicsController *graphics;
 @property Conductor *conductor;
 @property LoopData *loopData;
+@property MinigameInteractor *interactor;
 @property double nextBeat;
 @property BOOL resetLoopBeat;
 @property double resetLoopTime;
 @property double lastBeat;
 @property UISlider *slider;
 @property int streakCounter;
+@property double currentScore;
+@property double targetScore;
 @property SKLabelNode *streakDisplay;
 @property BOOL reachedGoal;
 
