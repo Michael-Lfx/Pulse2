@@ -16,12 +16,14 @@
 #import "SongSwipeScene.h"
 #import "OrbGameScene.h"
 
+#import "GraphicsController.h"
 #import "Conductor.h"
 #import "LoopData.h"
 
 @interface ViewController ()
 
 @property MainMenuScene *mainMenuScene;
+@property GraphicsController *graphics;
 @property Conductor *conductor;
 
 @end
@@ -42,6 +44,8 @@
     // create a global conductor
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.conductor = [[Conductor alloc] initWithAudioController:delegate.audioController];
+    
+    self.graphics = [[GraphicsController alloc] init];
     
     // configure the views
     self.mainMenuView = [[SKView alloc] initWithFrame:self.view.frame];
@@ -65,6 +69,7 @@
     NSString *soundscapeName = [info objectForKey:@"name"];
     
     [_conductor loadSoundscapeWithPlistNamed:soundscapeName];
+    [_graphics loadSoundscapeWithPlistNamed:soundscapeName];
     
     self.soundScapeView = [[SKView alloc] initWithFrame:self.view.frame];
     
@@ -87,6 +92,7 @@
     if ([soundscapeName isEqualToString:@"relaxation"]) {
         SoundscapeScene *relaxation = [[SoundscapeScene alloc] initWithSize:screenSize];
         relaxation.conductor = _conductor;
+        relaxation.graphics = _graphics;
         [_soundScapeView presentScene: relaxation transition:[SKTransition crossFadeWithDuration:.1]];
     }
 }
@@ -114,23 +120,26 @@
     NSDictionary *info = notification.userInfo;
     
     NSString *loopName = [info objectForKey:@"loopName"];
-//    NSLog(@"%@", loopName);
-    Conductor *conductor = [info objectForKey:@"conductor"];
-    CGPoint pointToZoomTo = [(NSValue *)[info objectForKey:@"nodeCoordinates"] CGPointValue];
-    CGSize nodeSize = [(NSValue *)[info objectForKey:@"nodeSize"] CGSizeValue];
     LoopData *loopData = [[LoopData alloc] initWithPlist:@"relaxation" loop:loopName];
     NSString *minigameName = [loopData getMinigameName];
+    
+    CGPoint pointToZoomTo = [(NSValue *)[info objectForKey:@"nodeCoordinates"] CGPointValue];
+    CGSize nodeSize = [(NSValue *)[info objectForKey:@"nodeSize"] CGSizeValue];
+    
     _miniScapeView = [[SKView alloc] initWithFrame:self.view.frame];
+    
     if ([minigameName isEqualToString:@"SongTapScene"]) {
-        [_miniScapeView presentScene: [[SongTapScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size]];
+        [_miniScapeView presentScene: [[SongTapScene alloc] initWithLoopData:loopData graphics:_graphics conductor:_conductor size:self.view.frame.size]];
     } else if ([minigameName isEqualToString:@"SongTrainScene"]) {
-        [_miniScapeView presentScene:[[SongTrainScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size]];
+        [_miniScapeView presentScene:[[SongTrainScene alloc] initWithLoopData:loopData graphics:_graphics conductor:_conductor size:self.view.frame.size]];
     } else if ([minigameName isEqualToString:@"SongSwipeScene"]) {
-        [_miniScapeView presentScene: [[SongSwipeScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size]];
+        [_miniScapeView presentScene: [[SongSwipeScene alloc] initWithLoopData:loopData graphics:_graphics conductor:_conductor size:self.view.frame.size]];
     } else if ([minigameName isEqualToString:@"OrbGameScene"]) {
-        [_miniScapeView presentScene: [[OrbGameScene alloc] initWithLoopData:loopData conductor:conductor size:self.view.frame.size]];
+        [_miniScapeView presentScene: [[OrbGameScene alloc] initWithLoopData:loopData graphics:_graphics conductor:_conductor size:self.view.frame.size]];
     }
-    [conductor fadeVolumeForLoop:loopName withDuration:1 fadeIn:YES];
+    
+    [_conductor setMinigameLoop:loopName];
+    
     _miniScapeView.alpha = 0;
     [self.view addSubview:_miniScapeView];
     [_soundScapeView.scene setPaused:YES];
@@ -142,10 +151,9 @@
     [UIView animateWithDuration:1.2 delay:0 options:0 animations:^{
         _soundScapeView.transform = tr;
         _soundScapeView.center = CGPointMake(w-w*s/2 + (w - pointToZoomTo.x)*s, h*s/2 - (h - pointToZoomTo.y)*s);
+        _soundScapeView.alpha = 0;
+        _miniScapeView.alpha = 1;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:1.0 animations:^{
-            _miniScapeView.alpha = 1;
-        }];
         if([_miniScapeView.scene isKindOfClass:[SongTapScene class]])
             [(SongTapScene *)_miniScapeView.scene displayDirections];
         else if([_miniScapeView.scene isKindOfClass:[SongTrainScene class]])
@@ -158,8 +166,10 @@
 
 - (void)returnToGameScene:(NSNotification *)notification {
     [_soundScapeView.scene setPaused:NO];
+    [_conductor setMinigameLoop:nil];
     [UIView animateWithDuration:.4 animations:^{
-        _miniScapeView.alpha=0;
+        _miniScapeView.alpha = 0;
+        _soundScapeView.alpha = 1;
     }];
     [UIView animateWithDuration:1.0 animations:^{
         _soundScapeView.transform = CGAffineTransformMakeScale(1, 1);

@@ -13,16 +13,18 @@
 
 #pragma mark - INITIALIZATION
 
-- (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor size:(CGSize)size {
+- (instancetype)initWithLoopData:(LoopData *)data graphics:(GraphicsController *)graphics conductor:(Conductor *)conductor size:(CGSize)size {
     self = [super initWithSize:size];
     if (self) {
         self.loopData = data;
         self.conductor = conductor;
+        self.graphics = graphics;
         
         self.beatValues = [_loopData getBeatValuesForVoice:0];
         self.ready = false;
         self.beatChecked = false;
         self.notePlayed = false;
+        self.reachedGoal = true;
     }
     
     return self;
@@ -33,7 +35,7 @@
 - (void) didMoveToView:(SKView *)view
 {
     // setup scene
-    self.backgroundColor = [SKColor colorWithRed:10.0/255 green:55.0/255 blue:70.0/255 alpha:1.0];
+    self.backgroundColor = [_graphics getBackgroundColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
         
     [_conductor addObserver:self forKeyPath:@"currentBeat" options:0 context:nil];
@@ -133,7 +135,7 @@
             }];
         }
     } else if ([node.name isEqualToString:@"backButton"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     }
 }
 

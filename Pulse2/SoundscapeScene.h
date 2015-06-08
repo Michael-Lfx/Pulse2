@@ -9,6 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "SoundInteractor.h"
 #import "Conductor.h"
+#import "GraphicsController.h"
 
 static const uint32_t edgeCategory = 0x1 << 0;
 static const uint32_t ballCategory = 0x1 << 1;
@@ -21,6 +22,7 @@ static const uint32_t borderCategory = 0x1 << 4;
 
 // audio
 //@property AEAudioController *audioController;
+@property GraphicsController *graphics;
 @property Conductor *conductor;
 //@property AEAudioUnitChannel *collisionSound;
 //@property NSMutableArray *soundChannels;

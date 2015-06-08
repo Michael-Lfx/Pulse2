@@ -9,6 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import <TheAmazingAudioEngine/TheAmazingAudioEngine.h>
 #import "Conductor.h"
+#import "GraphicsController.h"
 
 @interface SoundInteractor : SKSpriteNode
 
@@ -30,6 +31,8 @@
 
 // turn on with volume and color fade in
 - (void)turnOn;
+// turn on without fades
+- (void)turnOnSimple;
 // turn off with volume and color fade out
 - (void)turnOff;
 // update size of interactor according to current sound amplitude
@@ -37,5 +40,6 @@
 
 - (void)setUpInteractor;
 
+@property GraphicsController *graphics;
 
 @end

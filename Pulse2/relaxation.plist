@@ -190,9 +190,13 @@
 			<array>
 				<array>
 					<integer>0</integer>
+					<string>2</string>
 					<integer>4</integer>
+					<string>6</string>
 					<integer>8</integer>
+					<string>10</string>
 					<integer>12</integer>
+					<string>14</string>
 				</array>
 			</array>
 			<key>minigame name</key>
@@ -204,9 +208,17 @@
 			<array>
 				<array>
 					<integer>0</integer>
+					<string>0.67</string>
+					<string>1.33</string>
 					<integer>4</integer>
+					<string>4.67</string>
+					<string>5.33</string>
 					<integer>8</integer>
+					<string>8.67</string>
+					<string>9.33</string>
 					<integer>12</integer>
+					<string>12.67</string>
+					<string>13.33</string>
 				</array>
 			</array>
 			<key>minigame name</key>

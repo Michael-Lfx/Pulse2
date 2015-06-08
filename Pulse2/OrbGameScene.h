@@ -10,11 +10,13 @@
 #import <SpriteKit/SpriteKit.h>
 #import "LoopData.h"
 #import "Conductor.h"
+#import "GraphicsController.h"
 
 @interface OrbGameScene : SKScene
 
-- (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor size:(CGSize)size;
+- (instancetype)initWithLoopData:(LoopData *)data graphics:(GraphicsController *)graphics conductor:(Conductor *)conductor size:(CGSize)size;
 
+@property GraphicsController *graphics;
 @property Conductor *conductor;
 @property LoopData *loopData;
 
@@ -34,5 +36,6 @@
 @property BOOL beatChecked;
 @property BOOL notePlayed;
 @property BOOL ready;
+@property BOOL reachedGoal;
 
 @end

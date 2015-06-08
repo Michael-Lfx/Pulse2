@@ -34,6 +34,7 @@
 		BA4AA3AC1B02BA1F007E3D7B /* SongTrainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3A81B02BA1F007E3D7B /* SongTrainScene.m */; };
 		BA4AA3AD1B02BA1F007E3D7B /* SongSwipeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */; };
 		BAA47FE81B237B3C0072241E /* OrbGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA47FE71B237B3C0072241E /* OrbGameScene.m */; };
+		BAA47FED1B2506190072241E /* GraphicsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA47FEC1B2506190072241E /* GraphicsController.m */; };
 		BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB96FAB1AF81613001906D0 /* MainMenuScene.m */; };
 		BAB9D83E1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB9D83D1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m */; };
 		BABCBEE51B237ABD003FE0E5 /* SoundscapeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BABCBEE41B237ABD003FE0E5 /* SoundscapeScene.m */; };
@@ -98,6 +99,8 @@
 		BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSwipeScene.m; sourceTree = "<group>"; };
 		BAA47FE61B237B3C0072241E /* OrbGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbGameScene.h; sourceTree = "<group>"; };
 		BAA47FE71B237B3C0072241E /* OrbGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbGameScene.m; sourceTree = "<group>"; };
+		BAA47FEB1B2506190072241E /* GraphicsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsController.h; sourceTree = "<group>"; };
+		BAA47FEC1B2506190072241E /* GraphicsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphicsController.m; sourceTree = "<group>"; };
 		BAB96FAA1AF81613001906D0 /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		BAB96FAB1AF81613001906D0 /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
 		BAB9D83C1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDoubleTapGestureRecognizer.h; sourceTree = "<group>"; };
@@ -245,10 +248,6 @@
 			children = (
 				BABCBEE31B237ABD003FE0E5 /* SoundscapeScene.h */,
 				BABCBEE41B237ABD003FE0E5 /* SoundscapeScene.m */,
-				BA2BD3071AF98CA0008A4169 /* Conductor.h */,
-				BA2BD3081AF98CA0008A4169 /* Conductor.m */,
-				BA2BD30A1AF99D2D008A4169 /* LoopData.h */,
-				BA2BD30B1AF99D2D008A4169 /* LoopData.m */,
 				BAF06F351AEED6F400FBB4C3 /* SoundInteractor.h */,
 				BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */,
 			);
@@ -288,6 +287,12 @@
 		BAB9D83B1B0A9361009D4F50 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				BAA47FEB1B2506190072241E /* GraphicsController.h */,
+				BAA47FEC1B2506190072241E /* GraphicsController.m */,
+				BA2BD3071AF98CA0008A4169 /* Conductor.h */,
+				BA2BD3081AF98CA0008A4169 /* Conductor.m */,
+				BA2BD30A1AF99D2D008A4169 /* LoopData.h */,
+				BA2BD30B1AF99D2D008A4169 /* LoopData.m */,
 				BAB9D83C1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.h */,
 				BAB9D83D1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m */,
 			);
@@ -362,7 +367,7 @@
 				TargetAttributes = {
 					BA3C00801AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 65AAS3WP88;
+						DevelopmentTeam = 365AV5B22T;
 					};
 					BA3C00991AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -472,6 +477,7 @@
 				BA2BD30C1AF99D2D008A4169 /* LoopData.m in Sources */,
 				BA3C008D1AE7140B00911004 /* ViewController.m in Sources */,
 				BA3C008A1AE7140B00911004 /* AppDelegate.m in Sources */,
+				BAA47FED1B2506190072241E /* GraphicsController.m in Sources */,
 				BABCBEE51B237ABD003FE0E5 /* SoundscapeScene.m in Sources */,
 				BAB9D83E1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m in Sources */,
 				BA4AA3AC1B02BA1F007E3D7B /* SongTrainScene.m in Sources */,

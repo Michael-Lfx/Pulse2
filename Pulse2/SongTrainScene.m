@@ -12,11 +12,12 @@
 
 #pragma mark - INITIALIZATION
 
-- (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor size:(CGSize)size {
+- (instancetype)initWithLoopData:(LoopData *)data graphics:(GraphicsController *)graphics conductor:(Conductor *)conductor size:(CGSize)size {
     self = [super initWithSize:size];
     if (self) {
         self.loopData = data;
         self.conductor = conductor;
+        self.graphics = graphics;
     }
     
     return self;
@@ -25,7 +26,7 @@
 - (void) didMoveToView:(SKView *)view
 {
     // setup scene
-    self.backgroundColor = [SKColor colorWithRed:10.0/255 green:55.0/255 blue:70.0/255 alpha:1.0];
+    self.backgroundColor = [_graphics getBackgroundColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
     
     // setup global variables
@@ -300,7 +301,7 @@
         if((track.position.x >= _train.frame.origin.x - 10 && track.position.x <= _train.frame.origin.x + 10) ||
            _trainIsJumping){ // evaluate what makes this true at this point in time
             _streakCounter ++;
-            if(_streakCounter == 20){
+            if(_streakCounter == 1){
                 _reachedGoal = YES;
                 [self flashColoredScreen:[UIColor greenColor]];
                 _streakDisplay.colorBlendFactor = .8;

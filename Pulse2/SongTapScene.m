@@ -10,11 +10,12 @@
 
 @implementation SongTapScene
 
-- (instancetype)initWithLoopData:(LoopData *)data conductor:(Conductor *)conductor size:(CGSize)size {
+- (instancetype)initWithLoopData:(LoopData *)data graphics:(GraphicsController *)graphics conductor:(Conductor *)conductor size:(CGSize)size {
     self = [super initWithSize:size];
     if (self) {
         self.loopData = data;
         self.conductor = conductor;
+        self.graphics = graphics;
     }
     
     return self;
@@ -23,7 +24,7 @@
 - (void) didMoveToView:(SKView *)view
 {
     /* Setup your scene here */
-    self.backgroundColor = [SKColor colorWithRed:10.0/255 green:55.0/255 blue:70.0/255 alpha:1.0];
+    self.backgroundColor = [_graphics getBackgroundColor];
     self.scaleMode = SKSceneScaleModeAspectFit;
     
     _nextBeat = [self getNearestHigherBeat];
@@ -98,7 +99,7 @@
                     _streakCounter ++;
                     [node setFillColor:[UIColor greenColor]];
                     [self updateStreakCounterDisplay];
-                    if(_streakCounter == 10){
+                    if(_streakCounter == 1){
                         _reachedGoal = YES;
                         [self flashColoredScreen:[UIColor greenColor]];
                         _streakDisplay.color = [UIColor greenColor];

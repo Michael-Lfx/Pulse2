@@ -22,7 +22,9 @@
 - (void)stop;
 
 - (void)setVolumeForLoop:(NSString *)loopName withVolume:(double)volume;
-- (void)fadeVolumeForLoop:(NSString *)loopName withDuration:(double)duration fadeIn:(BOOL)fadeIn;
+//- (void)fadeVolumeForLoop:(NSString *)loopName withDuration:(double)duration fadeIn:(BOOL)fadeIn;
+
+- (void)setMinigameLoop:(NSString *)loopName;
 
 - (double)getPowerLevelForLoop:(NSString *)loopName;
 - (double)getCurrentBeatForLoop:(NSString *)loopName;
@@ -34,6 +36,7 @@
 
 @property(nonatomic) NSMutableDictionary *audioFilePlayers;
 @property(nonatomic) NSMutableDictionary *channelGroups;
+@property AEAudioFilePlayer *theMinigameLoop;
 @property AEChannelGroupRef masterChannel;
 
 @property BOOL shouldCheckLevels;

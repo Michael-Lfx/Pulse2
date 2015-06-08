@@ -19,6 +19,7 @@ double _beats;
     if (self) {
         self.audioController = audioController;
         self.shouldCheckLevels = false;
+        self.theMinigameLoop = nil;
     }
     
     return self;
@@ -54,7 +55,7 @@ double _beats;
     }
     
     self.masterChannel = [_audioController createChannelGroup];
-    [_audioController addChannels:[_audioFilePlayers allValues] toChannelGroup:_masterChannel];
+//    [_audioController addChannels:[_audioFilePlayers allValues] toChannelGroup:_masterChannel];
     
     _shouldCheckLevels = true;
 }
@@ -97,6 +98,32 @@ double _beats;
        else
            player.volume = 0;
     }];
+}
+
+- (void)setMinigameLoop:(NSString *)loopName {
+    if (loopName == nil) {
+        for (NSString *name in _audioFilePlayers) {
+            AEAudioFilePlayer *player = [_audioFilePlayers objectForKey:name];
+            if (player.volume > 0) {
+                [UIView animateWithDuration:1.0 animations:^{
+                    player.volume = 1.0;
+                }];
+            }
+        }
+    } else {
+        _theMinigameLoop = [_audioFilePlayers objectForKey:loopName];
+        for (NSString *name in _audioFilePlayers) {
+            AEAudioFilePlayer *player = [_audioFilePlayers objectForKey:name];
+            if (player.volume > 0) {
+                [UIView animateWithDuration:1.0 animations:^{
+                    player.volume = 0.5;
+                }];
+            }
+        }
+        [UIView animateWithDuration:1.0 animations:^{
+            _theMinigameLoop.volume = 1.0;
+        }];
+    }
 }
 
 - (double)getPowerLevelForLoop:(NSString *)loopName {
