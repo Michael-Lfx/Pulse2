@@ -33,6 +33,8 @@
 		BA4AA3A11B02B9A1007E3D7B /* Triangle_9.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4AA39F1B02B9A1007E3D7B /* Triangle_9.png */; };
 		BA4AA3AC1B02BA1F007E3D7B /* SongTrainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3A81B02BA1F007E3D7B /* SongTrainScene.m */; };
 		BA4AA3AD1B02BA1F007E3D7B /* SongSwipeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */; };
+		BA7DEC8C1B2571EC00C4A238 /* MinigameInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7DEC8B1B2571EC00C4A238 /* MinigameInteractor.m */; };
+		BA7DEC901B2575ED00C4A238 /* UIColor+CrossFade.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7DEC8F1B2575ED00C4A238 /* UIColor+CrossFade.m */; };
 		BAA47FE81B237B3C0072241E /* OrbGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA47FE71B237B3C0072241E /* OrbGameScene.m */; };
 		BAA47FED1B2506190072241E /* GraphicsController.m in Sources */ = {isa = PBXBuildFile; fileRef = BAA47FEC1B2506190072241E /* GraphicsController.m */; };
 		BAB96FAC1AF81613001906D0 /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BAB96FAB1AF81613001906D0 /* MainMenuScene.m */; };
@@ -97,6 +99,10 @@
 		BA4AA3A81B02BA1F007E3D7B /* SongTrainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTrainScene.m; sourceTree = "<group>"; };
 		BA4AA3A91B02BA1F007E3D7B /* SongSwipeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSwipeScene.h; sourceTree = "<group>"; };
 		BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongSwipeScene.m; sourceTree = "<group>"; };
+		BA7DEC8A1B2571EC00C4A238 /* MinigameInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinigameInteractor.h; sourceTree = "<group>"; };
+		BA7DEC8B1B2571EC00C4A238 /* MinigameInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinigameInteractor.m; sourceTree = "<group>"; };
+		BA7DEC8E1B2575ED00C4A238 /* UIColor+CrossFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CrossFade.h"; sourceTree = "<group>"; };
+		BA7DEC8F1B2575ED00C4A238 /* UIColor+CrossFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CrossFade.m"; sourceTree = "<group>"; };
 		BAA47FE61B237B3C0072241E /* OrbGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbGameScene.h; sourceTree = "<group>"; };
 		BAA47FE71B237B3C0072241E /* OrbGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbGameScene.m; sourceTree = "<group>"; };
 		BAA47FEB1B2506190072241E /* GraphicsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphicsController.h; sourceTree = "<group>"; };
@@ -191,6 +197,7 @@
 		BA3C00831AE7140B00911004 /* Pulse2 */ = {
 			isa = PBXGroup;
 			children = (
+				BA7DEC8D1B2575B500C4A238 /* Handlers */,
 				BA4AA3A41B02B9C3007E3D7B /* Application */,
 				BAAF36791B1E46B800BA2AF1 /* Main Menu */,
 				BA4AA3A31B02B9BC007E3D7B /* Soundscapes */,
@@ -231,6 +238,8 @@
 		BA4AA3A21B02B9AD007E3D7B /* Mini Games */ = {
 			isa = PBXGroup;
 			children = (
+				BA7DEC8A1B2571EC00C4A238 /* MinigameInteractor.h */,
+				BA7DEC8B1B2571EC00C4A238 /* MinigameInteractor.m */,
 				E662A84C1B23AE8100AEFF7E /* SongTapScene.h */,
 				E662A84D1B23AE8100AEFF7E /* SongTapScene.m */,
 				BA4AA3A71B02BA1F007E3D7B /* SongTrainScene.h */,
@@ -267,6 +276,19 @@
 			name = Application;
 			sourceTree = "<group>";
 		};
+		BA7DEC8D1B2575B500C4A238 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				BAA47FEB1B2506190072241E /* GraphicsController.h */,
+				BAA47FEC1B2506190072241E /* GraphicsController.m */,
+				BA2BD3071AF98CA0008A4169 /* Conductor.h */,
+				BA2BD3081AF98CA0008A4169 /* Conductor.m */,
+				BA2BD30A1AF99D2D008A4169 /* LoopData.h */,
+				BA2BD30B1AF99D2D008A4169 /* LoopData.m */,
+			);
+			name = Handlers;
+			sourceTree = "<group>";
+		};
 		BAAF36791B1E46B800BA2AF1 /* Main Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,12 +309,8 @@
 		BAB9D83B1B0A9361009D4F50 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				BAA47FEB1B2506190072241E /* GraphicsController.h */,
-				BAA47FEC1B2506190072241E /* GraphicsController.m */,
-				BA2BD3071AF98CA0008A4169 /* Conductor.h */,
-				BA2BD3081AF98CA0008A4169 /* Conductor.m */,
-				BA2BD30A1AF99D2D008A4169 /* LoopData.h */,
-				BA2BD30B1AF99D2D008A4169 /* LoopData.m */,
+				BA7DEC8E1B2575ED00C4A238 /* UIColor+CrossFade.h */,
+				BA7DEC8F1B2575ED00C4A238 /* UIColor+CrossFade.m */,
 				BAB9D83C1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.h */,
 				BAB9D83D1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m */,
 			);
@@ -473,11 +491,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA7DEC901B2575ED00C4A238 /* UIColor+CrossFade.m in Sources */,
 				BAF06F371AEED6F400FBB4C3 /* SoundInteractor.m in Sources */,
 				BA2BD30C1AF99D2D008A4169 /* LoopData.m in Sources */,
 				BA3C008D1AE7140B00911004 /* ViewController.m in Sources */,
 				BA3C008A1AE7140B00911004 /* AppDelegate.m in Sources */,
 				BAA47FED1B2506190072241E /* GraphicsController.m in Sources */,
+				BA7DEC8C1B2571EC00C4A238 /* MinigameInteractor.m in Sources */,
 				BABCBEE51B237ABD003FE0E5 /* SoundscapeScene.m in Sources */,
 				BAB9D83E1B0A9392009D4F50 /* UIDoubleTapGestureRecognizer.m in Sources */,
 				BA4AA3AC1B02BA1F007E3D7B /* SongTrainScene.m in Sources */,

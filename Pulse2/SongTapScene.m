@@ -84,12 +84,12 @@
 {
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
+    SKNode *tappedNode = [self nodeAtPoint:location];
     
-    if ([node.name isEqualToString:@"backButton"]) {
+    if ([tappedNode.name isEqualToString:@"backButton"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     } else {
-        CGFloat errorAllowed = 25;
+        CGFloat errorAllowed = 50;
         SKNode *playhead = [self childNodeWithName:@"playhead"];
         for (SKShapeNode *node in [self children]){
             if([node.name isEqualToString:@"droppedBall"]){

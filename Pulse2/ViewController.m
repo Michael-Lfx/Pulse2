@@ -90,10 +90,10 @@
     }];
     
     if ([soundscapeName isEqualToString:@"relaxation"]) {
-        SoundscapeScene *relaxation = [[SoundscapeScene alloc] initWithSize:screenSize];
-        relaxation.conductor = _conductor;
-        relaxation.graphics = _graphics;
-        [_soundScapeView presentScene: relaxation transition:[SKTransition crossFadeWithDuration:.1]];
+        self.soundscapeScene = [[SoundscapeScene alloc] initWithSize:screenSize];
+        _soundscapeScene.conductor = _conductor;
+        _soundscapeScene.graphics = _graphics;
+        [_soundScapeView presentScene: _soundscapeScene transition:[SKTransition crossFadeWithDuration:.1]];
     }
 }
 

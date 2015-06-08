@@ -21,10 +21,12 @@
         self.graphics = graphics;
         
         self.beatValues = [_loopData getBeatValuesForVoice:0];
-        self.ready = false;
-        self.beatChecked = false;
-        self.notePlayed = false;
-        self.reachedGoal = true;
+        self.ready = NO;
+        self.beatChecked = NO;
+        self.notePlayed = NO;
+        self.reachedGoal = NO;
+        self.targetScore = [_beatValues count];
+        self.currentScore = 0;
     }
     
     return self;
@@ -44,7 +46,7 @@
     // add nodes
     [self addTargets];
     [self addOrb];
-    [self addBackButton];
+    [self addInteractor];
     _ready = true;
 }
 
@@ -98,16 +100,20 @@
     [_orb setZPosition:-1];
 }
 
-- (void)addBackButton
-{
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    SKSpriteNode *backButton = [SKSpriteNode spriteNodeWithImageNamed:@"blurGlow2"];
-    backButton.position = CGPointMake(screenWidth/2, screenHeight);
-    backButton.name = @"backButton";//how the node is identified later
-    backButton.color = [SKColor greenColor];
-    backButton.colorBlendFactor = .9;
-    [self addChild:backButton];
+- (void)addInteractor {
+    self.interactor = [[MinigameInteractor alloc] initWithTexture:[_graphics getTextureForInteractor:[_loopData getLoopName]]];
+    
+    _interactor.graphics = _graphics;
+    [_interactor setUpInteractor];
+    
+    _interactor.position = CGPointMake(self.size.width/2, self.size.height*0.75);
+    _interactor.zPosition = -2;
+    _interactor.name = [_loopData getLoopName];
+    _interactor.color = [_graphics getInteractorOnColor];
+    
+    [_interactor connectToConductor:_conductor];
+    
+    [self addChild:_interactor];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -121,21 +127,43 @@
 //        int targetNum = [[target.name substringFromIndex:6] integerValue];
         double distance = hypot(target.position.x - _orb.position.x, target.position.y - _orb.position.y);
         if ([target intersectsNode:_orb] && distance < target.size.width/5) {
-            SKAction *flashOn = [SKAction colorizeWithColor:[UIColor greenColor] colorBlendFactor:1.0 duration:0.1];
-            SKAction *flashOff = [SKAction colorizeWithColorBlendFactor:0.0 duration:0.7];
-            [target runAction:flashOn completion:^{
-                [target runAction:flashOff];
-            }];
+            [self handleHitOnTarget:target];
             _notePlayed = true;
         } else {
-            SKAction *flashOn = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1.0 duration:0.1];
-            SKAction *flashOff = [SKAction colorizeWithColorBlendFactor:0.0 duration:0.7];
-            [target runAction:flashOn completion:^{
-                [target runAction:flashOff];
-            }];
+            [self handleMissOnTarget:target];
         }
-    } else if ([node.name isEqualToString:@"backButton"]) {
+    } else if ([node.name isEqualToString:[_loopData getLoopName]]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
+    }
+}
+
+- (void)handleHitOnTarget:(SKSpriteNode *)target {
+    SKAction *flashOn = [SKAction colorizeWithColor:[UIColor greenColor] colorBlendFactor:1.0 duration:0.1];
+    SKAction *flashOff = [SKAction colorizeWithColorBlendFactor:0.0 duration:0.7];
+    [target runAction:flashOn completion:^{
+        [target runAction:flashOff];
+    }];
+    
+    if (!_reachedGoal) {
+        _currentScore++;
+        [_interactor setPercentFull:_currentScore/_targetScore];
+        if (_currentScore == _targetScore) {
+            _reachedGoal = YES;
+        }
+    }
+}
+
+- (void)handleMissOnTarget:(SKSpriteNode *)target {
+    SKAction *flashOn = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1.0 duration:0.1];
+    SKAction *flashOff = [SKAction colorizeWithColorBlendFactor:0.0 duration:0.7];
+    [target runAction:flashOn completion:^{
+        [target runAction:flashOff];
+    }];
+    
+    if (!_reachedGoal) {
+        _currentScore -= 3;
+        if (_currentScore < 0) _currentScore = 0;
+        [_interactor setPercentFull:_currentScore/_targetScore];
     }
 }
 
@@ -193,11 +221,7 @@
                     break;
                 }
             }
-            SKAction *flashOn = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1.0 duration:0.1];
-            SKAction *flashOff = [SKAction colorizeWithColorBlendFactor:0.0 duration:0.7];
-            [missedTarget runAction:flashOn completion:^{
-                [missedTarget runAction:flashOff];
-            }];
+            [self handleMissOnTarget:missedTarget];
         }
         _notePlayed = false;
         _beatChecked = true;
@@ -208,6 +232,8 @@
     CGPoint position = CGPointMake(_prevPosition.x*ratio + _nextPosition.x*(1-ratio), _prevPosition.y*ratio + _nextPosition.y*(1-ratio));
     
     _orb.position = position;
+    
+    [_interactor updateAppearance];
     
 }
 

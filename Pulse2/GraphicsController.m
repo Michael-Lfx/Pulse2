@@ -61,7 +61,7 @@
     return _backgroundColor;
 }
 
-- (UIColor *)getInteracterOnColor {
+- (UIColor *)getInteractorOnColor {
     return _interactorColorOn;
 }
 

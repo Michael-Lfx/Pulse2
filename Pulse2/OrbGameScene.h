@@ -11,6 +11,7 @@
 #import "LoopData.h"
 #import "Conductor.h"
 #import "GraphicsController.h"
+#import "MinigameInteractor.h"
 
 @interface OrbGameScene : SKScene
 
@@ -26,6 +27,7 @@
 
 @property SKSpriteNode *orb;
 @property NSMutableArray *targets;
+@property MinigameInteractor *interactor;
 
 @property NSArray *targetPositions;
 @property CGPoint prevPosition;
@@ -36,6 +38,9 @@
 @property BOOL beatChecked;
 @property BOOL notePlayed;
 @property BOOL ready;
+
+@property double targetScore;
+@property double currentScore;
 @property BOOL reachedGoal;
 
 @end

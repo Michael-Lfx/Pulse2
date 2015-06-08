@@ -18,7 +18,6 @@
 @implementation SoundscapeScene
 
 double interactorTimerDuration = 1.0;
-float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
 
 - (void)didMoveToView:(SKView *)view {
     if(_hasBeenInitialized)
@@ -45,6 +44,10 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToGameScene:) name:@"ReturnToGameScene" object:nil];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ReturnToGameScene" object:nil];
+}
+
 - (void)createSoundInteractors {
     CGFloat windowWidth = self.size.width;
     CGFloat windowHeight = self.size.height;
@@ -66,7 +69,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         if(y < _baseInteractorSize/2) y += _baseInteractorSize/2;
         
         // create interactor, attach to audio file player
-        SoundInteractor *interactor = [[ SoundInteractor alloc] initWithImageNamed:@"interactor_locked"];
+        SoundInteractor *interactor = [[ SoundInteractor alloc] initWithTexture:[_graphics getTextureForInteractor:filename]];
         interactor.graphics = _graphics;
         [interactor setUpInteractor];
         
@@ -92,32 +95,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     }
     
     self.draggedInteractor = nil;
-    
-    //    AudioComponentDescription component = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
-    //                                                                          kAudioUnitType_MusicDevice,
-    //                                                                          kAudioUnitSubType_Sampler);
-    //    NSError *error = NULL;
-    //    self.collisionSound = [[AEAudioUnitChannel alloc] initWithComponentDescription:component audioController:_audioController error:&error];
-    //    if (!_collisionSound) {
-    //        // report error
-    //    } else {
-    //
-    //        NSURL *presetURL = [[NSBundle mainBundle] URLForResource:@"piano" withExtension:@"aupreset"];
-    //
-    //        OSStatus result = noErr;
-    //        AUSamplerInstrumentData auPreset = {0};
-    //        auPreset.fileURL = (__bridge CFURLRef)presetURL;
-    //        auPreset.instrumentType = kInstrumentType_AUPreset;
-    //        result = AudioUnitSetProperty(_collisionSound.audioUnit,
-    //                             kAUSamplerProperty_LoadInstrument,
-    //                             kAudioUnitScope_Global,
-    //                             0,
-    //                             &auPreset,
-    //                             sizeof(auPreset));
-    //    }
-    //
-    //    [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
-    //    [_soundChannels addObject:_collisionSound];
 }
 
 - (void)addMenuNode {
@@ -131,7 +108,6 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     homeNode.colorBlendFactor = 1.0;
     SKSpriteNode *homeIcon = [SKSpriteNode spriteNodeWithImageNamed:@"home_icon"];
     [homeNode addChild:homeIcon];
-//    menuNode.blendMode = nil;
     
     [homeNode setPhysicsBody:[SKPhysicsBody bodyWithTexture:homeNode.texture alphaThreshold:0 size:homeNode.size]];
     homeNode.physicsBody.affectedByGravity = NO;
@@ -140,7 +116,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
     homeNode.physicsBody.friction = 0.0f;
     homeNode.physicsBody.restitution = 0.0f;
     homeNode.physicsBody.linearDamping = 0.1f;
-    homeNode.physicsBody.angularDamping = 0.0f;
+    homeNode.physicsBody.angularDamping = 0.2f;
     homeNode.physicsBody.categoryBitMask = ballCategory;
     homeNode.physicsBody.collisionBitMask = ballCategory | edgeCategory;
     homeNode.physicsBody.contactTestBitMask = edgeCategory | ballCategory;
@@ -236,12 +212,11 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         
     }
     
-    //    if (contactImpulse > 1) {
-    //        int r = arc4random_uniform(6);
-    //        float vel = pow(10, 1/(-contactImpulse));
-    //        int intVel = roundf(vel * 50);
-    //        MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, collisionFrequencies[r], intVel, 0);
-    //    }
+        if (contactImpulse > 1) {
+            float vel = pow(10, 1/(-contactImpulse));
+            int intVel = roundf(vel * 50);
+            [_conductor playCollisionSoundWithVelocity:intVel];
+        }
 }
 
 
@@ -298,7 +273,7 @@ float collisionFrequencies[6] = {51, 55, 56, 58, 62, 63};
         } else {
             [interactor turnOff];
         }
-    } else if ([touchedNode.name isEqualToString:@"menuNode"]) {
+    } else if ([touchedNode.name isEqualToString:@"homeNode"] || [touchedNode.parent.name isEqualToString:@"homeNode"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToMainMenu" object:self userInfo:nil];
     }
 }

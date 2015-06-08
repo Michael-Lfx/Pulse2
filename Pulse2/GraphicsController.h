@@ -16,7 +16,7 @@
 
 - (SKTexture *)getTextureForInteractor:(NSString *)name;
 - (UIColor *)getBackgroundColor;
-- (UIColor *)getInteracterOnColor;
+- (UIColor *)getInteractorOnColor;
 - (UIColor *)getInteractorOffColor;
 
 @end

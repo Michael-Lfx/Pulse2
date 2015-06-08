@@ -54,8 +54,32 @@ double _beats;
         [_channelGroups setObject:[NSValue valueWithPointer:group] forKey:filename];
     }
     
-    self.masterChannel = [_audioController createChannelGroup];
-//    [_audioController addChannels:[_audioFilePlayers allValues] toChannelGroup:_masterChannel];
+    AudioComponentDescription component = AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
+                                                                          kAudioUnitType_MusicDevice,
+                                                                          kAudioUnitSubType_Sampler);
+    NSError *error = NULL;
+    self.collisionSound = [[AEAudioUnitChannel alloc] initWithComponentDescription:component audioController:_audioController error:&error];
+    if (!_collisionSound) {
+        // report error
+    } else {
+        
+        NSURL *presetURL = [[NSBundle mainBundle] URLForResource:@"piano" withExtension:@"aupreset"];
+        
+        OSStatus result = noErr;
+        AUSamplerInstrumentData auPreset = {0};
+        auPreset.fileURL = (__bridge CFURLRef)presetURL;
+        auPreset.instrumentType = kInstrumentType_AUPreset;
+        result = AudioUnitSetProperty(_collisionSound.audioUnit,
+                                      kAUSamplerProperty_LoadInstrument,
+                                      kAudioUnitScope_Global,
+                                      0,
+                                      &auPreset,
+                                      sizeof(auPreset));
+    }
+    
+    [_audioController addChannels:[NSArray arrayWithObject:_collisionSound]];
+    
+    self.collisionNotes = [_data objectForKey:@"collision notes"];
     
     _shouldCheckLevels = true;
 }
@@ -83,6 +107,11 @@ double _beats;
         AEAudioFilePlayer *player = [_audioFilePlayers objectForKey:filename];
         player.channelIsPlaying = NO;
     }
+}
+
+-(void)playCollisionSoundWithVelocity:(int)vel {
+    int r = arc4random_uniform((int)[_collisionNotes count]);
+    MusicDeviceMIDIEvent(_collisionSound.audioUnit, 0x90, (UInt32)[_collisionNotes[r] integerValue], vel, 0);
 }
 
 - (void)setVolumeForLoop:(NSString *)loopName withVolume:(double)volume {

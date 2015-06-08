@@ -21,6 +21,8 @@
 - (void)start;
 - (void)stop;
 
+-(void)playCollisionSoundWithVelocity:(int)vel;
+
 - (void)setVolumeForLoop:(NSString *)loopName withVolume:(double)volume;
 //- (void)fadeVolumeForLoop:(NSString *)loopName withDuration:(double)duration fadeIn:(BOOL)fadeIn;
 
@@ -37,7 +39,9 @@
 @property(nonatomic) NSMutableDictionary *audioFilePlayers;
 @property(nonatomic) NSMutableDictionary *channelGroups;
 @property AEAudioFilePlayer *theMinigameLoop;
-@property AEChannelGroupRef masterChannel;
+
+@property AEAudioUnitChannel *collisionSound;
+@property NSArray *collisionNotes;
 
 @property BOOL shouldCheckLevels;
 

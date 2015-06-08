@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>collision notes</key>
+	<array>
+		<integer>51</integer>
+		<integer>55</integer>
+		<integer>56</integer>
+		<integer>58</integer>
+		<integer>62</integer>
+		<integer>63</integer>
+	</array>
+	<key>collision sound</key>
+	<string>piano</string>
 	<key>extension</key>
 	<string>mp3</string>
 	<key>bpm</key>

@@ -98,14 +98,13 @@ double _appearAnimationTime = 2.5;
 - (void)unlockNode {
     if (_ready) {
         _unlocked = YES;
-        self.color = [_graphics getInteracterOnColor];
+        self.color = [_graphics getInteractorOnColor];
     }
 }
 
 - (void)lockNode
 {
     _unlocked = NO;
-    self.texture = [SKTexture textureWithImageNamed:@"interactor_locked"];
     self.color = [_graphics getInteractorOffColor];
     [self runAction: [SKAction customActionWithDuration:_volumeFadeTime actionBlock:^(SKNode *node, CGFloat elapsedTime) {
         double targetValue = (elapsedTime / _volumeFadeTime);
@@ -123,9 +122,7 @@ double _appearAnimationTime = 2.5;
         [self removeActionForKey:@"VolumeDown"];
         [self runAction:_volumeUpAction withKey:@"VolumeUp"];
         
-        [_outerRing runAction:[SKAction fadeInWithDuration:_volumeFadeTime] completion:^{
-            self.texture = [_graphics getTextureForInteractor:self.name];
-        }];
+        [_outerRing runAction:[SKAction fadeInWithDuration:_volumeFadeTime]];
         
 //        SKSpriteNode *tempNode = [SKSpriteNode spriteNodeWithImageNamed:@"node_unlocked_on"];
 //        tempNode.alpha = 0;
@@ -142,7 +139,6 @@ double _appearAnimationTime = 2.5;
 
 - (void)turnOnSimple {
     _state = YES;
-    self.texture = [_graphics getTextureForInteractor:self.name];
     _outerRing.alpha = 1;
 }
 
@@ -150,9 +146,7 @@ double _appearAnimationTime = 2.5;
     [self removeActionForKey:@"VolumeUp"];
     [self runAction:_volumeDownAction withKey:@"VolumeDown"];
     
-    [_outerRing runAction:[SKAction fadeOutWithDuration:_volumeFadeTime] completion:^{
-        self.texture = [_graphics getTextureForInteractor:self.name];
-    }];
+    [_outerRing runAction:[SKAction fadeOutWithDuration:_volumeFadeTime]];
     
 //    SKSpriteNode *tempNode = [SKSpriteNode spriteNodeWithImageNamed:@"node_unlocked_on"];
 //    tempNode.zPosition = 1;
@@ -174,6 +168,7 @@ double _appearAnimationTime = 2.5;
     _outerRing.alpha = 0;
     _outerRing.zPosition = -1;
     [self addChild:_outerRing];
+    
     
     self.color = [_graphics getInteractorOffColor];
     self.colorBlendFactor = 1.0;
