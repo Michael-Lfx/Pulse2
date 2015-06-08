@@ -107,7 +107,7 @@
     CGPoint location = [touch locationInNode:self];
     SKNode *tappedNode = [self nodeAtPoint:location];
     
-    if ([tappedNode.name isEqualToString:@"backButton"]) {
+    if ([tappedNode.name isEqualToString:[_loopData getLoopName]]) {
         if(_reachedGoal){
             int timesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenTrainGame"];
             [[NSUserDefaults standardUserDefaults] setInteger:timesBeaten + 1 forKey:@"timesBeatenTrainGame"];
