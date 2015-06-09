@@ -44,6 +44,42 @@ double interactorTimerDuration = 3.0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnFromGameScene:) name:@"ReturnFromGameScene" object:nil];
 }
 
+- (void)displayMessage1
+{
+    SKSpriteNode *message = [SKSpriteNode spriteNodeWithImageNamed:@"soundscape_message_1"];
+    message.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    message.userInteractionEnabled = NO;
+    message.name = @"message";
+    message.userInteractionEnabled = NO;
+    message.zPosition = 2;
+    [self addChild:message];
+    
+}
+
+- (void)displayMessage2
+{
+    SKSpriteNode *message = [SKSpriteNode spriteNodeWithImageNamed:@"soundscape_message_2"];
+    message.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    message.userInteractionEnabled = NO;
+    message.name = @"message";
+    message.userInteractionEnabled = NO;
+    message.zPosition = 2;
+    [self addChild:message];
+    
+}
+
+- (void)displayMessage3
+{
+    SKSpriteNode *message = [SKSpriteNode spriteNodeWithImageNamed:@"soundscape_message_3"];
+    message.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    message.userInteractionEnabled = NO;
+    message.name = @"message";
+    message.userInteractionEnabled = NO;
+    message.zPosition = 2;
+    [self addChild:message];
+    
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ReturnFromGameScene" object:nil];
 }
@@ -289,6 +325,11 @@ double interactorTimerDuration = 3.0;
         }
     } else if ([touchedNode.name isEqualToString:@"homeNode"] || [touchedNode.parent.name isEqualToString:@"homeNode"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToMainMenu" object:self userInfo:nil];
+    } else if ([touchedNode.name isEqualToString:@"message"]) {
+        SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:0.5];
+        [touchedNode runAction:fadeOut completion:^(void){
+            [touchedNode removeFromParent];
+        }];
     }
 }
 
@@ -393,12 +434,22 @@ double interactorTimerDuration = 3.0;
         NSMutableDictionary *unlockedNodesDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:_unlockedNodesDictName]];
         [unlockedNodesDict setValue: [NSNumber numberWithBool:YES] forKey:_tappedInteractor.name];
         [[NSUserDefaults standardUserDefaults] setValue:unlockedNodesDict forKey:_unlockedNodesDictName];
-        if(unlockedNodesDict.count == _interactorCount){
+        if(unlockedNodesDict.count == [_soundInteractors count]){
             int unlockedScenes = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"soundscapesCompleted"];
             [[NSUserDefaults standardUserDefaults] setInteger:unlockedScenes + 1 forKey:@"soundscapesCompleted"];
+            
+            if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasSeenMessage3"]) {
+                [self displayMessage3];
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasSeenMessage3"];
+            }
         }
         [_tappedInteractor unlockNode];
         [_tappedInteractor turnOnSimple];
+        
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasSeenMessage2"]) {
+            [self displayMessage2];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasSeenMessage2"];
+        }
     }
     _tappedInteractor = nil;
     self.interactorTimer = [NSTimer scheduledTimerWithTimeInterval:interactorTimerDuration target:self selector:@selector(addNextInteractor) userInfo:nil repeats:YES];

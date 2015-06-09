@@ -107,10 +107,8 @@
     SKNode *tappedNode = [self nodeAtPoint:location];
     
     if ([tappedNode.name isEqualToString:[_loopData getLoopName]]) {
-        if(_reachedGoal){
-            int timesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenTrainGame"];
-            [[NSUserDefaults standardUserDefaults] setInteger:timesBeaten + 1 forKey:@"timesBeatenTrainGame"];
-        }
+        int timesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"timeSeenTapGame"];
+        [[NSUserDefaults standardUserDefaults] setInteger:timesBeaten + 1 forKey:@"timeSeenTapGame"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnFromGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     } else {
         CGFloat errorAllowed = 40;

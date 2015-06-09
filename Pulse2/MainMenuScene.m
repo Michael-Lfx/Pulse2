@@ -149,11 +149,16 @@ bool _nodesAdded = false;
             }];
         }];
     } else if ([touchedNode.name isEqualToString:@"demoReset"]){
+        [[self childNodeWithName:@"demoReset"] runAction:[SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1.0 duration:0.05] completion:^{
+            [[self childNodeWithName:@"demoReset"] runAction:[SKAction colorizeWithColorBlendFactor:0.0 duration:0.7]];
+        }];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstTime"];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenSoundscape"];
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesBeatenTrainGame"];
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesBeatenTapGame"];
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesBeatenPulseGame"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenMessage1"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenMessage2"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenMessage3"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesSeenTrainGame"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timeSeenTapGame"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesSeenOrbGame"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"soundscapesCompleted"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"relaxationUnlockedNodes"];
         // TODO remove for later scenes when we name them

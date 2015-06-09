@@ -44,4 +44,6 @@
 @property double currentScore;
 @property BOOL reachedGoal;
 
+- (void)displayDirections;
+
 @end

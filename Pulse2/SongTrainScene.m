@@ -120,7 +120,7 @@
 {
     // TODO FOR HENRY - CHANGE FILENAME ON NEXT LINE TO BE APPROPRIATE
     SKSpriteNode *directions = [SKSpriteNode spriteNodeWithImageNamed:@"train_game_directions"];
-    directions.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    directions.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.55);
     directions.userInteractionEnabled = NO;
     directions.name = @"directions";
     directions.userInteractionEnabled = NO;
@@ -155,10 +155,8 @@
             [_rightButton runAction:[SKAction colorizeWithColor:[_graphics getInteractorOnColor] colorBlendFactor:1.0 duration:0.7]];
         }];
     } else if ([node.name isEqualToString:[_loopData getLoopName]]) {
-        if(_reachedGoal){
-            int timesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenTrainGame"];
-            [[NSUserDefaults standardUserDefaults] setInteger:timesBeaten + 1 forKey:@"timesBeatenTrainGame"];
-        }
+        int timesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"timesSeenTrainGame"];
+        [[NSUserDefaults standardUserDefaults] setInteger:timesBeaten + 1 forKey:@"timesSeenTrainGame"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnFromGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     }
 }

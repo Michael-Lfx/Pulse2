@@ -137,6 +137,8 @@
             }];
         }
     } else if ([node.name isEqualToString:[_loopData getLoopName]]) {
+        int timesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"timesSeenOrbGame"];
+        [[NSUserDefaults standardUserDefaults] setInteger:timesBeaten + 1 forKey:@"timesSeenOrbGame"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnFromGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     }
 }
@@ -172,6 +174,28 @@
         if (_currentScore < 0) _currentScore = 0;
         [_interactor setPercentFull:_currentScore/_targetScore];
     }
+}
+
+- (void)displayDirections
+{
+    // TODO FOR HENRY - CHANGE FILENAME ON NEXT LINE TO BE APPROPRIATE
+    SKSpriteNode *directions = [SKSpriteNode spriteNodeWithImageNamed:@"orb_game_directions"];
+    directions.position = CGPointMake(self.frame.size.width/2, self.frame.size.height*0.58);
+    directions.userInteractionEnabled = NO;
+    directions.name = @"directions";
+    directions.userInteractionEnabled = NO;
+    [self addChild:directions];
+    [self performSelector:@selector(fadeOutDirections) withObject:nil afterDelay:4];   // ADJUST DELAY TO BE APPROPRIATE
+    
+}
+
+- (void)fadeOutDirections
+{
+    SKSpriteNode *directions = (SKSpriteNode *)[self childNodeWithName:@"directions"];
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:1.5];
+    [directions runAction:fadeOut completion:^(void){
+        [self removeChildrenInArray:@[directions]];
+    }];
 }
 
 - (void)setGameValuesForBeat:(double)currentBeat {
