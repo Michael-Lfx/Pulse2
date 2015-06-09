@@ -161,6 +161,7 @@ bool _nodesAdded = false;
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesSeenOrbGame"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"soundscapesCompleted"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"relaxationUnlockedNodes"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"jamUnlockedNodes"];
         // TODO remove for later scenes when we name them
 //         _node2.alpha = 0.3;
          _node3.alpha = 0.3;
