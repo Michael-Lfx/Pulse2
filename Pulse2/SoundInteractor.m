@@ -137,6 +137,8 @@ double _appearAnimationTime = 2.5;
 }
 
 - (void)turnOnSimple {
+    [self.outerRing removeAllActions];
+    [self removeActionForKey:@"VolumeDown"];
     _state = YES;
     _outerRing.alpha = 1;
 }

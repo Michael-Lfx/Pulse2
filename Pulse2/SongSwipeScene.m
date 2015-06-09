@@ -226,7 +226,7 @@
         SKSpriteNode *hitZone = (SKSpriteNode *)[self childNodeWithName:@"hitZone"];
         _hitNodesAtTouch = [self nodesAtPoint:hitZone.position];
     } else if ([touchedNode.name isEqualToString:@"backButton"]) {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnFromGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     }
 }
 

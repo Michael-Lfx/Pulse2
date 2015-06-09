@@ -84,6 +84,11 @@ bool _nodesAdded = false;
     _loadingNode.userInteractionEnabled = NO;
     [self addChild:_loadingNode];
     
+    SKSpriteNode *demoReset = [SKSpriteNode spriteNodeWithImageNamed:@"demo_reset"];
+    [demoReset setPosition:CGPointMake(demoReset.size.width/2 + 10, self.size.height-demoReset.size.height/2 - 10)];
+    demoReset.name = @"demoReset";
+    [self addChild:demoReset];
+    
     _nodesAdded = true;
 }
 
@@ -124,7 +129,7 @@ bool _nodesAdded = false;
         [_loadingNode runAction:[SKAction fadeAlphaTo:1.0 duration:0.5]];
         [_node2 runAction:[SKAction colorizeWithColor:[UIColor orangeColor] colorBlendFactor:1.0 duration:0.05] completion:^{
             [_node2 runAction:[SKAction colorizeWithColorBlendFactor:0.0 duration:0.5] completion:^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]]; // CHANGE RELAXATION TO APPROPRIATE NAME
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]]; // TODO CHANGE RELAXATION TO APPROPRIATE NAME
             }];
         }];
     } else if([touchedNode isEqualToNode:_node3]){
@@ -132,7 +137,7 @@ bool _nodesAdded = false;
         [_loadingNode runAction:[SKAction fadeAlphaTo:1.0 duration:0.5]];
         [_node3 runAction:[SKAction colorizeWithColor:[UIColor yellowColor] colorBlendFactor:1.0 duration:0.05] completion:^{
             [_node3 runAction:[SKAction colorizeWithColorBlendFactor:0.0 duration:0.5] completion:^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]]; // CHANGE RELAXATION TO APPROPRIATE NAME
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]]; // TODO CHANGE RELAXATION TO APPROPRIATE NAME
             }];
         }];
     } else if([touchedNode isEqualToNode:_node4]){
@@ -140,9 +145,21 @@ bool _nodesAdded = false;
         [_loadingNode runAction:[SKAction fadeAlphaTo:1.0 duration:0.5]];
         [_node4 runAction:[SKAction colorizeWithColor:[UIColor purpleColor] colorBlendFactor:1.0 duration:0.05] completion:^{
             [_node4 runAction:[SKAction colorizeWithColorBlendFactor:0.0 duration:0.5] completion:^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]]; // CHANGE RELAXATION TO APPROPRIATE NAME
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]]; // TODO CHANGE RELAXATION TO APPROPRIATE NAME
             }];
         }];
+    } else if ([touchedNode.name isEqualToString:@"demoReset"]){
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstTime"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenSoundscape"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesBeatenTrainGame"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesBeatenTapGame"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesBeatenPulseGame"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"soundscapesCompleted"];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"relaxationUnlockedNodes"];
+        // TODO remove for later scenes when we name them
+         _node2.alpha = 0.3;
+         _node3.alpha = 0.3;
+         _node4.alpha = 0.3;
     }
 }
 

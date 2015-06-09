@@ -17,7 +17,7 @@
 
 @implementation SoundscapeScene
 
-double interactorTimerDuration = 1.0;
+double interactorTimerDuration = 3.0;
 
 - (void)didMoveToView:(SKView *)view {
     if(_hasBeenInitialized)
@@ -41,11 +41,11 @@ double interactorTimerDuration = 1.0;
     [self startScene];
     _hasBeenInitialized = YES;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToGameScene:) name:@"ReturnToGameScene" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnFromGameScene:) name:@"ReturnFromGameScene" object:nil];
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ReturnToGameScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ReturnFromGameScene" object:nil];
 }
 
 - (void)createSoundInteractors {
@@ -277,6 +277,7 @@ double interactorTimerDuration = 1.0;
             pointToZoomTo.y += touchedNode.frame.size.height/4;
             
             _tappedInteractor = interactor;
+            [_interactorTimer invalidate];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadMinigame" object:self userInfo:[NSDictionary dictionaryWithObjects:@[interactor.name, [NSValue valueWithCGPoint:pointToZoomTo], [NSValue valueWithCGSize:touchedNode.frame.size]] forKeys:@[@"loopName", @"nodeCoordinates", @"nodeSize"]]];
             
 //            [interactor turnOn];
@@ -381,14 +382,14 @@ double interactorTimerDuration = 1.0;
     return NO;
 }
 
-- (void)returnToGameScene:(NSNotification *)notification
+- (void)returnFromGameScene:(NSNotification *)notification
 {
     BOOL wasSuccessful = [(NSNumber *)notification.userInfo[@"reachedGoal"] boolValue];
     if(!wasSuccessful && !_tappedInteractor.isUnlocked){
         [_tappedInteractor lockNode];
-    } else if (!wasSuccessful && _tappedInteractor.isUnlocked) {
+    } else if (_tappedInteractor.isUnlocked) {
         [_tappedInteractor turnOnSimple];
-    } else if(!_tappedInteractor.isUnlocked) {
+    } else {
         NSMutableDictionary *unlockedNodesDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:_unlockedNodesDictName]];
         [unlockedNodesDict setValue: [NSNumber numberWithBool:YES] forKey:_tappedInteractor.name];
         [[NSUserDefaults standardUserDefaults] setValue:unlockedNodesDict forKey:_unlockedNodesDictName];
@@ -400,6 +401,8 @@ double interactorTimerDuration = 1.0;
         [_tappedInteractor turnOnSimple];
     }
     _tappedInteractor = nil;
+    self.interactorTimer = [NSTimer scheduledTimerWithTimeInterval:interactorTimerDuration target:self selector:@selector(addNextInteractor) userInfo:nil repeats:YES];
+    [_interactorTimer fire];
 }
 
 -(void)update:(CFTimeInterval)currentTime {
