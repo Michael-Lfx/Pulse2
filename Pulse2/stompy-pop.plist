@@ -425,11 +425,13 @@
 				</array>
 				<array>
 					<real>1.5</real>
-					<real>5.5</real>
+					<real>9.5</real>
 				</array>
 				<array>
 					<integer>0</integer>
-					<integer>4</integer>
+					<real>3.5</real>
+					<integer>8</integer>
+					<real>11.5</real>
 				</array>
 			</array>
 			<key>minigame name</key>
