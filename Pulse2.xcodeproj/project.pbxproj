@@ -66,6 +66,18 @@
 		E630081C1B27453500178716 /* stompy-pop-shaker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008111B27453500178716 /* stompy-pop-shaker.mp3 */; };
 		E630081D1B27453500178716 /* stompy-pop-trumpet-mute.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008121B27453500178716 /* stompy-pop-trumpet-mute.mp3 */; };
 		E630081F1B27455A00178716 /* stompy-pop.plist in Resources */ = {isa = PBXBuildFile; fileRef = E630081E1B27455A00178716 /* stompy-pop.plist */; };
+		E630082C1B2772F400178716 /* dark-air-jammer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008211B2772F400178716 /* dark-air-jammer.mp3 */; };
+		E630082D1B2772F400178716 /* dark-cello.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008221B2772F400178716 /* dark-cello.mp3 */; };
+		E630082E1B2772F400178716 /* dark-dank-5ths.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008231B2772F400178716 /* dark-dank-5ths.mp3 */; };
+		E630082F1B2772F400178716 /* dark-drumfx.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008241B2772F400178716 /* dark-drumfx.mp3 */; };
+		E63008301B2772F400178716 /* dark-drums.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008251B2772F400178716 /* dark-drums.mp3 */; };
+		E63008311B2772F400178716 /* dark-german-wood.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008261B2772F400178716 /* dark-german-wood.mp3 */; };
+		E63008321B2772F400178716 /* dark-legato.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008271B2772F400178716 /* dark-legato.mp3 */; };
+		E63008331B2772F400178716 /* dark-pearl.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008281B2772F400178716 /* dark-pearl.mp3 */; };
+		E63008341B2772F400178716 /* dark-peppermint.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008291B2772F400178716 /* dark-peppermint.mp3 */; };
+		E63008351B2772F400178716 /* dark-steel-drums.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E630082A1B2772F400178716 /* dark-steel-drums.mp3 */; };
+		E63008361B2772F400178716 /* dark-sub.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E630082B1B2772F400178716 /* dark-sub.mp3 */; };
+		E63008381B27731200178716 /* dark.plist in Resources */ = {isa = PBXBuildFile; fileRef = E63008371B27731200178716 /* dark.plist */; };
 		E662A84E1B23AE8100AEFF7E /* SongTapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E662A84D1B23AE8100AEFF7E /* SongTapScene.m */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +169,18 @@
 		E63008111B27453500178716 /* stompy-pop-shaker.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-shaker.mp3"; sourceTree = "<group>"; };
 		E63008121B27453500178716 /* stompy-pop-trumpet-mute.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-trumpet-mute.mp3"; sourceTree = "<group>"; };
 		E630081E1B27455A00178716 /* stompy-pop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "stompy-pop.plist"; sourceTree = "<group>"; };
+		E63008211B2772F400178716 /* dark-air-jammer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-air-jammer.mp3"; sourceTree = "<group>"; };
+		E63008221B2772F400178716 /* dark-cello.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-cello.mp3"; sourceTree = "<group>"; };
+		E63008231B2772F400178716 /* dark-dank-5ths.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-dank-5ths.mp3"; sourceTree = "<group>"; };
+		E63008241B2772F400178716 /* dark-drumfx.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-drumfx.mp3"; sourceTree = "<group>"; };
+		E63008251B2772F400178716 /* dark-drums.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-drums.mp3"; sourceTree = "<group>"; };
+		E63008261B2772F400178716 /* dark-german-wood.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-german-wood.mp3"; sourceTree = "<group>"; };
+		E63008271B2772F400178716 /* dark-legato.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-legato.mp3"; sourceTree = "<group>"; };
+		E63008281B2772F400178716 /* dark-pearl.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-pearl.mp3"; sourceTree = "<group>"; };
+		E63008291B2772F400178716 /* dark-peppermint.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-peppermint.mp3"; sourceTree = "<group>"; };
+		E630082A1B2772F400178716 /* dark-steel-drums.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-steel-drums.mp3"; sourceTree = "<group>"; };
+		E630082B1B2772F400178716 /* dark-sub.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-sub.mp3"; sourceTree = "<group>"; };
+		E63008371B27731200178716 /* dark.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dark.plist; sourceTree = "<group>"; };
 		E662A84C1B23AE8100AEFF7E /* SongTapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTapScene.h; sourceTree = "<group>"; };
 		E662A84D1B23AE8100AEFF7E /* SongTapScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTapScene.m; sourceTree = "<group>"; };
 		E7FB26D086C2121BEC49334E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -351,6 +375,7 @@
 		BAF06F381AEEE13000FBB4C3 /* Loop Data */ = {
 			isa = PBXGroup;
 			children = (
+				E63008201B2772E700178716 /* dark */,
 				E63008071B27451500178716 /* stompy-pop */,
 				E63007EE1B26A90500178716 /* jam */,
 				BA014C321AF05FF1001CAAE3 /* relaxation */,
@@ -393,6 +418,25 @@
 				E630081E1B27455A00178716 /* stompy-pop.plist */,
 			);
 			name = "stompy-pop";
+			sourceTree = "<group>";
+		};
+		E63008201B2772E700178716 /* dark */ = {
+			isa = PBXGroup;
+			children = (
+				E63008211B2772F400178716 /* dark-air-jammer.mp3 */,
+				E63008221B2772F400178716 /* dark-cello.mp3 */,
+				E63008231B2772F400178716 /* dark-dank-5ths.mp3 */,
+				E63008241B2772F400178716 /* dark-drumfx.mp3 */,
+				E63008251B2772F400178716 /* dark-drums.mp3 */,
+				E63008261B2772F400178716 /* dark-german-wood.mp3 */,
+				E63008271B2772F400178716 /* dark-legato.mp3 */,
+				E63008281B2772F400178716 /* dark-pearl.mp3 */,
+				E63008291B2772F400178716 /* dark-peppermint.mp3 */,
+				E630082A1B2772F400178716 /* dark-steel-drums.mp3 */,
+				E630082B1B2772F400178716 /* dark-sub.mp3 */,
+				E63008371B27731200178716 /* dark.plist */,
+			);
+			name = dark;
 			sourceTree = "<group>";
 		};
 		F0B311003B034DAA1E839EB0 /* Frameworks */ = {
@@ -502,31 +546,43 @@
 				BA014C2F1AF05FE9001CAAE3 /* relaxation-dub-pulse.mp3 in Resources */,
 				BA3C00951AE7140B00911004 /* LaunchScreen.xib in Resources */,
 				BA014C2B1AF05FE9001CAAE3 /* relaxation-cypress.mp3 in Resources */,
+				E63008331B2772F400178716 /* dark-pearl.mp3 in Resources */,
 				E630081D1B27453500178716 /* stompy-pop-trumpet-mute.mp3 in Resources */,
 				BA3C00921AE7140B00911004 /* Images.xcassets in Resources */,
 				E63007FC1B26A93300178716 /* jam-echo-string.mp3 in Resources */,
+				E630082C1B2772F400178716 /* dark-air-jammer.mp3 in Resources */,
 				E63007FA1B26A93300178716 /* jam-crescendo.mp3 in Resources */,
 				BA014C311AF05FE9001CAAE3 /* relaxation-empee-ep.mp3 in Resources */,
 				E630081B1B27453500178716 /* stompy-pop-premium.mp3 in Resources */,
+				E63008301B2772F400178716 /* dark-drums.mp3 in Resources */,
 				E63007FE1B26A93300178716 /* jam-jazz-guitar.mp3 in Resources */,
 				BA2BD3061AF9664A008A4169 /* piano.aupreset in Resources */,
+				E630082E1B2772F400178716 /* dark-dank-5ths.mp3 in Resources */,
 				E63008161B27453500178716 /* stompy-pop-call-in-air.mp3 in Resources */,
+				E630082F1B2772F400178716 /* dark-drumfx.mp3 in Resources */,
 				E630081C1B27453500178716 /* stompy-pop-shaker.mp3 in Resources */,
+				E63008321B2772F400178716 /* dark-legato.mp3 in Resources */,
+				E630082D1B2772F400178716 /* dark-cello.mp3 in Resources */,
 				E63008001B26A93300178716 /* jam-pizzicato.mp3 in Resources */,
 				BA2BD3041AF965EC008A4169 /* Sounds in Resources */,
 				BA014C261AF05FE9001CAAE3 /* relaxation-drums.mp3 in Resources */,
+				E63008311B2772F400178716 /* dark-german-wood.mp3 in Resources */,
 				E63008151B27453500178716 /* stompy-pop-attacker.mp3 in Resources */,
 				E63008041B26A96900178716 /* jam.plist in Resources */,
 				BA014C301AF05FE9001CAAE3 /* relaxation-eighties-ep.mp3 in Resources */,
 				BA014C2C1AF05FE9001CAAE3 /* relaxation-dance-organ.mp3 in Resources */,
 				E63007F91B26A93300178716 /* jam-basic-jazz.mp3 in Resources */,
 				BA014C2D1AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 in Resources */,
+				E63008381B27731200178716 /* dark.plist in Resources */,
+				E63008351B2772F400178716 /* dark-steel-drums.mp3 in Resources */,
 				E630081A1B27453500178716 /* stompy-pop-piano-body.mp3 in Resources */,
 				BAF06F541AEEE16200FBB4C3 /* relaxation.plist in Resources */,
 				BA014C291AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 in Resources */,
 				E63008131B27453500178716 /* stompy-pop-addict.mp3 in Resources */,
 				BA014C271AF05FE9001CAAE3 /* relaxation-beach.mp3 in Resources */,
 				E63008011B26A93300178716 /* jam-ubluesy.mp3 in Resources */,
+				E63008361B2772F400178716 /* dark-sub.mp3 in Resources */,
+				E63008341B2772F400178716 /* dark-peppermint.mp3 in Resources */,
 				BA014C2E1AF05FE9001CAAE3 /* relaxation-dominant.mp3 in Resources */,
 				E63008171B27453500178716 /* stompy-pop-claps.mp3 in Resources */,
 			);
