@@ -54,6 +54,18 @@
 		E63008021B26A93300178716 /* jam-voxi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63007F81B26A93300178716 /* jam-voxi.mp3 */; };
 		E63008041B26A96900178716 /* jam.plist in Resources */ = {isa = PBXBuildFile; fileRef = E63008031B26A96900178716 /* jam.plist */; };
 		E63008061B26B52400178716 /* train_hop.caf in Resources */ = {isa = PBXBuildFile; fileRef = E63008051B26B4F800178716 /* train_hop.caf */; };
+		E63008131B27453500178716 /* stompy-pop-addict.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008081B27453500178716 /* stompy-pop-addict.mp3 */; };
+		E63008141B27453500178716 /* stompy-pop-african-plucks.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008091B27453500178716 /* stompy-pop-african-plucks.mp3 */; };
+		E63008151B27453500178716 /* stompy-pop-attacker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E630080A1B27453500178716 /* stompy-pop-attacker.mp3 */; };
+		E63008161B27453500178716 /* stompy-pop-call-in-air.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E630080B1B27453500178716 /* stompy-pop-call-in-air.mp3 */; };
+		E63008171B27453500178716 /* stompy-pop-claps.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E630080C1B27453500178716 /* stompy-pop-claps.mp3 */; };
+		E63008181B27453500178716 /* stompy-pop-gust-crack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E630080D1B27453500178716 /* stompy-pop-gust-crack.mp3 */; };
+		E63008191B27453500178716 /* stompy-pop-kick.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E630080E1B27453500178716 /* stompy-pop-kick.mp3 */; };
+		E630081A1B27453500178716 /* stompy-pop-piano-body.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E630080F1B27453500178716 /* stompy-pop-piano-body.mp3 */; };
+		E630081B1B27453500178716 /* stompy-pop-premium.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008101B27453500178716 /* stompy-pop-premium.mp3 */; };
+		E630081C1B27453500178716 /* stompy-pop-shaker.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008111B27453500178716 /* stompy-pop-shaker.mp3 */; };
+		E630081D1B27453500178716 /* stompy-pop-trumpet-mute.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63008121B27453500178716 /* stompy-pop-trumpet-mute.mp3 */; };
+		E630081F1B27455A00178716 /* stompy-pop.plist in Resources */ = {isa = PBXBuildFile; fileRef = E630081E1B27455A00178716 /* stompy-pop.plist */; };
 		E662A84E1B23AE8100AEFF7E /* SongTapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E662A84D1B23AE8100AEFF7E /* SongTapScene.m */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +145,18 @@
 		E63007F81B26A93300178716 /* jam-voxi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "jam-voxi.mp3"; sourceTree = "<group>"; };
 		E63008031B26A96900178716 /* jam.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = jam.plist; sourceTree = "<group>"; };
 		E63008051B26B4F800178716 /* train_hop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = train_hop.caf; sourceTree = "<group>"; };
+		E63008081B27453500178716 /* stompy-pop-addict.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-addict.mp3"; sourceTree = "<group>"; };
+		E63008091B27453500178716 /* stompy-pop-african-plucks.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-african-plucks.mp3"; sourceTree = "<group>"; };
+		E630080A1B27453500178716 /* stompy-pop-attacker.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-attacker.mp3"; sourceTree = "<group>"; };
+		E630080B1B27453500178716 /* stompy-pop-call-in-air.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-call-in-air.mp3"; sourceTree = "<group>"; };
+		E630080C1B27453500178716 /* stompy-pop-claps.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-claps.mp3"; sourceTree = "<group>"; };
+		E630080D1B27453500178716 /* stompy-pop-gust-crack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-gust-crack.mp3"; sourceTree = "<group>"; };
+		E630080E1B27453500178716 /* stompy-pop-kick.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-kick.mp3"; sourceTree = "<group>"; };
+		E630080F1B27453500178716 /* stompy-pop-piano-body.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-piano-body.mp3"; sourceTree = "<group>"; };
+		E63008101B27453500178716 /* stompy-pop-premium.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-premium.mp3"; sourceTree = "<group>"; };
+		E63008111B27453500178716 /* stompy-pop-shaker.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-shaker.mp3"; sourceTree = "<group>"; };
+		E63008121B27453500178716 /* stompy-pop-trumpet-mute.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stompy-pop-trumpet-mute.mp3"; sourceTree = "<group>"; };
+		E630081E1B27455A00178716 /* stompy-pop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "stompy-pop.plist"; sourceTree = "<group>"; };
 		E662A84C1B23AE8100AEFF7E /* SongTapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTapScene.h; sourceTree = "<group>"; };
 		E662A84D1B23AE8100AEFF7E /* SongTapScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTapScene.m; sourceTree = "<group>"; };
 		E7FB26D086C2121BEC49334E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -327,6 +351,7 @@
 		BAF06F381AEEE13000FBB4C3 /* Loop Data */ = {
 			isa = PBXGroup;
 			children = (
+				E63008071B27451500178716 /* stompy-pop */,
 				E63007EE1B26A90500178716 /* jam */,
 				BA014C321AF05FF1001CAAE3 /* relaxation */,
 			);
@@ -349,6 +374,25 @@
 				E63008031B26A96900178716 /* jam.plist */,
 			);
 			name = jam;
+			sourceTree = "<group>";
+		};
+		E63008071B27451500178716 /* stompy-pop */ = {
+			isa = PBXGroup;
+			children = (
+				E63008081B27453500178716 /* stompy-pop-addict.mp3 */,
+				E63008091B27453500178716 /* stompy-pop-african-plucks.mp3 */,
+				E630080A1B27453500178716 /* stompy-pop-attacker.mp3 */,
+				E630080B1B27453500178716 /* stompy-pop-call-in-air.mp3 */,
+				E630080C1B27453500178716 /* stompy-pop-claps.mp3 */,
+				E630080D1B27453500178716 /* stompy-pop-gust-crack.mp3 */,
+				E630080E1B27453500178716 /* stompy-pop-kick.mp3 */,
+				E630080F1B27453500178716 /* stompy-pop-piano-body.mp3 */,
+				E63008101B27453500178716 /* stompy-pop-premium.mp3 */,
+				E63008111B27453500178716 /* stompy-pop-shaker.mp3 */,
+				E63008121B27453500178716 /* stompy-pop-trumpet-mute.mp3 */,
+				E630081E1B27455A00178716 /* stompy-pop.plist */,
+			);
+			name = "stompy-pop";
 			sourceTree = "<group>";
 		};
 		F0B311003B034DAA1E839EB0 /* Frameworks */ = {
@@ -411,7 +455,7 @@
 				TargetAttributes = {
 					BA3C00801AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 365AV5B22T;
+						DevelopmentTeam = 65AAS3WP88;
 					};
 					BA3C00991AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -443,9 +487,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E63008191B27453500178716 /* stompy-pop-kick.mp3 in Resources */,
 				E63008061B26B52400178716 /* train_hop.caf in Resources */,
 				E63008021B26A93300178716 /* jam-voxi.mp3 in Resources */,
 				E63007FD1B26A93300178716 /* jam-frog.mp3 in Resources */,
+				E630081F1B27455A00178716 /* stompy-pop.plist in Resources */,
+				E63008141B27453500178716 /* stompy-pop-african-plucks.mp3 in Resources */,
+				E63008181B27453500178716 /* stompy-pop-gust-crack.mp3 in Resources */,
 				E63007FF1B26A93300178716 /* jam-legato-strings.mp3 in Resources */,
 				E63007FB1B26A93300178716 /* jam-drums.mp3 in Resources */,
 				BA3C00901AE7140B00911004 /* Main.storyboard in Resources */,
@@ -454,25 +502,33 @@
 				BA014C2F1AF05FE9001CAAE3 /* relaxation-dub-pulse.mp3 in Resources */,
 				BA3C00951AE7140B00911004 /* LaunchScreen.xib in Resources */,
 				BA014C2B1AF05FE9001CAAE3 /* relaxation-cypress.mp3 in Resources */,
+				E630081D1B27453500178716 /* stompy-pop-trumpet-mute.mp3 in Resources */,
 				BA3C00921AE7140B00911004 /* Images.xcassets in Resources */,
 				E63007FC1B26A93300178716 /* jam-echo-string.mp3 in Resources */,
 				E63007FA1B26A93300178716 /* jam-crescendo.mp3 in Resources */,
 				BA014C311AF05FE9001CAAE3 /* relaxation-empee-ep.mp3 in Resources */,
+				E630081B1B27453500178716 /* stompy-pop-premium.mp3 in Resources */,
 				E63007FE1B26A93300178716 /* jam-jazz-guitar.mp3 in Resources */,
 				BA2BD3061AF9664A008A4169 /* piano.aupreset in Resources */,
+				E63008161B27453500178716 /* stompy-pop-call-in-air.mp3 in Resources */,
+				E630081C1B27453500178716 /* stompy-pop-shaker.mp3 in Resources */,
 				E63008001B26A93300178716 /* jam-pizzicato.mp3 in Resources */,
 				BA2BD3041AF965EC008A4169 /* Sounds in Resources */,
 				BA014C261AF05FE9001CAAE3 /* relaxation-drums.mp3 in Resources */,
+				E63008151B27453500178716 /* stompy-pop-attacker.mp3 in Resources */,
 				E63008041B26A96900178716 /* jam.plist in Resources */,
 				BA014C301AF05FE9001CAAE3 /* relaxation-eighties-ep.mp3 in Resources */,
 				BA014C2C1AF05FE9001CAAE3 /* relaxation-dance-organ.mp3 in Resources */,
 				E63007F91B26A93300178716 /* jam-basic-jazz.mp3 in Resources */,
 				BA014C2D1AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 in Resources */,
+				E630081A1B27453500178716 /* stompy-pop-piano-body.mp3 in Resources */,
 				BAF06F541AEEE16200FBB4C3 /* relaxation.plist in Resources */,
 				BA014C291AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 in Resources */,
+				E63008131B27453500178716 /* stompy-pop-addict.mp3 in Resources */,
 				BA014C271AF05FE9001CAAE3 /* relaxation-beach.mp3 in Resources */,
 				E63008011B26A93300178716 /* jam-ubluesy.mp3 in Resources */,
 				BA014C2E1AF05FE9001CAAE3 /* relaxation-dominant.mp3 in Resources */,
+				E63008171B27453500178716 /* stompy-pop-claps.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
