@@ -34,6 +34,8 @@
     _resetLoopTime = 0;
     _resetLoopBeat = NO;
     _streakCounter = 0;
+    _currentScore = 0;
+    _targetScore = [[_loopData getBeatMap] count]*2;
     _lastBeat = -1; // this signals we don't know what last beat is.
     float screenWidth = [UIScreen mainScreen].bounds.size.width;
     _leftTrackCenter = screenWidth/3;
@@ -70,38 +72,43 @@
 {
     float screenWidth = [UIScreen mainScreen].bounds.size.width;
     // left button
-    SKSpriteNode *leftButton = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(screenWidth/2,100)];
-    leftButton.position = CGPointMake(leftButton.frame.size.width/2, leftButton.frame.size.height/2);
-    leftButton.name = @"leftButton";//how the node is identified later
-    leftButton.color = [SKColor purpleColor];
-    [self addChild:leftButton];
+    _leftButton = [SKSpriteNode spriteNodeWithImageNamed:@"left_arrow"];
+    _leftButton.position = CGPointMake(_leftButton.frame.size.width/2 + 3, _leftButton.frame.size.height/2 + 3);
+    _leftButton.name = @"leftButton";//how the node is identified later
+    _leftButton.color = [_graphics getInteractorOnColor];
+    _leftButton.colorBlendFactor = 1.0;
+    [self addChild:_leftButton];
     // right button
-    SKSpriteNode *rightButton = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(screenWidth/2,100)];
-    rightButton.position = CGPointMake(screenWidth/2 + rightButton.frame.size.width/2, rightButton.frame.size.height/2);
-    rightButton.name = @"rightButton";//how the node is identified later
-    rightButton.color = [SKColor greenColor];
-    [self addChild:rightButton];
+    _rightButton = [SKSpriteNode spriteNodeWithImageNamed:@"right_arrow"];
+    _rightButton.position = CGPointMake(screenWidth/2 + _rightButton.frame.size.width/2 + 2, _rightButton.frame.size.height/2 + 3);
+    _rightButton.name = @"rightButton";//how the node is identified later
+    _rightButton.color = [_graphics getInteractorOnColor];
+    _rightButton.colorBlendFactor = 1.0;
+    [self addChild:_rightButton];
 }
 
 - (void)addTrain
 {
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    _train = [SKSpriteNode spriteNodeWithImageNamed:@"train2"];
+    _train = [SKSpriteNode spriteNodeWithImageNamed:@"monorail"];
     _train.position = CGPointMake(screenWidth/2, screenHeight/3);
     [self addChild:_train];
 }
 
-- (void)addBackButton
-{
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    SKSpriteNode *backButton = [SKSpriteNode spriteNodeWithImageNamed:@"blurGlow2"];
-    backButton.position = CGPointMake(screenWidth/2, screenHeight);
-    backButton.name = @"backButton";//how the node is identified later
-    backButton.color = [SKColor greenColor];
-    backButton.colorBlendFactor = .9;
-    [self addChild:backButton];
+- (void)addInteractor {
+    self.interactor = [[MinigameInteractor alloc] initWithTexture:[_graphics getTextureForInteractor:[_loopData getLoopName]]];
+    
+    _interactor.graphics = _graphics;
+    [_interactor setUpInteractor];
+    
+    _interactor.position = CGPointMake(self.size.width/2, self.size.height*0.75);
+    _interactor.zPosition = -2;
+    _interactor.name = [_loopData getLoopName];
+    
+    [_interactor connectToConductor:_conductor];
+    
+    [self addChild:_interactor];
 }
 
 -(void)initStreakDisplay
@@ -137,8 +144,8 @@
 - (void)displayDirections
 {
     // TODO FOR HENRY - CHANGE FILENAME ON NEXT LINE TO BE APPROPRIATE
-    SKSpriteNode *directions = [SKSpriteNode spriteNodeWithImageNamed:@"train2"];
-    directions.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    SKSpriteNode *directions = [SKSpriteNode spriteNodeWithImageNamed:@"train_game_directions"];
+    directions.position = CGPointMake(self.frame.size.width/2, self.frame.size.height * 0.55);
     directions.userInteractionEnabled = NO;
     directions.name = @"directions";
     directions.userInteractionEnabled = NO;
@@ -164,13 +171,17 @@
     
     if ([node.name isEqualToString:@"leftButton"]) {
         [self hop:@"left"];
+        [_leftButton runAction:[SKAction colorizeWithColor:[UIColor whiteColor] colorBlendFactor:1.0 duration:0.1] completion:^{
+            [_leftButton runAction:[SKAction colorizeWithColor:[_graphics getInteractorOnColor] colorBlendFactor:1.0 duration:0.7]];
+        }];
     } else if ([node.name isEqualToString:@"rightButton"]) {
         [self hop:@"right"];
-    } else if ([node.name isEqualToString:@"backButton"]) {
-        if(_reachedGoal){
-            int timesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenTrainGame"];
-            [[NSUserDefaults standardUserDefaults] setInteger:timesBeaten + 1 forKey:@"timesBeatenTrainGame"];
-        }
+        [_rightButton runAction:[SKAction colorizeWithColor:[UIColor whiteColor] colorBlendFactor:1.0 duration:0.1] completion:^{
+            [_rightButton runAction:[SKAction colorizeWithColor:[_graphics getInteractorOnColor] colorBlendFactor:1.0 duration:0.7]];
+        }];
+    } else if ([node.name isEqualToString:[_loopData getLoopName]]) {
+        int timesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"timesSeenTrainGame"];
+        [[NSUserDefaults standardUserDefaults] setInteger:timesBeaten + 1 forKey:@"timesSeenTrainGame"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnFromGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     }
 }
@@ -199,8 +210,12 @@
                 trackFound = YES;
         }
         if(!trackFound){
-            [self flashColoredScreen:[UIColor redColor]];
             _streakCounter = 0;
+            if (!_reachedGoal) {
+                _currentScore -= 2;
+                if (_currentScore < 0) _currentScore = 0;
+                [_interactor setPercentFull:_currentScore/_targetScore];
+            }
         }
     }];
     AudioServicesPlaySystemSound(_hihatSound);
@@ -296,60 +311,75 @@
     CGFloat distancePerBeat = initialDistance/2;
     CGFloat length = distancePerBeat * beatLength - trackSpacing;
     // initialize track
-    SKSpriteNode *track = [self buildTrack:length];
+    SKShapeNode *track = [self buildTrack:length];
     CGFloat xPos = noteNumber == 1 ? _leftTrackCenter : _rightTrackCenter; // only built for two instruments
-    [track setPosition:CGPointMake(xPos - track.size.width/2, screenHeight)];
+    [track setPosition:CGPointMake(xPos - track.frame.size.width/2, screenHeight)];
     track.zPosition = -1;
     [self addChild:track];
     // move track
     [self moveTrack:track initialDistance:initialDistance duration:animationDuration];
 }
 
-- (SKSpriteNode *)buildTrack:(double)length
+
+- (SKShapeNode *)buildTrack:(double)length
 {
-    CGFloat trackWidth = _train.size.width/_train.xScale - 10;
-    SKSpriteNode *track = [SKSpriteNode spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(trackWidth, length)];
-    
-    //build side rails
-    SKSpriteNode *leftRail = [SKSpriteNode spriteNodeWithColor:[UIColor yellowColor] size:CGSizeMake(2, length)];
-    SKSpriteNode *rightRail = [SKSpriteNode spriteNodeWithColor:[UIColor yellowColor] size:CGSizeMake(2, length)];
-    leftRail.position = CGPointMake(8, length/2);
-    rightRail.position = CGPointMake(trackWidth - 8, length/2);
-    [track addChild:leftRail];
-    [track addChild:rightRail];
-    
-    //build cross hatches
-    CGFloat spacing = 15;
-    for(CGFloat startingPosition = 2; startingPosition < length; startingPosition += spacing){
-        SKSpriteNode *railCross = [SKSpriteNode spriteNodeWithColor:[UIColor yellowColor] size:CGSizeMake(trackWidth, .7)];
-        railCross.position = CGPointMake(trackWidth/2, startingPosition);
-        [track addChild:railCross];
-    }
+    CGFloat trackWidth = 4;
+//    SKSpriteNode *track = [SKSpriteNode spriteNodeWithColor:[UIColor whiteColor] size:CGSizeMake(trackWidth, length)];
+    CGRect rect = CGRectMake(0, 0, trackWidth, length);
+    SKShapeNode *track = [SKShapeNode shapeNodeWithRect:rect];
+    track.strokeColor = [UIColor whiteColor];
+    track.fillColor = [UIColor whiteColor];
+    track.glowWidth = 2;
+//    //build side rails
+//    SKSpriteNode *leftRail = [SKSpriteNode spriteNodeWithColor:[UIColor yellowColor] size:CGSizeMake(2, length)];
+//    SKSpriteNode *rightRail = [SKSpriteNode spriteNodeWithColor:[UIColor yellowColor] size:CGSizeMake(2, length)];
+//    leftRail.position = CGPointMake(8, length/2);
+//    rightRail.position = CGPointMake(trackWidth - 8, length/2);
+//    [track addChild:leftRail];
+//    [track addChild:rightRail];
+//    
+//    //build cross hatches
+//    CGFloat spacing = 15;
+//    for(CGFloat startingPosition = 2; startingPosition < length; startingPosition += spacing){
+//        SKSpriteNode *railCross = [SKSpriteNode spriteNodeWithColor:[UIColor yellowColor] size:CGSizeMake(trackWidth, .7)];
+//        railCross.position = CGPointMake(trackWidth/2, startingPosition);
+//        [track addChild:railCross];
+//    }
     
     // return track
     track.name = @"track";
     return track;
 }
 
-- (void)moveTrack:(SKSpriteNode *)track initialDistance:(CGFloat)initialDistance duration:(double)animationDuration
+- (void)moveTrack:(SKShapeNode *)track initialDistance:(CGFloat)initialDistance duration:(double)animationDuration
 {
     //  move track
     SKAction *moveTrackToTrain = [SKAction moveToY:_train.position.y + _train.size.height/2 duration:animationDuration];
-    CGFloat outDestination = _train.position.y - track.size.height - _train.size.height/2;
+    CGFloat outDestination = _train.position.y - track.frame.size.height;
     CGFloat outDistance = _train.position.y + _train.size.height/2 - outDestination;
     SKAction *moveTrackOut = [SKAction moveToY:outDestination duration:animationDuration * (outDistance/initialDistance)];
     [track runAction:moveTrackToTrain completion:^(void){
         if((track.position.x >= _train.frame.origin.x - 10 && track.position.x <= _train.frame.origin.x + 10) ||
            _trainIsJumping){ // evaluate what makes this true at this point in time
             _streakCounter ++;
-            if(_streakCounter == 1){
+            
+            if (!_reachedGoal) _currentScore++;
+            
+            if (_currentScore < _targetScore) {
+                [_interactor setPercentFull:_currentScore/_targetScore];
+            } else if (_currentScore == _targetScore){
                 _reachedGoal = YES;
-//                [self flashColoredScreen:[UIColor greenColor]];
-                _streakDisplay.colorBlendFactor = .8;
-                _streakDisplay.color = [UIColor greenColor];
+                [_interactor setPercentFull:1];
             }
+            
         } else {
             _streakCounter = 0;
+            
+            if (!_reachedGoal) {
+                _currentScore -= 2;
+                if (_currentScore < 0) _currentScore = 0;
+                [_interactor setPercentFull:_currentScore/_targetScore];
+            }
 //            [self flashColoredScreen:[UIColor redColor]];
         }
         [self updateStreakCounterDisplay];
@@ -381,6 +411,8 @@
         }
         _nextBeat = beatAfter;// update next beat by iterating through keys
     }
+    
+    [_interactor updateAppearance];
 }
 
 @end

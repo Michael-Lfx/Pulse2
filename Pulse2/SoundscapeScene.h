@@ -47,4 +47,8 @@ static const uint32_t borderCategory = 0x1 << 4;
 @property UITapGestureRecognizer *tapInteractorRecognizer;
 @property UILongPressGestureRecognizer *longPressRecognizer;
 
+- (void)displayMessage1;
+- (void)displayMessage2;
+- (void)displayMessage3;
+
 @end

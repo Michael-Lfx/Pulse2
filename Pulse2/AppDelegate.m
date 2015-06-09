@@ -30,10 +30,12 @@
     
     if(![[NSUserDefaults standardUserDefaults] objectForKey:@"firstTime"]){
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstTime"];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenSoundscape"];
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesBeatenTrainGame"];
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesBeatenTapGame"];
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesBeatenPulseGame"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenMessage1"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenMessage2"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenMessage3"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesSeenTrainGame"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timeSeenTapGame"];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"timesSeenOrbGame"];
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"soundscapesCompleted"];
     }
     

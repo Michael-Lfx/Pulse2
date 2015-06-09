@@ -29,8 +29,6 @@
 		BA3C00901AE7140B00911004 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA3C008E1AE7140B00911004 /* Main.storyboard */; };
 		BA3C00921AE7140B00911004 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA3C00911AE7140B00911004 /* Images.xcassets */; };
 		BA3C00951AE7140B00911004 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA3C00931AE7140B00911004 /* LaunchScreen.xib */; };
-		BA4AA3A01B02B9A1007E3D7B /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4AA39E1B02B9A1007E3D7B /* arrow.png */; };
-		BA4AA3A11B02B9A1007E3D7B /* Triangle_9.png in Resources */ = {isa = PBXBuildFile; fileRef = BA4AA39F1B02B9A1007E3D7B /* Triangle_9.png */; };
 		BA4AA3AC1B02BA1F007E3D7B /* SongTrainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3A81B02BA1F007E3D7B /* SongTrainScene.m */; };
 		BA4AA3AD1B02BA1F007E3D7B /* SongSwipeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4AA3AA1B02BA1F007E3D7B /* SongSwipeScene.m */; };
 		BA7DEC8C1B2571EC00C4A238 /* MinigameInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = BA7DEC8B1B2571EC00C4A238 /* MinigameInteractor.m */; };
@@ -104,8 +102,6 @@
 		BA3C00911AE7140B00911004 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BA3C00941AE7140B00911004 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		BA3C009A1AE7140B00911004 /* Pulse2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Pulse2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA4AA39E1B02B9A1007E3D7B /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
-		BA4AA39F1B02B9A1007E3D7B /* Triangle_9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Triangle_9.png; sourceTree = "<group>"; };
 		BA4AA3A71B02BA1F007E3D7B /* SongTrainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTrainScene.h; sourceTree = "<group>"; };
 		BA4AA3A81B02BA1F007E3D7B /* SongTrainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTrainScene.m; sourceTree = "<group>"; };
 		BA4AA3A91B02BA1F007E3D7B /* SongSwipeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongSwipeScene.h; sourceTree = "<group>"; };
@@ -426,7 +422,7 @@
 				TargetAttributes = {
 					BA3C00801AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 65AAS3WP88;
+						DevelopmentTeam = 365AV5B22T;
 					};
 					BA3C00991AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -489,7 +485,6 @@
 				BA014C2D1AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 in Resources */,
 				BAF06F541AEEE16200FBB4C3 /* relaxation.plist in Resources */,
 				BA014C291AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 in Resources */,
-				BA4AA3A01B02B9A1007E3D7B /* arrow.png in Resources */,
 				BA014C271AF05FE9001CAAE3 /* relaxation-beach.mp3 in Resources */,
 				E63008011B26A93300178716 /* jam-ubluesy.mp3 in Resources */,
 				BA014C2E1AF05FE9001CAAE3 /* relaxation-dominant.mp3 in Resources */,
@@ -692,6 +687,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -706,6 +702,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

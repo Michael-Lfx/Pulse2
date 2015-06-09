@@ -11,6 +11,7 @@
 #import "LoopData.h"
 #import "Conductor.h"
 #import "GraphicsController.h"
+#import "MinigameInteractor.h"
 
 @interface SongTrainScene : SKScene
 
@@ -19,6 +20,7 @@
 @property GraphicsController *graphics;
 @property Conductor *conductor;
 @property LoopData *loopData;
+@property MinigameInteractor *interactor;
 @property double nextBeat;
 @property BOOL resetLoopBeat;
 @property BOOL trainIsJumping;
@@ -26,7 +28,11 @@
 @property double resetLoopTime;
 @property double lastBeat;
 @property SKSpriteNode *train;
+@property SKSpriteNode *leftButton;
+@property SKSpriteNode *rightButton;
 @property int streakCounter;
+@property double currentScore;
+@property double targetScore;
 @property SKLabelNode *streakDisplay;
 @property SKLabelNode *highScoreDisplay;
 @property CGFloat leftTrackCenter;
