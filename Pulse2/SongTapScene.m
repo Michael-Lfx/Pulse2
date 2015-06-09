@@ -31,7 +31,7 @@
     _resetLoopBeat = NO;
     _streakCounter = 0;
     _currentScore = 0;
-    _targetScore = [[_loopData getBeatMap] count]*2;
+    _targetScore = [[_loopData getBeatMap] count];
     _lastBeat = -1; // this signals we don't know what last beat is.
     _reachedGoal = NO;
     _nextBeat = [self getNearestHigherBeat];

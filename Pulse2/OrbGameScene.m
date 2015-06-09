@@ -26,7 +26,7 @@
         self.notePlayed = NO;
         self.noteMissed = NO;
         self.reachedGoal = NO;
-        self.targetScore = [_beatValues count]*2;
+        self.targetScore = [_beatValues count];
         self.currentScore = 0;
     }
     

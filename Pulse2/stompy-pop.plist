@@ -220,7 +220,7 @@
 				</array>
 			</array>
 			<key>minigame name</key>
-			<string>SongTapScene</string>
+			<string>OrbGameScene</string>
 		</dict>
 		<key>stompy-pop-claps</key>
 		<dict>
@@ -265,7 +265,7 @@
 		<key>stompy-pop-kick</key>
 		<dict>
 			<key>minigame name</key>
-			<string>SongTapScene</string>
+			<string>OrbGameScene</string>
 			<key>beat values</key>
 			<array>
 				<array>
@@ -387,7 +387,7 @@
 				</array>
 			</array>
 			<key>minigame name</key>
-			<string>SongTapScene</string>
+			<string>OrbGameScene</string>
 		</dict>
 		<key>stompy-pop-trumpet-mute</key>
 		<dict>
