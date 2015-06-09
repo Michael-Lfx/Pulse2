@@ -112,7 +112,7 @@
             int timesBeaten = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenTrainGame"];
             [[NSUserDefaults standardUserDefaults] setInteger:timesBeaten + 1 forKey:@"timesBeatenTrainGame"];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnToGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReturnFromGameScene" object:self userInfo:@{@"reachedGoal":[NSNumber numberWithBool:_reachedGoal]}];
     } else {
         CGFloat errorAllowed = 40;
         SKNode *playhead = [self childNodeWithName:@"playhead"];

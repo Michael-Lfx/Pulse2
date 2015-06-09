@@ -39,7 +39,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSoundscape:) name:@"LoadSoundscape" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToMainMenu:) name:@"ReturnToMainMenu" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMinigame:) name:@"LoadMinigame" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToGameScene:) name:@"ReturnToGameScene" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnFromGameScene:) name:@"ReturnFromGameScene" object:nil];
     
     // create a global conductor
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -164,7 +164,7 @@
     
 }
 
-- (void)returnToGameScene:(NSNotification *)notification {
+- (void)returnFromGameScene:(NSNotification *)notification {
     [_soundScapeView.scene setPaused:NO];
     [_conductor setMinigameLoop:nil];
     [UIView animateWithDuration:.4 animations:^{
