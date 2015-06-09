@@ -37,16 +37,16 @@
     if ([plist isEqualToString:@"relaxation"]) {
         _backgroundColor = [UIColor colorWithRed:0.125f green:0.314f blue:0.502f alpha:1.00f];
         _interactorColorOn = [UIColor colorWithRed:0.431f green:0.651f blue:0.871f alpha:1.00f];
-        _interactorColorOff = [UIColor colorWithRed:0.663f green:0.706f blue:0.753f alpha:1.00f];
+        _interactorColorOff = [UIColor colorWithRed:0.498f green:0.502f blue:0.502f alpha:1.00f];
     } else if ([plist isEqualToString:@"jam"]) {
         _backgroundColor = [UIColor colorWithRed:0.678f green:0.388f blue:0.153f alpha:1.00f];
         _interactorColorOn = [UIColor colorWithRed:1.000f green:0.784f blue:0.612f alpha:1.00f];
         _interactorColorOff = [UIColor colorWithRed:0.322f green:0.278f blue:0.243f alpha:1.00f];
-    } else if ([plist isEqualToString:@"three"]) {
+    } else if ([plist isEqualToString:@"stompy-pop"]) {
         _backgroundColor = [UIColor colorWithRed:0.659f green:0.753f blue:0.188f alpha:1.00f];
         _interactorColorOn = [UIColor colorWithRed:0.855f green:0.910f blue:0.592f alpha:1.00f];
         _interactorColorOff = [UIColor colorWithRed:0.510f green:0.510f blue:0.510f alpha:1.00f];
-    } else if ([plist isEqualToString:@"four"]) {
+    } else if ([plist isEqualToString:@"pservice"]) {
         _backgroundColor = [UIColor colorWithRed:0.518f green:0.231f blue:0.702f alpha:1.00f];
         _interactorColorOn = [UIColor colorWithRed:0.824f green:0.725f blue:0.890f alpha:1.00f];
         _interactorColorOff = [UIColor colorWithRed:0.255f green:0.188f blue:0.298f alpha:1.00f];

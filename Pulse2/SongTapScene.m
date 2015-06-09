@@ -31,7 +31,7 @@
     _resetLoopBeat = NO;
     _streakCounter = 0;
     _currentScore = 0;
-    _targetScore = [[_loopData getBeatMap] count]*2;
+    _targetScore = [[_loopData getBeatMap] count];
     _lastBeat = -1; // this signals we don't know what last beat is.
     _reachedGoal = NO;
     _nextBeat = [self getNearestHigherBeat];
@@ -89,7 +89,7 @@
     _streakDisplay.fontSize = 16;
     _streakDisplay.fontColor = [UIColor whiteColor];
     _streakDisplay.fontName = @"Avenir-Light";
-    [_streakDisplay setPosition: CGPointMake(screenWidth - 10 - _streakDisplay.frame.size.width/2, screenHeight - 60)];
+    [_streakDisplay setPosition: CGPointMake(screenWidth - 10 - _streakDisplay.frame.size.width/2, screenHeight - 40)];
     _streakDisplay.alpha = .6;
     _streakDisplay.userInteractionEnabled = NO;
     [self addChild:_streakDisplay];
@@ -103,7 +103,7 @@
     _highScoreDisplay.fontSize = 12;
     _highScoreDisplay.fontColor = [UIColor whiteColor];
     _highScoreDisplay.fontName = @"Avenir-Light";
-    [_highScoreDisplay setPosition: CGPointMake(screenWidth - 10 - _highScoreDisplay.frame.size.width/2, screenHeight - 40)];
+    [_highScoreDisplay setPosition: CGPointMake(screenWidth - 10 - _highScoreDisplay.frame.size.width/2, screenHeight - 20)];
     _highScoreDisplay.alpha = .6;
     _highScoreDisplay.userInteractionEnabled = NO;
     [self addChild:_highScoreDisplay];
@@ -291,10 +291,6 @@
     if(firingTime > [_loopData getNumBeats]){ // now it oscilates from 0 to 16
         firingTime -= [_loopData getNumBeats];
     }
-    CGFloat dif1 = (CACurrentMediaTime() - _resetLoopTime);
-    CGFloat dif2 = [_loopData getNumBeats] - _lastBeat - preBeat;
-//    if(dif1-dif2>0)
-//        NSLog(@"hi");
     if(firingTime > _nextBeat && (!_resetLoopBeat ||
                                   (_resetLoopBeat && (_resetLoopTime && (CACurrentMediaTime() - _resetLoopTime >= [_loopData getNumBeats]-_lastBeat-preBeat)) && firingTime < .5 + [self getFirstBeat]))){
         //            double timeWindow = CACurrentMediaTime() - _resetLoopTime;
