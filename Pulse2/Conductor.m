@@ -12,6 +12,7 @@
 
 double _bpm;
 double _beats;
+double _masterVolume;
 
 - (instancetype)initWithAudioController:(AEAudioController *)audioController {
     self = [super init];
@@ -82,17 +83,32 @@ double _beats;
     self.collisionNotes = [_data objectForKey:@"collision notes"];
     
     _shouldCheckLevels = true;
+    _masterVolume = 1;
 }
 
 - (void)releaseSoundscape
 {
     _shouldCheckLevels = false;
+    [self performSelector:@selector(decreaseVolume) withObject:nil afterDelay:0.01];
     
-    [_audioController removeChannels:[_audioFilePlayers allValues]];
-    
-    _audioFilePlayers = nil;
-    _channelGroups = nil;
-    _data = nil;
+}
+
+- (void)decreaseVolume {
+    if (_masterVolume > 0) {
+        _masterVolume -= 0.05;
+        for (NSString *loopName in _channelGroups) {
+            AEChannelGroupRef group = [[_channelGroups objectForKey:loopName] pointerValue];
+            [_audioController setVolume:_masterVolume forChannelGroup:group];
+        }
+        [self performSelector:@selector(decreaseVolume) withObject:nil afterDelay:0.05];
+    } else {
+        [self stop];
+        [_audioController removeChannels:[_audioFilePlayers allValues]];
+        
+        _audioFilePlayers = nil;
+        _channelGroups = nil;
+        _data = nil;
+    }
 }
 
 - (void)start {

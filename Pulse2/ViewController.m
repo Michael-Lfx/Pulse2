@@ -116,13 +116,12 @@
     
     [_mainMenuView presentScene:_mainMenuScene];
     _mainMenuView.userInteractionEnabled = YES;
+    [_conductor releaseSoundscape];
     [UIView animateWithDuration:1.0 animations:^{
         _soundScapeView.alpha = 0;
         _mainMenuView.transform = CGAffineTransformMakeScale(1, 1);
         _mainMenuView.center = self.view.center;
     } completion:^(BOOL finished){
-        [_conductor stop];
-        [_conductor releaseSoundscape];
         [_soundScapeView presentScene:nil];
         [_soundScapeView removeFromSuperview];
         _soundScapeView = nil;
