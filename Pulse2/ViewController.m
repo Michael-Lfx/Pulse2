@@ -89,7 +89,7 @@
         [_conductor start];
     }];
     
-    if ([soundscapeName isEqualToString:@"relaxation"]) {
+//    if ([soundscapeName isEqualToString:@"relaxation"]) {
         self.soundscapeScene = [[SoundscapeScene alloc] initWithSize:screenSize];
         _soundscapeScene.conductor = _conductor;
         _soundscapeScene.graphics = _graphics;
@@ -98,7 +98,16 @@
             [_soundscapeScene displayMessage1];
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasSeenMessage1"];
         }
-    }
+//    } else if ([soundscapeName isEqualToString:@"jam"]) {
+//        self.soundscapeScene = [[SoundscapeScene alloc] initWithSize:screenSize];
+//        _soundscapeScene.conductor = _conductor;
+//        _soundscapeScene.graphics = _graphics;
+//        [_soundScapeView presentScene: _soundscapeScene transition:[SKTransition crossFadeWithDuration:.1]];
+//        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"hasSeenMessage1"]) {
+//            [_soundscapeScene displayMessage1];
+//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasSeenMessage1"];
+//        }
+//    }
 }
 
 - (void)returnToMainMenu:(NSNotification *)notification {
@@ -124,7 +133,8 @@
     NSDictionary *info = notification.userInfo;
     
     NSString *loopName = [info objectForKey:@"loopName"];
-    LoopData *loopData = [[LoopData alloc] initWithPlist:@"relaxation" loop:loopName];
+    NSLog(@"entering loop: %@",loopName);
+    LoopData *loopData = [[LoopData alloc] initWithPlist:[_conductor getSoundscapeName] loop:loopName];
     NSString *minigameName = [loopData getMinigameName];
     
     CGPoint pointToZoomTo = [(NSValue *)[info objectForKey:@"nodeCoordinates"] CGPointValue];

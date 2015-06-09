@@ -129,7 +129,7 @@ bool _nodesAdded = false;
         [_loadingNode runAction:[SKAction fadeAlphaTo:1.0 duration:0.5]];
         [_node2 runAction:[SKAction colorizeWithColor:[UIColor orangeColor] colorBlendFactor:1.0 duration:0.05] completion:^{
             [_node2 runAction:[SKAction colorizeWithColorBlendFactor:0.0 duration:0.5] completion:^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"relaxation"] forKeys:@[@"name"]]]; // TODO CHANGE RELAXATION TO APPROPRIATE NAME
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"LoadSoundscape" object:self userInfo:[NSDictionary dictionaryWithObjects:@[@"jam"] forKeys:@[@"name"]]]; // TODO CHANGE RELAXATION TO APPROPRIATE NAME
             }];
         }];
     } else if([touchedNode isEqualToNode:_node3]){
