@@ -411,7 +411,7 @@
 				TargetAttributes = {
 					BA3C00801AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 65AAS3WP88;
+						DevelopmentTeam = 365AV5B22T;
 					};
 					BA3C00991AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;

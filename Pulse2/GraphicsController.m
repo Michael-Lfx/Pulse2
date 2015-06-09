@@ -41,7 +41,7 @@
     } else if ([plist isEqualToString:@"jam"]) {
         _backgroundColor = [UIColor colorWithRed:0.678f green:0.388f blue:0.153f alpha:1.00f];
         _interactorColorOn = [UIColor colorWithRed:1.000f green:0.784f blue:0.612f alpha:1.00f];
-        _interactorColorOff = [UIColor colorWithRed:1.000f green:0.784f blue:0.612f alpha:1.00f];
+        _interactorColorOff = [UIColor colorWithRed:0.322f green:0.278f blue:0.243f alpha:1.00f];
     } else if ([plist isEqualToString:@"three"]) {
         _backgroundColor = [UIColor colorWithRed:0.659f green:0.753f blue:0.188f alpha:1.00f];
         _interactorColorOn = [UIColor colorWithRed:0.855f green:0.910f blue:0.592f alpha:1.00f];
