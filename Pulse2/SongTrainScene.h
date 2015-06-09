@@ -28,6 +28,7 @@
 @property SKSpriteNode *train;
 @property int streakCounter;
 @property SKLabelNode *streakDisplay;
+@property SKLabelNode *highScoreDisplay;
 @property CGFloat leftTrackCenter;
 @property CGFloat rightTrackCenter;
 @property SystemSoundID hihatSound;

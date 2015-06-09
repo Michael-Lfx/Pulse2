@@ -42,8 +42,14 @@
     
     [self addPlayhead];
     [self initStreakDisplay];
-//    [self addBackButton];
+    [self initHighScoreDisplay];
     [self addInteractor];
+    
+    
+    NSString *highScoreString = [NSString stringWithFormat:@"%@HighScore", [_loopData getLoopName]];
+    int highScore = (int)[[NSUserDefaults standardUserDefaults] integerForKey:highScoreString];
+    _highScoreDisplay.text = [NSString stringWithFormat:@"high score: %d", highScore];
+
 }
 
 -(void) addPlayhead
@@ -58,18 +64,6 @@
     playHead.glowWidth = 2;
     playHead.zPosition = -1;
     [self addChild:playHead];
-}
-
-- (void)addBackButton
-{
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    SKSpriteNode *backButton = [SKSpriteNode spriteNodeWithImageNamed:@"blurGlow2"];
-    backButton.position = CGPointMake(screenWidth/2, screenHeight);
-    backButton.name = @"backButton";//how the node is identified later
-    backButton.color = [SKColor greenColor];
-    backButton.colorBlendFactor = .9;
-    [self addChild:backButton];
 }
 
 - (void)addInteractor {
@@ -88,17 +82,32 @@
     [self addChild:_interactor];
 }
 
--(void)initStreakDisplay{
+-(void)initStreakDisplay
+{
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    _streakDisplay = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%i", _streakCounter]];
-    _streakDisplay.fontSize = 18;
+    _streakDisplay = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"streak: %i", _streakCounter]];
+    _streakDisplay.fontSize = 16;
     _streakDisplay.fontColor = [UIColor whiteColor];
-    _streakDisplay.fontName = @"Avenir-Medium";
-    [_streakDisplay setPosition: CGPointMake(screenWidth - 25, screenHeight - 60)];
+    _streakDisplay.fontName = @"Avenir-Light";
+    [_streakDisplay setPosition: CGPointMake(screenWidth - 10 - _streakDisplay.frame.size.width/2, screenHeight - 60)];
     _streakDisplay.alpha = .6;
     _streakDisplay.userInteractionEnabled = NO;
     [self addChild:_streakDisplay];
+}
+
+-(void)initHighScoreDisplay
+{
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    _highScoreDisplay = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"high score: %i", _streakCounter]];
+    _highScoreDisplay.fontSize = 12;
+    _highScoreDisplay.fontColor = [UIColor whiteColor];
+    _highScoreDisplay.fontName = @"Avenir-Light";
+    [_highScoreDisplay setPosition: CGPointMake(screenWidth - 10 - _highScoreDisplay.frame.size.width/2, screenHeight - 40)];
+    _highScoreDisplay.alpha = .6;
+    _highScoreDisplay.userInteractionEnabled = NO;
+    [self addChild:_highScoreDisplay];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -247,9 +256,13 @@
 
 - (void)updateStreakCounterDisplay
 {
-    _streakDisplay.text = [NSString stringWithFormat:@"%i", _streakCounter];
+    _streakDisplay.text = [NSString stringWithFormat:@"streak: %i", _streakCounter];
+    if(_streakCounter > [[_highScoreDisplay.text substringFromIndex:11] integerValue]){
+        _highScoreDisplay.text = [NSString stringWithFormat:@"high score: %d", _streakCounter];
+        NSString *highScoreString = [NSString stringWithFormat:@"%@HighScore", [_loopData getLoopName]];
+        [[NSUserDefaults standardUserDefaults] setInteger:_streakCounter forKey:highScoreString];
+    }
 }
-
 
 - (void)displayDirections
 {

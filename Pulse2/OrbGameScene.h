@@ -35,6 +35,10 @@
 @property int prevNum;
 @property int nextNum;
 
+@property int streakCounter;
+@property SKLabelNode *streakDisplay;
+@property SKLabelNode *highScoreDisplay;
+
 @property BOOL beatChecked;
 @property BOOL notePlayed;
 @property BOOL noteMissed;

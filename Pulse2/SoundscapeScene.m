@@ -393,7 +393,7 @@ double interactorTimerDuration = 3.0;
         NSMutableDictionary *unlockedNodesDict = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:_unlockedNodesDictName]];
         [unlockedNodesDict setValue: [NSNumber numberWithBool:YES] forKey:_tappedInteractor.name];
         [[NSUserDefaults standardUserDefaults] setValue:unlockedNodesDict forKey:_unlockedNodesDictName];
-        if(unlockedNodesDict.count == _interactorCount){
+        if(unlockedNodesDict.count == [_soundInteractors count]){
             int unlockedScenes = (int)[[NSUserDefaults standardUserDefaults] integerForKey:@"soundscapesCompleted"];
             [[NSUserDefaults standardUserDefaults] setInteger:unlockedScenes + 1 forKey:@"soundscapesCompleted"];
         }
