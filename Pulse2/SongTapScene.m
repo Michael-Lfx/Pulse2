@@ -81,7 +81,6 @@
     _interactor.position = CGPointMake(self.size.width/2, self.size.height*0.75);
     _interactor.zPosition = -2;
     _interactor.name = [_loopData getLoopName];
-    _interactor.color = [_graphics getInteractorOnColor];
     
     [_interactor connectToConductor:_conductor];
     
@@ -215,7 +214,7 @@
     CGFloat underPositionY = midPositionY - 10;
     circle.fillColor = [SKColor whiteColor];
     circle.strokeColor = [SKColor whiteColor];
-    circle.glowWidth = 3;
+    circle.glowWidth = 4;
     
     [circle setPosition:CGPointMake(column * screenWidth/numVoices + (screenWidth/numVoices)/2, initialPositionY)];
     [self addChild:circle];
@@ -254,7 +253,7 @@
 - (void)displayDirections
 {
     // TODO FOR HENRY - CHANGE FILENAME ON NEXT LINE TO BE APPROPRIATE
-    SKSpriteNode *directions = [SKSpriteNode spriteNodeWithImageNamed:@"train2"];
+    SKSpriteNode *directions = [SKSpriteNode spriteNodeWithImageNamed:@"tap_game_directions"];
     directions.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
     directions.userInteractionEnabled = NO;
     directions.name = @"directions";

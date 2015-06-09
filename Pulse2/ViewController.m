@@ -154,13 +154,15 @@
         _soundScapeView.alpha = 0;
         _miniScapeView.alpha = 1;
     } completion:^(BOOL finished) {
-        if([_miniScapeView.scene isKindOfClass:[SongTapScene class]] && [[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenTapGame"] <3)
-            [(SongTapScene *)_miniScapeView.scene displayDirections];
-        else if([_miniScapeView.scene isKindOfClass:[SongTrainScene class]] && [[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenTrainGame"] <3)
-            [(SongTrainScene *)_miniScapeView.scene displayDirections];
+        
 //        else if([_miniScapeView.scene isKindOfClass:[OrbGameScene class]] && [[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenPulseGame"] <3)
           //  [(OrbGameScene *)_miniScapeView.scene displayDirections];
     }];
+    
+    if([_miniScapeView.scene isKindOfClass:[SongTapScene class]] && [[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenTapGame"] <3)
+        [(SongTapScene *)_miniScapeView.scene displayDirections];
+    else if([_miniScapeView.scene isKindOfClass:[SongTrainScene class]] && [[NSUserDefaults standardUserDefaults] integerForKey:@"timesBeatenTrainGame"] <3)
+        [(SongTrainScene *)_miniScapeView.scene displayDirections];
     
 }
 

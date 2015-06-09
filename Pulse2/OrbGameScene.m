@@ -110,7 +110,6 @@
     _interactor.position = CGPointMake(self.size.width/2, self.size.height*0.75);
     _interactor.zPosition = -2;
     _interactor.name = [_loopData getLoopName];
-    _interactor.color = [_graphics getInteractorOnColor];
     
     [_interactor connectToConductor:_conductor];
     
