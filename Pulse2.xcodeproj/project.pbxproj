@@ -42,9 +42,6 @@
 		BAF06F371AEED6F400FBB4C3 /* SoundInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */; };
 		BAF06F541AEEE16200FBB4C3 /* relaxation.plist in Resources */ = {isa = PBXBuildFile; fileRef = BAF06F461AEEE16200FBB4C3 /* relaxation.plist */; };
 		BAF58992314D5901ED41946D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB9D2BD43485FF5B2111854 /* libPods.a */; };
-		E627909A1B1E4AED00435C4A /* blurGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = E62790991B1E4AED00435C4A /* blurGlow.png */; };
-		E627909C1B1E4CE500435C4A /* blurGlow2.png in Resources */ = {isa = PBXBuildFile; fileRef = E627909B1B1E4CE500435C4A /* blurGlow2.png */; };
-		E63007ED1B268C2400178716 /* train_hop.caf in Resources */ = {isa = PBXBuildFile; fileRef = E63007EC1B26891200178716 /* train_hop.caf */; };
 		E63007F91B26A93300178716 /* jam-basic-jazz.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63007EF1B26A93300178716 /* jam-basic-jazz.mp3 */; };
 		E63007FA1B26A93300178716 /* jam-crescendo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63007F01B26A93300178716 /* jam-crescendo.mp3 */; };
 		E63007FB1B26A93300178716 /* jam-drums.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63007F11B26A93300178716 /* jam-drums.mp3 */; };
@@ -56,8 +53,8 @@
 		E63008011B26A93300178716 /* jam-ubluesy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63007F71B26A93300178716 /* jam-ubluesy.mp3 */; };
 		E63008021B26A93300178716 /* jam-voxi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E63007F81B26A93300178716 /* jam-voxi.mp3 */; };
 		E63008041B26A96900178716 /* jam.plist in Resources */ = {isa = PBXBuildFile; fileRef = E63008031B26A96900178716 /* jam.plist */; };
+		E63008061B26B52400178716 /* train_hop.caf in Resources */ = {isa = PBXBuildFile; fileRef = E63008051B26B4F800178716 /* train_hop.caf */; };
 		E662A84E1B23AE8100AEFF7E /* SongTapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E662A84D1B23AE8100AEFF7E /* SongTapScene.m */; };
-		E662A8541B23C49200AEFF7E /* train2.png in Resources */ = {isa = PBXBuildFile; fileRef = E662A8531B23C49200AEFF7E /* train2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,9 +121,6 @@
 		BAF06F351AEED6F400FBB4C3 /* SoundInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundInteractor.h; sourceTree = "<group>"; };
 		BAF06F361AEED6F400FBB4C3 /* SoundInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundInteractor.m; sourceTree = "<group>"; };
 		BAF06F461AEEE16200FBB4C3 /* relaxation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = relaxation.plist; sourceTree = "<group>"; };
-		E62790991B1E4AED00435C4A /* blurGlow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blurGlow.png; sourceTree = "<group>"; };
-		E627909B1B1E4CE500435C4A /* blurGlow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blurGlow2.png; sourceTree = "<group>"; };
-		E63007EC1B26891200178716 /* train_hop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = train_hop.caf; sourceTree = "<group>"; };
 		E63007EF1B26A93300178716 /* jam-basic-jazz.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "jam-basic-jazz.mp3"; sourceTree = "<group>"; };
 		E63007F01B26A93300178716 /* jam-crescendo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "jam-crescendo.mp3"; sourceTree = "<group>"; };
 		E63007F11B26A93300178716 /* jam-drums.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "jam-drums.mp3"; sourceTree = "<group>"; };
@@ -138,9 +132,9 @@
 		E63007F71B26A93300178716 /* jam-ubluesy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "jam-ubluesy.mp3"; sourceTree = "<group>"; };
 		E63007F81B26A93300178716 /* jam-voxi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "jam-voxi.mp3"; sourceTree = "<group>"; };
 		E63008031B26A96900178716 /* jam.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = jam.plist; sourceTree = "<group>"; };
+		E63008051B26B4F800178716 /* train_hop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = train_hop.caf; sourceTree = "<group>"; };
 		E662A84C1B23AE8100AEFF7E /* SongTapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongTapScene.h; sourceTree = "<group>"; };
 		E662A84D1B23AE8100AEFF7E /* SongTapScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongTapScene.m; sourceTree = "<group>"; };
-		E662A8531B23C49200AEFF7E /* train2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = train2.png; sourceTree = "<group>"; };
 		E7FB26D086C2121BEC49334E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -243,12 +237,7 @@
 		BA4AA39D1B02B994007E3D7B /* assets */ = {
 			isa = PBXGroup;
 			children = (
-				BA4AA39E1B02B9A1007E3D7B /* arrow.png */,
-				E62790991B1E4AED00435C4A /* blurGlow.png */,
-				E63007EC1B26891200178716 /* train_hop.caf */,
-				E662A8531B23C49200AEFF7E /* train2.png */,
-				E627909B1B1E4CE500435C4A /* blurGlow2.png */,
-				BA4AA39F1B02B9A1007E3D7B /* Triangle_9.png */,
+				E63008051B26B4F800178716 /* train_hop.caf */,
 			);
 			name = assets;
 			sourceTree = "<group>";
@@ -422,7 +411,7 @@
 				TargetAttributes = {
 					BA3C00801AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 365AV5B22T;
+						DevelopmentTeam = 65AAS3WP88;
 					};
 					BA3C00991AE7140B00911004 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -454,7 +443,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E63007ED1B268C2400178716 /* train_hop.caf in Resources */,
+				E63008061B26B52400178716 /* train_hop.caf in Resources */,
 				E63008021B26A93300178716 /* jam-voxi.mp3 in Resources */,
 				E63007FD1B26A93300178716 /* jam-frog.mp3 in Resources */,
 				E63007FF1B26A93300178716 /* jam-legato-strings.mp3 in Resources */,
@@ -468,20 +457,16 @@
 				BA3C00921AE7140B00911004 /* Images.xcassets in Resources */,
 				E63007FC1B26A93300178716 /* jam-echo-string.mp3 in Resources */,
 				E63007FA1B26A93300178716 /* jam-crescendo.mp3 in Resources */,
-				BA4AA3A11B02B9A1007E3D7B /* Triangle_9.png in Resources */,
 				BA014C311AF05FE9001CAAE3 /* relaxation-empee-ep.mp3 in Resources */,
 				E63007FE1B26A93300178716 /* jam-jazz-guitar.mp3 in Resources */,
 				BA2BD3061AF9664A008A4169 /* piano.aupreset in Resources */,
 				E63008001B26A93300178716 /* jam-pizzicato.mp3 in Resources */,
-				E627909A1B1E4AED00435C4A /* blurGlow.png in Resources */,
 				BA2BD3041AF965EC008A4169 /* Sounds in Resources */,
 				BA014C261AF05FE9001CAAE3 /* relaxation-drums.mp3 in Resources */,
 				E63008041B26A96900178716 /* jam.plist in Resources */,
-				E662A8541B23C49200AEFF7E /* train2.png in Resources */,
 				BA014C301AF05FE9001CAAE3 /* relaxation-eighties-ep.mp3 in Resources */,
 				BA014C2C1AF05FE9001CAAE3 /* relaxation-dance-organ.mp3 in Resources */,
 				E63007F91B26A93300178716 /* jam-basic-jazz.mp3 in Resources */,
-				E627909C1B1E4CE500435C4A /* blurGlow2.png in Resources */,
 				BA014C2D1AF05FE9001CAAE3 /* relaxation-distant-planet.mp3 in Resources */,
 				BAF06F541AEEE16200FBB4C3 /* relaxation.plist in Resources */,
 				BA014C291AF05FE9001CAAE3 /* relaxation-bouncing-mark.mp3 in Resources */,

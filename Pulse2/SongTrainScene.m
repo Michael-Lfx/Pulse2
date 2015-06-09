@@ -50,8 +50,8 @@
     [self addButtons];
     [self addTrain];
     [self initStreakDisplay];
+    [self addInteractor];
     [self initHighScoreDisplay];
-    [self addBackButton];
     
     NSString *highScoreString = [NSString stringWithFormat:@"%@HighScore", [_loopData getLoopName]];
     int highScore = (int)[[NSUserDefaults standardUserDefaults] integerForKey:highScoreString];
