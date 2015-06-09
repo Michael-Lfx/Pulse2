@@ -124,7 +124,7 @@
 			<key>beat values</key>
 			<array>
 				<array>
-					<string>0</string>
+					<integer>0</integer>
 					<integer>8</integer>
 				</array>
 			</array>
