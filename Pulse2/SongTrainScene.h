@@ -24,6 +24,7 @@
 @property double nextBeat;
 @property BOOL resetLoopBeat;
 @property BOOL trainIsJumping;
+@property NSString *trainJumpDirection;
 @property BOOL reachedGoal;
 @property double resetLoopTime;
 @property double lastBeat;

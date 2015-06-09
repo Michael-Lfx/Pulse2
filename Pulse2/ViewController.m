@@ -75,7 +75,15 @@
     
     CGSize screenSize = self.view.frame.size;
     CGPoint pointToZoomTo;
-    pointToZoomTo = CGPointMake(_mainMenuView.center.x - 400, _mainMenuView.center.y + 300); // make this legit center for sections
+    if([soundscapeName isEqualToString:@"relaxation"])
+        pointToZoomTo = CGPointMake(_mainMenuView.center.x - 400, _mainMenuView.center.y + 300); // make this legit center for sections
+    else if([soundscapeName isEqualToString:@"jam"])
+        pointToZoomTo = CGPointMake(_mainMenuView.center.x + 450, _mainMenuView.center.y); // make this legit center for sections
+    else if([soundscapeName isEqualToString:@"stompy-pop"])
+        pointToZoomTo = CGPointMake(_mainMenuView.center.x - 400, _mainMenuView.center.y - 900); // make this legit center for sections
+    else if([soundscapeName isEqualToString:@"relaxation"]) // TODO change this
+        pointToZoomTo = CGPointMake(_mainMenuView.center.x + 400, _mainMenuView.center.y - 1200); // make this legit center for sections
+        
     _soundScapeView.alpha = 0;
     [self.view addSubview:_soundScapeView];
     _mainMenuView.userInteractionEnabled = NO;

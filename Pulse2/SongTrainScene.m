@@ -38,8 +38,8 @@
     _targetScore = [[_loopData getBeatMap] count];
     _lastBeat = -1; // this signals we don't know what last beat is.
     float screenWidth = [UIScreen mainScreen].bounds.size.width;
-    _leftTrackCenter = screenWidth/3;
-    _rightTrackCenter = screenWidth*2/3;
+    _leftTrackCenter = screenWidth/4;
+    _rightTrackCenter = screenWidth*3/4;
     _reachedGoal = NO;
     
     
@@ -200,40 +200,36 @@
     SKAction *jumpSecondHalf = [SKAction group:@[moveSecondHalf, fall]];
     SKAction *jump = [SKAction sequence:@[jumpFirstHalf, jumpSecondHalf]];
     _trainIsJumping = YES;
+    _trainJumpDirection = direction;
     [_train runAction:jump completion:^(void){
-        _trainIsJumping = NO;
-        CGPoint location = _train.position;
-        NSArray *nodes = [self nodesAtPoint:location];
+        //evaluate if track is there
+        CGFloat xPos = _train.position.x;
+        CGFloat yPos = _train.position.y;
         BOOL trackFound = NO;
-        for (SKNode *node in nodes) {
-            if([node.name isEqualToString:@"track"])
-                trackFound = YES;
+        for(SKNode *node in [self children]){
+            if([node.name isEqualToString:@"track"]){
+                if(node.position.x > xPos - 10 && node.position.x < xPos + 10){ // there exists a track on the screen by the train
+                    if(yPos > node.position.y - 20 && yPos < node.position.y + node.frame.size.height){
+                        trackFound = YES;
+                        break;
+                    }
+                }
+            }
         }
         if(!trackFound){
             _streakCounter = 0;
+            
             if (!_reachedGoal) {
                 _currentScore -= 2;
                 if (_currentScore < 0) _currentScore = 0;
                 [_interactor setPercentFull:_currentScore/_targetScore];
             }
+            [self updateStreakCounterDisplay];
         }
+        _trainIsJumping = NO;
+        _trainJumpDirection = nil;
     }];
     AudioServicesPlaySystemSound(_hihatSound);
-}
-
-- (void)flashColoredScreen:(UIColor *)colorToFlash
-{
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    CGRect rect = CGRectMake(0, 0, screenWidth, screenHeight);
-    SKShapeNode *coloredCover = [SKShapeNode shapeNodeWithRect:rect];
-    coloredCover.fillColor = colorToFlash;
-    coloredCover.userInteractionEnabled = NO;
-    [self addChild:coloredCover];
-    SKAction *fadeOut = [SKAction fadeAlphaTo:0 duration:.4];
-    [coloredCover runAction:fadeOut completion:^(void){
-        [self removeChildrenInArray:@[coloredCover]];
-    }];
 }
 
 - (void)updateStreakCounterDisplay
@@ -305,7 +301,7 @@
     // initialize variables
     int noteNumber = voiceNumber.intValue + 1;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat initialDistance = screenHeight - _train.position.y - _train.size.height/2;
+    CGFloat initialDistance = screenHeight - _train.position.y;
     // calculate track length
     CGFloat trackSpacing = 20;
     CGFloat distancePerBeat = initialDistance/2;
@@ -315,6 +311,7 @@
     CGFloat xPos = noteNumber == 1 ? _leftTrackCenter : _rightTrackCenter; // only built for two instruments
     [track setPosition:CGPointMake(xPos - track.frame.size.width/2, screenHeight)];
     track.zPosition = -1;
+    track.name = @"track";
     [self addChild:track];
     // move track
     [self moveTrack:track initialDistance:initialDistance duration:animationDuration];
@@ -354,13 +351,15 @@
 - (void)moveTrack:(SKShapeNode *)track initialDistance:(CGFloat)initialDistance duration:(double)animationDuration
 {
     //  move track
-    SKAction *moveTrackToTrain = [SKAction moveToY:_train.position.y + _train.size.height/2 duration:animationDuration];
-    CGFloat outDestination = _train.position.y - track.frame.size.height;
-    CGFloat outDistance = _train.position.y + _train.size.height/2 - outDestination;
+    SKAction *moveTrackToTrain = [SKAction moveToY:_train.position.y  duration:animationDuration];
+    CGFloat outDestination = 0 - track.frame.size.height;
+    CGFloat outDistance = _train.position.y - outDestination;
     SKAction *moveTrackOut = [SKAction moveToY:outDestination duration:animationDuration * (outDistance/initialDistance)];
+    NSString *trackSide;
+    trackSide = track.position.x > self.view.frame.size.width/2 ? @"right" : @"left";
     [track runAction:moveTrackToTrain completion:^(void){
-        if((track.position.x >= _train.frame.origin.x - 10 && track.position.x <= _train.frame.origin.x + 10) ||
-           _trainIsJumping){ // evaluate what makes this true at this point in time
+        if((track.position.x >= _train.position.x - 20 && track.position.x <= _train.position.x + 20) ||
+           (_trainIsJumping && [_trainJumpDirection isEqualToString:trackSide])){ // evaluate what makes this true at this point in time
             _streakCounter ++;
             
             if (!_reachedGoal) _currentScore++;
@@ -380,7 +379,6 @@
                 if (_currentScore < 0) _currentScore = 0;
                 [_interactor setPercentFull:_currentScore/_targetScore];
             }
-//            [self flashColoredScreen:[UIColor redColor]];
         }
         [self updateStreakCounterDisplay];
         [track runAction:moveTrackOut completion:^(void){
