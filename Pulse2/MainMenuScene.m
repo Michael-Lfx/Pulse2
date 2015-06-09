@@ -56,7 +56,7 @@ bool _nodesAdded = false;
     self.node2 = [SKSpriteNode spriteNodeWithImageNamed:@"menu_button_2"];
     [_node2 setPosition:CGPointMake(centerPoint.x - 111.21 + _node2.size.width/2,
                                     self.size.height - (centerPoint.y - 118.07 + _node2.size.height/2))];
-    _node2.alpha = 0.3;
+//    _node2.alpha = 0.3;
     _node2.name = @"2";
     [self addChild:_node2];
     
@@ -157,7 +157,7 @@ bool _nodesAdded = false;
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"soundscapesCompleted"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"relaxationUnlockedNodes"];
         // TODO remove for later scenes when we name them
-         _node2.alpha = 0.3;
+//         _node2.alpha = 0.3;
          _node3.alpha = 0.3;
          _node4.alpha = 0.3;
     }
