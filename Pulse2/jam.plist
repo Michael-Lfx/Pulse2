@@ -71,7 +71,7 @@
 				</array>
 			</array>
 			<key>minigame name</key>
-			<string>TapGameScene</string>
+			<string>SongTapScene</string>
 		</dict>
 		<key>jam-drums</key>
 		<dict>
@@ -117,7 +117,7 @@
 				</array>
 			</array>
 			<key>minigame name</key>
-			<string>TapGameScene</string>
+			<string>SongTapScene</string>
 		</dict>
 		<key>jam-echo-string</key>
 		<dict>
