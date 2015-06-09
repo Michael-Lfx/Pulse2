@@ -63,7 +63,7 @@ bool _nodesAdded = false;
     self.node3 = [SKSpriteNode spriteNodeWithImageNamed:@"menu_button_3"];
     [_node3 setPosition:CGPointMake(centerPoint.x - 2.46 + _node3.size.width/2,
                                     self.size.height - (centerPoint.y - 36.99 + _node3.size.height/2))];
-    _node3.alpha = 0.3;
+//    _node3.alpha = 0.3;
     _node3.name = @"3";
     [self addChild:_node3];
     
@@ -164,7 +164,7 @@ bool _nodesAdded = false;
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"jamUnlockedNodes"];
         // TODO remove for later scenes when we name them
 //         _node2.alpha = 0.3;
-         _node3.alpha = 0.3;
+//         _node3.alpha = 0.3;
          _node4.alpha = 0.3;
     }
 }
