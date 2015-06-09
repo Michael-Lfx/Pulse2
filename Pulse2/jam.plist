@@ -124,14 +124,12 @@
 			<key>beat values</key>
 			<array>
 				<array>
-					<integer>0</integer>
-				</array>
-				<array>
-					<integer>9</integer>
+					<string>0</string>
+					<integer>8</integer>
 				</array>
 			</array>
 			<key>minigame name</key>
-			<string>SongTapScene</string>
+			<string>OrbGameScene</string>
 		</dict>
 		<key>jam-frog</key>
 		<dict>
@@ -252,7 +250,7 @@
 				</array>
 			</array>
 			<key>minigame name</key>
-			<string>SongTapScene</string>
+			<string>SongTrainScene</string>
 		</dict>
 		<key>jam-voxi</key>
 		<dict>

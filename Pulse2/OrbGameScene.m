@@ -130,7 +130,7 @@
     _streakDisplay.fontSize = 16;
     _streakDisplay.fontColor = [UIColor whiteColor];
     _streakDisplay.fontName = @"Avenir-Light";
-    [_streakDisplay setPosition: CGPointMake(screenWidth - 10 - _streakDisplay.frame.size.width/2, screenHeight - 60)];
+    [_streakDisplay setPosition: CGPointMake(screenWidth - 10 - _streakDisplay.frame.size.width/2, screenHeight - 40)];
     _streakDisplay.alpha = .6;
     _streakDisplay.userInteractionEnabled = NO;
     [self addChild:_streakDisplay];
@@ -144,7 +144,7 @@
     _highScoreDisplay.fontSize = 12;
     _highScoreDisplay.fontColor = [UIColor whiteColor];
     _highScoreDisplay.fontName = @"Avenir-Light";
-    [_highScoreDisplay setPosition: CGPointMake(screenWidth - 10 - _highScoreDisplay.frame.size.width/2, screenHeight - 40)];
+    [_highScoreDisplay setPosition: CGPointMake(screenWidth - 10 - _highScoreDisplay.frame.size.width/2, screenHeight - 20)];
     _highScoreDisplay.alpha = .6;
     _highScoreDisplay.userInteractionEnabled = NO;
     [self addChild:_highScoreDisplay];

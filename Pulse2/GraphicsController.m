@@ -37,7 +37,7 @@
     if ([plist isEqualToString:@"relaxation"]) {
         _backgroundColor = [UIColor colorWithRed:0.125f green:0.314f blue:0.502f alpha:1.00f];
         _interactorColorOn = [UIColor colorWithRed:0.431f green:0.651f blue:0.871f alpha:1.00f];
-        _interactorColorOff = [UIColor colorWithRed:0.663f green:0.706f blue:0.753f alpha:1.00f];
+        _interactorColorOff = [UIColor colorWithRed:0.498f green:0.502f blue:0.502f alpha:1.00f];
     } else if ([plist isEqualToString:@"jam"]) {
         _backgroundColor = [UIColor colorWithRed:0.678f green:0.388f blue:0.153f alpha:1.00f];
         _interactorColorOn = [UIColor colorWithRed:1.000f green:0.784f blue:0.612f alpha:1.00f];
