@@ -23,7 +23,7 @@
 @property MinigameInteractor *interactor;
 @property double nextBeat;
 @property BOOL resetLoopBeat;
-@property double resetLoopTime;
+@property long resetLoopTime;
 @property double lastBeat;
 @property int streakCounter;
 @property double currentScore;

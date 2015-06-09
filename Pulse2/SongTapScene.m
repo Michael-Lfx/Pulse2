@@ -291,16 +291,20 @@
     if(firingTime > [_loopData getNumBeats]){ // now it oscilates from 0 to 16
         firingTime -= [_loopData getNumBeats];
     }
+    CGFloat dif1 = (CACurrentMediaTime() - _resetLoopTime);
+    CGFloat dif2 = [_loopData getNumBeats] - _lastBeat - preBeat;
+//    if(dif1-dif2>0)
+//        NSLog(@"hi");
     if(firingTime > _nextBeat && (!_resetLoopBeat ||
-                                  (_resetLoopBeat && (_resetLoopTime && (CACurrentMediaTime() - _resetLoopTime > [_loopData getNumBeats]-_lastBeat-preBeat)) && firingTime < .5 + [self getFirstBeat]))){
+                                  (_resetLoopBeat && (_resetLoopTime && (CACurrentMediaTime() - _resetLoopTime >= [_loopData getNumBeats]-_lastBeat-preBeat)) && firingTime < .5 + [self getFirstBeat]))){
         //            double timeWindow = CACurrentMediaTime() - _resetLoopTime;
         _resetLoopBeat = NO;
         NSDictionary *beatMap = [_loopData getBeatMap];
         NSArray *beatsToFire = [beatMap objectForKey:[NSNumber numberWithDouble:_nextBeat]];
+        _nextBeat = [self getNextBeat:beatMap];// update next beat by iterating through keys
         for(NSNumber *voiceNumber in beatsToFire){
             [self dropBall:voiceNumber duration:animationDuration];
         }
-        _nextBeat = [self getNextBeat:beatMap];// update next beat by iterating through keys
     }
     
     [_interactor updateAppearance];
