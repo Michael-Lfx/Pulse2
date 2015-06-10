@@ -47,7 +47,23 @@
 			<key>beat values</key>
 			<array>
 				<array>
-					<integer>0</integer>
+					<real>4.66</real>
+				</array>
+				<array>
+					<real>0.25</real>
+					<integer>4</integer>
+					<real>5.6</real>
+					<real>22.6</real>
+					<real>23.6</real>
+				</array>
+				<array>
+					<real>3.5</real>
+					<integer>16</integer>
+					<integer>22</integer>
+					<integer>30</integer>
+				</array>
+				<array>
+					<real>21.5</real>
 				</array>
 			</array>
 			<key>minigame name</key>
@@ -59,11 +75,29 @@
 			<array>
 				<array>
 					<integer>0</integer>
-					<real>0.75</real>
 					<real>1.5</real>
+					<real>2.5</real>
+					<integer>4</integer>
+					<real>5.5</real>
+					<real>6.5</real>
 					<integer>8</integer>
-					<real>8.75</real>
 					<real>9.5</real>
+					<real>10.5</real>
+					<integer>12</integer>
+					<real>13.5</real>
+					<real>14.5</real>
+					<integer>16</integer>
+					<real>17.5</real>
+					<real>18.5</real>
+					<integer>20</integer>
+					<real>21.5</real>
+					<real>22.5</real>
+					<integer>24</integer>
+					<real>25.5</real>
+					<real>26.5</real>
+					<integer>28</integer>
+					<real>29.5</real>
+					<real>30.5</real>
 				</array>
 			</array>
 			<key>minigame name</key>
@@ -73,7 +107,42 @@
 		<dict>
 			<key>beat values</key>
 			<array>
-				<array/>
+				<array>
+					<integer>14</integer>
+					<real>14.33</real>
+					<real>14.66</real>
+					<integer>15</integer>
+					<real>15.33</real>
+					<real>15.66</real>
+					<integer>30</integer>
+					<real>30.33</real>
+					<real>30.66</real>
+					<integer>31</integer>
+					<real>31.33</real>
+					<real>31.66</real>
+				</array>
+				<array>
+					<real>9.833</real>
+					<real>10.177</real>
+					<real>10.5</real>
+					<real>10.833</real>
+					<real>25.833</real>
+					<real>26.177</real>
+					<real>26.5</real>
+					<real>26.833</real>
+				</array>
+				<array>
+					<integer>8</integer>
+					<integer>24</integer>
+				</array>
+				<array>
+					<integer>5</integer>
+					<integer>6</integer>
+					<integer>7</integer>
+					<integer>21</integer>
+					<integer>22</integer>
+					<integer>23</integer>
+				</array>
 			</array>
 			<key>minigame name</key>
 			<string>OrbGameScene</string>
@@ -81,14 +150,96 @@
 		<key>dark-drums</key>
 		<dict>
 			<key>beat values</key>
-			<array/>
+			<array>
+				<array>
+					<integer>2</integer>
+					<real>3.5</real>
+					<integer>6</integer>
+					<integer>7</integer>
+					<real>7.33</real>
+					<real>7.66</real>
+					<real>10.5</real>
+					<real>11.5</real>
+					<integer>14</integer>
+					<integer>15</integer>
+					<real>15.5</real>
+					<integer>18</integer>
+					<real>19.5</real>
+					<integer>22</integer>
+					<integer>23</integer>
+					<real>23.33</real>
+					<real>23.66</real>
+					<real>26.5</real>
+					<real>27.5</real>
+					<integer>30</integer>
+					<integer>31</integer>
+					<real>31.5</real>
+				</array>
+				<array>
+					<integer>0</integer>
+					<integer>1</integer>
+					<real>1.5</real>
+					<real>4.5</real>
+					<real>5.5</real>
+					<real>6.5</real>
+					<integer>9</integer>
+					<real>12.5</real>
+					<real>13.5</real>
+					<integer>16</integer>
+					<integer>17</integer>
+					<real>17.5</real>
+					<real>20.5</real>
+					<real>21.5</real>
+					<real>22.5</real>
+					<integer>25</integer>
+					<real>28.5</real>
+					<real>29.5</real>
+				</array>
+			</array>
 			<key>minigame name</key>
 			<string>SongTapScene</string>
 		</dict>
 		<key>dark-german-wood</key>
 		<dict>
 			<key>beat values</key>
-			<array/>
+			<array>
+				<array>
+					<integer>2</integer>
+					<real>2.33</real>
+					<real>2.66</real>
+					<integer>3</integer>
+					<integer>6</integer>
+					<real>6.33</real>
+					<real>6.66</real>
+					<integer>7</integer>
+					<integer>10</integer>
+					<real>10.33</real>
+					<real>10.66</real>
+					<integer>11</integer>
+					<integer>18</integer>
+					<real>18.33</real>
+					<real>18.66</real>
+					<integer>19</integer>
+					<integer>22</integer>
+					<real>22.33</real>
+					<real>22.66</real>
+					<integer>23</integer>
+					<integer>26</integer>
+					<real>26.33</real>
+					<real>26.66</real>
+					<integer>27</integer>
+				</array>
+				<array>
+					<integer>14</integer>
+					<real>14.33</real>
+					<real>14.66</real>
+					<integer>15</integer>
+					<integer>30</integer>
+					<real>30.33</real>
+					<real>30.66</real>
+					<integer>31</integer>
+				</array>
+			</array>
 			<key>minigame name</key>
 			<string>SongTapScene</string>
 		</dict>
